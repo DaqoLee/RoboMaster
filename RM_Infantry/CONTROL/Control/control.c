@@ -54,7 +54,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 								Cap_Casual();//补血点按住Ctrl大电流给超级电容充电
 							else
 								Cap_Mode();//超级电容0.5A充电
-							LED_Set(&Flag1_20Hz);//LED
+							LED_Set(&Flag1_20Hz);//LED状态灯闪烁
 							break;
 /*****************************补给模式**********************************************/				
 				case    SUPPLY:
