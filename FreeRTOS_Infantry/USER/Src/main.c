@@ -7,10 +7,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 #include "SystemClock.h"
-#include "BSP_GPIO.h"
-#include "BSP_TIM.h"
-#include "BSP_USART.h"
-#include "BSP_CAN.h"
 #include "Task_user.h"
 
 int main(void)
@@ -20,11 +16,7 @@ int main(void)
   /* Configure the system clock */
 	SystemClock_Config();
   /* Initialize all configured peripherals */
-	GPIO_Init();
-	TIM_Init();
-	UART_Init();
-    CAN_Init(&hcan1);
-    CAN_Init(&hcan2);
+
   /* Initialize all configured peripherals */
 	
     xTaskCreate(start_task,            //ÈÎÎñº¯Êý
@@ -42,6 +34,5 @@ int main(void)
 }
 
 
- 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,36 +1,60 @@
-#include "Task_user.h"
+#include "Task_User.h"
 #include "BSP_GPIO.h"
 #include "stm32f4xx_hal.h"
+#include "BSP_GPIO.h"
+#include "BSP_TIM.h"
+#include "BSP_USART.h"
+#include "BSP_CAN.h"
+#include "BSP_NVIC.h"
 TaskHandle_t StartTask_Handler;
 TaskHandle_t LED0Task_Handler;
 TaskHandle_t LED1Task_Handler;
 TaskHandle_t FLOATTask_Handler;
 TaskHandle_t LED_TaskHandler;
 TaskHandle_t KEY_TaskHandler;
+TaskHandle_t Buzzer_TaskHandler;
+
 void start_task(void *pvParameters)
 {
+	static uint8_t i=1;
+	
+	GPIO_Init();
+	TIM_Init();
+	UART_Init();
+    CAN_Init(&hcan1);
+    CAN_Init(&hcan2);
+	NVIC_Init();
+	TIM12->CCR1=200;
+	for(;i<4;i++)
+	{
+		TIM12->ARR=1999-200*i;
+		vTaskDelay(150);
+	}
+	TIM12->ARR=0;
+	
+	
     taskENTER_CRITICAL();          
     
     xTaskCreate(led0_task,     	
 				"led0_task",   	
 			    50, 
                 NULL,				
-                6,	
+                5,	
                 &LED0Task_Handler);   
    
     xTaskCreate(led1_task,     
                 "led1_task",   
                 50, 
                 NULL,
-                5,
+                4,
                 &LED1Task_Handler);        
    
-    xTaskCreate(float_task,     
-                "float_task",   
+    xTaskCreate(Buzzer_Task,     
+                "Buzzer_Task",   
                 128, 
                 NULL,
-                4,
-                &FLOATTask_Handler);
+                2,
+                &Buzzer_TaskHandler);
     xTaskCreate(LED_Task,     
                 "LED_Task",   
                 128, 
@@ -70,10 +94,10 @@ void led1_task(void *pvParameters)
 void LED_Task(void *pvParameters)
 {
 	static uint8_t i=1;
+	TIM12->CCR1=200;
 	 while(1)
     {
-
-		for(;i<17;i++)
+		for(i=1;i<17;i++)
 		{
 		   if(i>8)
 				GPIOG->BSRR=1<<(i+8);
@@ -82,6 +106,22 @@ void LED_Task(void *pvParameters)
            vTaskDelay(50);
 		}
 		i=1;
+    }
+}
+
+void Buzzer_Task(void *pvParameters)
+{
+	static uint8_t i=1;
+	TIM12->CCR1=200;
+	 while(1)
+    {
+		vTaskDelay(2000);
+		for(;i<8;i++)
+		{
+			TIM12->ARR=1999-100*i;
+			vTaskDelay(150);
+		}
+		TIM12->ARR=0;
     }
 }
 
