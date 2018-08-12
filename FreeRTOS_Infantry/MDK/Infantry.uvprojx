@@ -315,7 +315,7 @@
             <Optim>4</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
-            <OneElfS>0</OneElfS>
+            <OneElfS>1</OneElfS>
             <Strict>0</Strict>
             <EnumInt>0</EnumInt>
             <PlainCh>0</PlainCh>
@@ -324,8 +324,8 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>1</uC99>
-            <uGnu>1</uGnu>
+            <uC99>0</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -338,7 +338,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F427xx</Define>
               <Undefine></Undefine>
-              <IncludePath>..\USER\Inc;..\Drivers\STM32F4xx_HAL_Driver\Inc;..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy;..\Drivers\CMSIS\Include;..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\FreeRTOS\portable\MemMang;..\FreeRTOS\portable\RVDS\ARM_CM4F;..\FreeRTOS\include;..\TASK\User;..\Device\BSP_GPIO;..\Device\BSP_TIM;..\Device\BSP_CAN;..\Device\BSP_USART</IncludePath>
+              <IncludePath>..\USER\Inc;..\Library\STM32F4xx_HAL_Driver\Inc;..\Library\STM32F4xx_HAL_Driver\Inc\Legacy;..\Library\CMSIS\Include;..\Library\CMSIS\Device\ST\STM32F4xx\Include;..\FreeRTOS\portable\MemMang;..\FreeRTOS\portable\RVDS\ARM_CM4F;..\FreeRTOS\include;..\TASK\User;..\BSP\BSP_GPIO;..\BSP\BSP_TIM;..\BSP\BSP_CAN;..\BSP\BSP_USART;..\Control\Ctrl_Chassis;..\Control\Ctrl_Cloud;..\Control\Ctrl_Frict;..\Control\Ctrl_Rammer;..\Driver\Dirver_OLED;..\Driver\Driver_DBUS;..\Driver\Driver_Judge;..\Driver\Driver_PID;..\Driver\Driver_Niming;..\BSP\BSP_I2C;..\TASK\Ctrl;..\BSP\BSP_NVIC</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -435,140 +435,112 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers</GroupName>
+          <GroupName>Library</GroupName>
           <Files>
+            <File>
+              <FileName>system_stm32f4xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Library\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c</FilePath>
+            </File>
             <File>
               <FileName>stm32f4xx_hal.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c</FilePath>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_can.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_can.c</FilePath>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_can.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_cortex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c</FilePath>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_dma_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_flash_ramfunc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ramfunc.c</FilePath>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma_ex.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_flash.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c</FilePath>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_flash_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ex.c</FilePath>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_flash_ramfunc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash_ramfunc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_pwr_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_rcc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_rcc_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_tim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_tim_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_uart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_dma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c</FilePath>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_i2c.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c.c</FilePath>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_i2c_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c</FilePath>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c_ex.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_pwr.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c</FilePath>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c</FilePath>
             </File>
             <File>
-              <FileName>system_stm32f4xx.c</FileName>
+              <FileName>stm32f4xx_hal_rcc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Control</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Device</GroupName>
-          <Files>
-            <File>
-              <FileName>BSP_GPIO.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Device\BSP_GPIO\BSP_GPIO.c</FilePath>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c</FilePath>
             </File>
             <File>
-              <FileName>BSP_TIM.c</FileName>
+              <FileName>stm32f4xx_hal_rcc_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Device\BSP_TIM\BSP_TIM.c</FilePath>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c</FilePath>
             </File>
             <File>
-              <FileName>BSP_CAN.c</FileName>
+              <FileName>stm32f4xx_hal_tim.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Device\BSP_CAN\BSP_CAN.c</FilePath>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c</FilePath>
             </File>
             <File>
-              <FileName>BSP_USART.c</FileName>
+              <FileName>stm32f4xx_hal_tim_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Device\BSP_USART\BSP_USART.c</FilePath>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_pwr_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Library\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -598,12 +570,107 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Control</GroupName>
+          <Files>
+            <File>
+              <FileName>Ctrl_Chassis.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Control\Ctrl_Chassis\Ctrl_Chassis.c</FilePath>
+            </File>
+            <File>
+              <FileName>Ctrl_Cloud.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Control\Ctrl_Cloud\Ctrl_Cloud.c</FilePath>
+            </File>
+            <File>
+              <FileName>Ctrl_Frict.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Control\Ctrl_Frict\Ctrl_Frict.c</FilePath>
+            </File>
+            <File>
+              <FileName>Ctrl_Rammer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Control\Ctrl_Rammer\Ctrl_Rammer.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Driver</GroupName>
+          <Files>
+            <File>
+              <FileName>Driver_PID.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\Driver_PID\Driver_PID.c</FilePath>
+            </File>
+            <File>
+              <FileName>Driver_DBUS.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\Driver_DBUS\Driver_DBUS.c</FilePath>
+            </File>
+            <File>
+              <FileName>Driver_Judge.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\Driver_Judge\Driver_Judge.c</FilePath>
+            </File>
+            <File>
+              <FileName>Dirver_OLED.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\Dirver_OLED\Dirver_OLED.c</FilePath>
+            </File>
+            <File>
+              <FileName>Driver_Niming.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\Driver_Niming\Driver_Niming.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>TASK</GroupName>
           <Files>
             <File>
-              <FileName>Task_user.c</FileName>
+              <FileName>Task_User.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\TASK\User\Task_user.c</FilePath>
+              <FilePath>..\TASK\User\Task_User.c</FilePath>
+            </File>
+            <File>
+              <FileName>Task_Ctrl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\TASK\Ctrl\Task_Ctrl.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BSP</GroupName>
+          <Files>
+            <File>
+              <FileName>BSP_CAN.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\BSP_CAN\BSP_CAN.c</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_GPIO.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\BSP_GPIO\BSP_GPIO.c</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_TIM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\BSP_TIM\BSP_TIM.c</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_USART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\BSP_USART\BSP_USART.c</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_I2C.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\BSP_I2C\BSP_I2C.c</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_NVIC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\BSP_NVIC\BSP_NVIC.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -614,6 +681,16 @@
               <FileName>startup_stm32f427xx.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\startup_stm32f427xx.s</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Docs</GroupName>
+          <Files>
+            <File>
+              <FileName>README.md</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\README.md</FilePath>
             </File>
           </Files>
         </Group>
