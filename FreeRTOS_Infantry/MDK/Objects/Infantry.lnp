@@ -44,6 +44,7 @@
 ".\objects\driver_niming.o"
 ".\objects\task_user.o"
 ".\objects\task_ctrl.o"
+".\objects\task_can.o"
 ".\objects\bsp_can.o"
 ".\objects\bsp_gpio.o"
 ".\objects\bsp_tim.o"

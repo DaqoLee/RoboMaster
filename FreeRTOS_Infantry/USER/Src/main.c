@@ -21,7 +21,7 @@ int main(void)
 	
     xTaskCreate(start_task,            //任务函数
                 "start_task",          //任务名称
-                128,       			   //任务堆栈大小
+                512,       			   //任务堆栈大小
                 NULL,                  //传递给任务函数的参数
                 1,       			   //任务优先级
                 &StartTask_Handler);   //任务句柄              

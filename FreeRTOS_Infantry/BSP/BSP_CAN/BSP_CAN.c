@@ -43,12 +43,15 @@ void CAN_Init(CAN_HandleTypeDef* _hcan)
 
 	if(_hcan == &hcan1)
 	{
+		MX_CAN1_Init();
 		_hcan->pTxMsg = &Tx1Message;
 		_hcan->pRxMsg = &Rx1Message;
+		
 	}
 
 	if(_hcan == &hcan2)
 	{
+		MX_CAN2_Init();
 		_hcan->pTxMsg = &Tx2Message;
 		_hcan->pRxMsg = &Rx2Message;
 	}
@@ -63,10 +66,8 @@ void CAN_Init(CAN_HandleTypeDef* _hcan)
   */
 void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* _hcan)
 {
-	
 	if(_hcan==&hcan1)
 	{
-	    
 	    __HAL_CAN_ENABLE_IT(&hcan1, CAN_IT_FMP0);
 	}
 	if(_hcan==&hcan2)
@@ -144,7 +145,8 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan)
     HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
     /* Peripheral interrupt init */
-
+	HAL_NVIC_SetPriority(CAN1_TX_IRQn, 2, 0);
+    HAL_NVIC_EnableIRQ(CAN1_TX_IRQn);
   /* USER CODE BEGIN CAN1_MspInit 1 */
  
   /* USER CODE END CAN1_MspInit 1 */
@@ -173,7 +175,8 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan)
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
     /* Peripheral interrupt init */
-
+    HAL_NVIC_SetPriority(CAN2_TX_IRQn, 3, 0);
+    HAL_NVIC_EnableIRQ(CAN2_TX_IRQn);
   /* USER CODE BEGIN CAN2_MspInit 1 */
 
   /* USER CODE END CAN2_MspInit 1 */

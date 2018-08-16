@@ -6,13 +6,15 @@
 #include "BSP_USART.h"
 #include "BSP_CAN.h"
 #include "BSP_NVIC.h"
+#include "Task_Can.h"
+#include "Task_Ctrl.h"
 TaskHandle_t StartTask_Handler;
-TaskHandle_t LED0Task_Handler;
-TaskHandle_t LED1Task_Handler;
 TaskHandle_t FLOATTask_Handler;
 TaskHandle_t LED_TaskHandler;
 TaskHandle_t KEY_TaskHandler;
 TaskHandle_t Buzzer_TaskHandler;
+TaskHandle_t Task_CanSendHandler;
+TaskHandle_t Task_ControlHandler;
 
 void start_task(void *pvParameters)
 {
@@ -32,22 +34,9 @@ void start_task(void *pvParameters)
 	}
 	TIM12->ARR=0;
 	
+	Queue_CanSend=xQueueCreate(128, sizeof(CAN_HandleTypeDef));
 	
-    taskENTER_CRITICAL();          
-    
-    xTaskCreate(led0_task,     	
-				"led0_task",   	
-			    50, 
-                NULL,				
-                5,	
-                &LED0Task_Handler);   
-   
-    xTaskCreate(led1_task,     
-                "led1_task",   
-                50, 
-                NULL,
-                4,
-                &LED1Task_Handler);        
+    taskENTER_CRITICAL();            
    
     xTaskCreate(Buzzer_Task,     
                 "Buzzer_Task",   
@@ -66,35 +55,27 @@ void start_task(void *pvParameters)
                 128, 
                 NULL,
                 2,
-                &KEY_TaskHandler);  				
+                &KEY_TaskHandler);  	
+	xTaskCreate(Task_CanSend,     
+                "Task_CanSend",   
+                300, 
+                NULL,
+				4,
+                &Task_CanSendHandler);  	
+	xTaskCreate(Task_Control,     
+                "Task_Control",   
+                128, 
+                NULL,
+                4,
+                &Task_ControlHandler); 				
 				
     vTaskDelete(StartTask_Handler); 
     taskEXIT_CRITICAL();            
 }
 
-
-void led0_task(void *pvParameters)
-{
-    while(1)
-    {
-		HAL_GPIO_TogglePin(LED_R_GPIO_Port, LED_R_Pin);
-        vTaskDelay(500);
-    }
-}     
-
-void led1_task(void *pvParameters)
-{
-    while(1)
-    {
-		HAL_GPIO_TogglePin(LED_G_GPIO_Port, LED_G_Pin);
-        vTaskDelay(50);
-    }
-}
-
 void LED_Task(void *pvParameters)
 {
 	static uint8_t i=1;
-	TIM12->CCR1=200;
 	 while(1)
     {
 		for(i=1;i<17;i++)
@@ -103,8 +84,10 @@ void LED_Task(void *pvParameters)
 				GPIOG->BSRR=1<<(i+8);
 		   else
 				GPIOG->BSRR=1<<i;
-           vTaskDelay(50);
+		   HAL_GPIO_TogglePin(LED_G_GPIO_Port, LED_G_Pin);
+           vTaskDelay(40);
 		}
+		HAL_GPIO_TogglePin(LED_R_GPIO_Port, LED_R_Pin);
 		i=1;
     }
 }
@@ -144,15 +127,10 @@ void KEY_Task(void *pvParameters)
 		if(Flag2)
 		{
 			vTaskSuspend(LED_TaskHandler);
-			vTaskSuspend(LED0Task_Handler);
-			vTaskSuspend(LED1Task_Handler);
-			
 		}
 		else
 		{
 			vTaskResume(LED_TaskHandler);
-			vTaskResume(LED0Task_Handler);
-			vTaskResume(LED1Task_Handler);
 		}
     }
 }
