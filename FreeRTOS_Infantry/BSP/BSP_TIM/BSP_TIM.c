@@ -20,7 +20,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 		if(htim == &htim7)
         {  
-		   // printf("7 \r\n");
+		    printf("7 \r\n");
 		}
 		else if(htim == &htim6)
 		{

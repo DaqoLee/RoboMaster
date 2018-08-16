@@ -49,3 +49,6 @@
 .\objects\task_user.o: ..\BSP\BSP_USART\BSP_USART.h
 .\objects\task_user.o: ..\BSP\BSP_CAN\BSP_CAN.h
 .\objects\task_user.o: ..\BSP\BSP_NVIC\BSP_NVIC.h
+.\objects\task_user.o: ..\TASK\Can\Task_Can.h
+.\objects\task_user.o: ..\FreeRTOS\include\queue.h
+.\objects\task_user.o: ..\TASK\Ctrl\Task_Ctrl.h

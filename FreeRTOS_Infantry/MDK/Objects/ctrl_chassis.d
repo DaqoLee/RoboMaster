@@ -34,3 +34,16 @@
 .\objects\ctrl_chassis.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h
 .\objects\ctrl_chassis.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h
 .\objects\ctrl_chassis.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h
+.\objects\ctrl_chassis.o: ..\TASK\Can\Task_Can.h
+.\objects\ctrl_chassis.o: ..\FreeRTOS\include\FreeRTOS.h
+.\objects\ctrl_chassis.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\ctrl_chassis.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+.\objects\ctrl_chassis.o: ..\FreeRTOS\include\projdefs.h
+.\objects\ctrl_chassis.o: ..\FreeRTOS\include\portable.h
+.\objects\ctrl_chassis.o: ..\FreeRTOS\include\deprecated_definitions.h
+.\objects\ctrl_chassis.o: ..\FreeRTOS\portable\RVDS\ARM_CM4F\portmacro.h
+.\objects\ctrl_chassis.o: ..\FreeRTOS\include\mpu_wrappers.h
+.\objects\ctrl_chassis.o: ..\FreeRTOS\include\task.h
+.\objects\ctrl_chassis.o: ..\FreeRTOS\include\list.h
+.\objects\ctrl_chassis.o: ..\FreeRTOS\include\queue.h
+.\objects\ctrl_chassis.o: ..\BSP\BSP_CAN\BSP_CAN.h
