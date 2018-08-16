@@ -1,8 +1,6 @@
 #ifndef __DRIVER_JUDGE_H
 #define __DRIVER_JUDGE_H
 
-
-
 #include "stm32f4xx.h"
 #define JudgeBufferLength       150
 #define JudgeFrameLength_1      17
