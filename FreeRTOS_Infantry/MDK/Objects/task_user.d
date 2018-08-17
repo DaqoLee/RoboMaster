@@ -1,8 +1,8 @@
 .\objects\task_user.o: ..\TASK\User\Task_User.c
 .\objects\task_user.o: ..\TASK\User\Task_User.h
 .\objects\task_user.o: ..\FreeRTOS\include\FreeRTOS.h
-.\objects\task_user.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\objects\task_user.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\task_user.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\task_user.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\task_user.o: ..\FreeRTOS\include\FreeRTOSConfig.h
 .\objects\task_user.o: ..\FreeRTOS\include\projdefs.h
 .\objects\task_user.o: ..\FreeRTOS\include\portable.h
@@ -27,7 +27,7 @@
 .\objects\task_user.o: ..\Library\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
 .\objects\task_user.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h
 .\objects\task_user.o: ..\Library\STM32F4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h
-.\objects\task_user.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\task_user.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\task_user.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h
 .\objects\task_user.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h
 .\objects\task_user.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio_ex.h
@@ -48,6 +48,11 @@
 .\objects\task_user.o: ..\BSP\BSP_TIM\BSP_TIM.h
 .\objects\task_user.o: ..\BSP\BSP_USART\BSP_USART.h
 .\objects\task_user.o: ..\BSP\BSP_CAN\BSP_CAN.h
+.\objects\task_user.o: ..\Control\Ctrl_Rammer\Ctrl_Rammer.h
+.\objects\task_user.o: ..\USER\Inc\User_typedefs.h
+.\objects\task_user.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\task_user.o: ..\Driver\Driver_PID\Driver_PID.h
+.\objects\task_user.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\task_user.o: ..\BSP\BSP_NVIC\BSP_NVIC.h
 .\objects\task_user.o: ..\TASK\Can\Task_Can.h
 .\objects\task_user.o: ..\FreeRTOS\include\queue.h

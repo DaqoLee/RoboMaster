@@ -8,7 +8,7 @@
 .\objects\systemclock.o: ..\Library\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\systemclock.o: ..\Library\CMSIS\Device\ST\STM32F4xx\Include\stm32f427xx.h
 .\objects\systemclock.o: ..\Library\CMSIS\Include\core_cm4.h
-.\objects\systemclock.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\systemclock.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\systemclock.o: ..\Library\CMSIS\Include\core_cmInstr.h
 .\objects\systemclock.o: ..\Library\CMSIS\Include\cmsis_armcc.h
 .\objects\systemclock.o: ..\Library\CMSIS\Include\core_cmFunc.h
@@ -16,7 +16,7 @@
 .\objects\systemclock.o: ..\Library\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
 .\objects\systemclock.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h
 .\objects\systemclock.o: ..\Library\STM32F4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h
-.\objects\systemclock.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\systemclock.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\systemclock.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h
 .\objects\systemclock.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h
 .\objects\systemclock.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio_ex.h
@@ -35,7 +35,7 @@
 .\objects\systemclock.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h
 .\objects\systemclock.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h
 .\objects\systemclock.o: ..\FreeRTOS\include\FreeRTOS.h
-.\objects\systemclock.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\systemclock.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\systemclock.o: ..\FreeRTOS\include\FreeRTOSConfig.h
 .\objects\systemclock.o: ..\FreeRTOS\include\projdefs.h
 .\objects\systemclock.o: ..\FreeRTOS\include\portable.h

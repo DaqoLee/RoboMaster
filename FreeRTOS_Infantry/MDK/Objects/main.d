@@ -7,7 +7,7 @@
 .\objects\main.o: ..\Library\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\main.o: ..\Library\CMSIS\Device\ST\STM32F4xx\Include\stm32f427xx.h
 .\objects\main.o: ..\Library\CMSIS\Include\core_cm4.h
-.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\main.o: ..\Library\CMSIS\Include\core_cmInstr.h
 .\objects\main.o: ..\Library\CMSIS\Include\cmsis_armcc.h
 .\objects\main.o: ..\Library\CMSIS\Include\core_cmFunc.h
@@ -15,7 +15,7 @@
 .\objects\main.o: ..\Library\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
 .\objects\main.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h
 .\objects\main.o: ..\Library\STM32F4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h
-.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\main.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h
 .\objects\main.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h
 .\objects\main.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio_ex.h
@@ -36,7 +36,7 @@
 .\objects\main.o: ..\USER\Inc\SystemClock.h
 .\objects\main.o: ..\TASK\User\Task_user.h
 .\objects\main.o: ..\FreeRTOS\include\FreeRTOS.h
-.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\main.o: ..\FreeRTOS\include\FreeRTOSConfig.h
 .\objects\main.o: ..\FreeRTOS\include\projdefs.h
 .\objects\main.o: ..\FreeRTOS\include\portable.h
