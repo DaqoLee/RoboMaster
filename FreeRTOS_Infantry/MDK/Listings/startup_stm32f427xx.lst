@@ -907,16 +907,16 @@ ARM Macro Assembler    Page 14
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
 erwork --depend=.\objects\startup_stm32f427xx.d -o.\objects\startup_stm32f427xx
-.o -I.\RTE\_Infantry -IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMS
+.o -I.\RTE\_Infantry -ID:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0\Drivers\CM
 
 
 
 ARM Macro Assembler    Page 15 
 
 
-IS\Device\ST\STM32F4xx\Include -IC:\Keil_v5\ARM\CMSIS\Include --predefine="__UV
-ISION_VERSION SETA 525" --predefine="STM32F427xx SETA 1" --list=.\listings\star
-tup_stm32f427xx.lst startup_stm32f427xx.s
+SIS\Device\ST\STM32F4xx\Include -ID:\Keil_v5\ARM\CMSIS\Include --predefine="__E
+VAL SETA 1" --predefine="__UVISION_VERSION SETA 525" --predefine="STM32F427xx S
+ETA 1" --list=.\listings\startup_stm32f427xx.lst startup_stm32f427xx.s
 
 
 
@@ -2089,4 +2089,4 @@ Symbol: __use_two_region_memory
       None
 Comment: __use_two_region_memory unused
 3 symbols
-454 symbols in table
+455 symbols in table

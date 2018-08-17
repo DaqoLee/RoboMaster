@@ -59,6 +59,131 @@ void CAN_Init(CAN_HandleTypeDef* _hcan)
 	 __HAL_CAN_ENABLE_IT(&hcan2,CAN_IT_FMP0);
 }
 
+/*
+  * @brief CAN
+  * @param * hcan CAN
+  * @retval None
+  */
+void Analysis_RM_Can(CAN_HandleTypeDef* hcan)
+{
+//	uint8_t i;
+	switch(hcan->pRxMsg->StdId)
+	{
+//		case 0x201:
+//			ChassisParam.LB.Real_Angle=((int16_t)(hcan->pRxMsg->Data[0]<<8)|hcan->pRxMsg->Data[1]);
+//		    ChassisParam.LB.Real_Speed=((int16_t)(hcan->pRxMsg->Data[2]<<8)|hcan->pRxMsg->Data[3]);
+//			ChassisParam.LB.Real_Current=((int16_t)(hcan->pRxMsg->Data[4]<<8)|hcan->pRxMsg->Data[5]);
+//		    ChassisParam.LB.FrameRate++;
+//			break;
+//		case 0x202:
+//			ChassisParam.RB.Real_Angle=((int16_t)(hcan->pRxMsg->Data[0]<<8)|hcan->pRxMsg->Data[1]);
+//		    ChassisParam.RB.Real_Speed=((int16_t)(hcan->pRxMsg->Data[2]<<8)|hcan->pRxMsg->Data[3]);
+//			ChassisParam.RB.Real_Current=((int16_t)(hcan->pRxMsg->Data[4]<<8)|hcan->pRxMsg->Data[5]);
+//			ChassisParam.RB.FrameRate++;
+//			break;
+//		case 0x203:
+//			ChassisParam.RF.Real_Angle=((int16_t)(hcan->pRxMsg->Data[0]<<8)|hcan->pRxMsg->Data[1]);
+//		    ChassisParam.RF.Real_Speed=((int16_t)(hcan->pRxMsg->Data[2]<<8)|hcan->pRxMsg->Data[3]);
+//			ChassisParam.RF.Real_Current=((int16_t)(hcan->pRxMsg->Data[4]<<8)|hcan->pRxMsg->Data[5]);
+//		    ChassisParam.RF.FrameRate++;
+//			break;
+//		case 0x204:
+//			ChassisParam.LF.Real_Angle=((int16_t)(hcan->pRxMsg->Data[0]<<8)|hcan->pRxMsg->Data[1]);
+//		    ChassisParam.LF.Real_Speed=((int16_t)(hcan->pRxMsg->Data[2]<<8)|hcan->pRxMsg->Data[3]);
+//			ChassisParam.LF.Real_Current=((int16_t)(hcan->pRxMsg->Data[4]<<8)|hcan->pRxMsg->Data[5]);
+//			ChassisParam.LF.FrameRate++;
+//			break;
+//		case 0x205:
+//			CloudParam.Yaw.Real_Angle=((int16_t)(hcan->pRxMsg->Data[0]<<8)|hcan->pRxMsg->Data[1]);
+//			CloudParam.Yaw.Real_Current=((int16_t)(hcan->pRxMsg->Data[2]<<8)|hcan->pRxMsg->Data[3]);
+//			CloudParam.Yaw.FrameRate++;
+//			break;
+//		case 0x206:
+//			CloudParam.Pitch.Real_Angle=((int16_t)(hcan->pRxMsg->Data[0]<<8)|hcan->pRxMsg->Data[1]);
+//			CloudParam.Pitch.Real_Current=((int16_t)(hcan->pRxMsg->Data[2]<<8)|hcan->pRxMsg->Data[3]);
+//			CloudParam.Pitch.FrameRate++;
+//			break;
+		case 0x207:
+			M2006.Real_Angle=((int16_t)(hcan->pRxMsg->Data[0]<<8)|hcan->pRxMsg->Data[1]);
+			M2006.Real_Speed=((int16_t)(hcan->pRxMsg->Data[2]<<8)|hcan->pRxMsg->Data[3]);
+		    M2006.Real_Current=((int16_t)(hcan->pRxMsg->Data[4]<<8)|hcan->pRxMsg->Data[5]);
+		    Rammer_Angle();
+			M2006.FrameRate++;
+		
+		    break;
+//		case 0x208:
+//			break;
+//		
+////		case 0x259:	//UWB????
+////			
+////       if(hcan->pRxMsg->DLC==8)
+////			{
+////			  flag++;
+////				if(flag==1)
+////				{
+////					UWB.X=((int16_t)(hcan->pRxMsg->Data[1]<<8)|hcan->pRxMsg->Data[0]);
+////					UWB.Y=((int16_t)(hcan->pRxMsg->Data[3]<<8)|hcan->pRxMsg->Data[2]);
+////					UWB.Angle=((uint16_t)(hcan->pRxMsg->Data[5]<<8)|hcan->pRxMsg->Data[4])/100;
+////					UWB.Distance[0]=((int16_t)(hcan->pRxMsg->Data[7]<<8)|hcan->pRxMsg->Data[6]);
+////					
+////				}	
+////				else if(flag==2)
+////				{
+////					
+////					UWB.Distance[1]=((int16_t)(hcan->pRxMsg->Data[1]<<8)|hcan->pRxMsg->Data[0]);
+////					UWB.Distance[2]=((int16_t)(hcan->pRxMsg->Data[3]<<8)|hcan->pRxMsg->Data[2]);
+////					UWB.Distance[3]=((int16_t)(hcan->pRxMsg->Data[5]<<8)|hcan->pRxMsg->Data[4]);
+////					UWB.Distance[4]=((int16_t)(hcan->pRxMsg->Data[7]<<8)|hcan->pRxMsg->Data[6]);
+////				}
+////				
+////			}
+////			
+////			if(hcan->pRxMsg->DLC==6)
+////			{    flag=0;
+////				 UWB.Distance[5]=((int16_t)(hcan->pRxMsg->Data[1]<<8)|hcan->pRxMsg->Data[0]);
+////				 UWB.Error=((int16_t)(hcan->pRxMsg->Data[3]<<8)|hcan->pRxMsg->Data[2]);
+////					
+////			}
+////		
+////			break;
+//		case 0x11://?????
+//			if(hcan->pRxMsg->DLC==4)
+//			{
+//				for(i=0;i<4;i++)
+//				{
+//				   Type.U[i]=(int16_t)(hcan->pRxMsg->Data[i]);
+//				}
+//				   CloudParam.Gyro.radian=Type.F;
+//				   CloudParam.Gyro.angle=57.3f*CloudParam.Gyro.radian;
+//			}
+//		    CloudParam.Gyro.FrameRate++;
+//			break;
+//		case 0x401://???
+//			
+//		//	memcpy(Current_Meter.data.dataBuff,hcan->pRxMsg->Data,sizeof(uint8_t[8]));
+//		    Current_Meter.data.ChassisVolt=((uint16_t)(hcan->pRxMsg->Data[1]<<8)|hcan->pRxMsg->Data[0])/100.0f;
+//		    Current_Meter.data.ChassisCurrent=((uint16_t)(hcan->pRxMsg->Data[3]<<8)|hcan->pRxMsg->Data[2])/100.0f;
+//		    Current_Meter.data.ChassisPower=((uint16_t)(hcan->pRxMsg->Data[5]<<8)|hcan->pRxMsg->Data[4])/100.0f;
+//            Current_Meter.data.ChassisPowerBuffer=((uint16_t)(hcan->pRxMsg->Data[7]<<8)|hcan->pRxMsg->Data[6])/100.0f;
+//		
+//			if(Current_Meter.data.ChassisPowerBuffer<30)
+//				Meter_Power_Limit=1;
+//			else if(Current_Meter.data.ChassisPowerBuffer<15)
+//				Meter_Power_Limit=2;
+//			else if(Current_Meter.data.ChassisPowerBuffer>50)
+//				Meter_Power_Limit=0;
+//		    Cur_Meter.FrameRate++;
+//			break;
+	
+				
+		default:
+			break;
+	
+	}
+
+}
+
+
  /*
   * @brief CAN中断回调函数
   * @param * hcan CAN结构体指针
@@ -68,6 +193,7 @@ void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* _hcan)
 {
 	if(_hcan==&hcan1)
 	{
+			Analysis_RM_Can(&hcan1);
 	    __HAL_CAN_ENABLE_IT(&hcan1, CAN_IT_FMP0);
 	}
 	if(_hcan==&hcan2)

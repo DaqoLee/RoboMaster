@@ -139,7 +139,7 @@ typedef struct
 		 int16_t   		Last_Angle;
 		 int16_t   		Now_Angle; 
 		 int16_t   		Error_Angle;
-    	 int32_t   		All_error_Angle;
+     int32_t   		All_error_Angle;
 	
 		uint32_t 		Target_Angle;	
 		 int16_t 		Target_Current;		
