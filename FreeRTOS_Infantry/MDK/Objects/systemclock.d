@@ -34,3 +34,13 @@
 .\objects\systemclock.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h
 .\objects\systemclock.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h
 .\objects\systemclock.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h
+.\objects\systemclock.o: ..\FreeRTOS\include\FreeRTOS.h
+.\objects\systemclock.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\systemclock.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+.\objects\systemclock.o: ..\FreeRTOS\include\projdefs.h
+.\objects\systemclock.o: ..\FreeRTOS\include\portable.h
+.\objects\systemclock.o: ..\FreeRTOS\include\deprecated_definitions.h
+.\objects\systemclock.o: ..\FreeRTOS\portable\RVDS\ARM_CM4F\portmacro.h
+.\objects\systemclock.o: ..\FreeRTOS\include\mpu_wrappers.h
+.\objects\systemclock.o: ..\FreeRTOS\include\task.h
+.\objects\systemclock.o: ..\FreeRTOS\include\list.h

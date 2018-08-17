@@ -1,5 +1,7 @@
 #include "SystemClock.h"
 #include "stm32f4xx_hal.h"
+#include "FreeRTOS.h"
+#include "task.h"
 /** System Clock Configuration
 */
 void SystemClock_Config(void)
@@ -39,3 +41,9 @@ void SystemClock_Config(void)
   /* SysTick_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 }
+
+uint32_t HAL_GetTick(void)
+{
+	return xTaskGetTickCount();
+}
+

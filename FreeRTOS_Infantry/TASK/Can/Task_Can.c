@@ -8,7 +8,7 @@ void Task_CanSend(void *Parameters)
 	while(1)
 	{
 		xQueueReceive(Queue_CanSend, &Can, portMAX_DELAY);
-		//HAL_CAN_Transmit(&Can, 10);
+		HAL_CAN_Transmit(&Can, 100);
 	}
 
 
