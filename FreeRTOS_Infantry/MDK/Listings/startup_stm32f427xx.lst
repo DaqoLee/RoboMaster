@@ -914,9 +914,9 @@ erwork --depend=.\objects\startup_stm32f427xx.d -o.\objects\startup_stm32f427xx
 ARM Macro Assembler    Page 15 
 
 
-SIS\Device\ST\STM32F4xx\Include -ID:\Keil_v5\ARM\CMSIS\Include --predefine="__E
-VAL SETA 1" --predefine="__UVISION_VERSION SETA 525" --predefine="STM32F427xx S
-ETA 1" --list=.\listings\startup_stm32f427xx.lst startup_stm32f427xx.s
+SIS\Device\ST\STM32F4xx\Include -ID:\Keil_v5\ARM\CMSIS\Include --predefine="__U
+VISION_VERSION SETA 525" --predefine="STM32F427xx SETA 1" --list=.\listings\sta
+rtup_stm32f427xx.lst startup_stm32f427xx.s
 
 
 
@@ -2089,4 +2089,4 @@ Symbol: __use_two_region_memory
       None
 Comment: __use_two_region_memory unused
 3 symbols
-455 symbols in table
+454 symbols in table

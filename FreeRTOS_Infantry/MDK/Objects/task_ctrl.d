@@ -42,9 +42,11 @@
 .\objects\task_ctrl.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c_ex.h
 .\objects\task_ctrl.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h
 .\objects\task_ctrl.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h
+.\objects\task_ctrl.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h
 .\objects\task_ctrl.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h
 .\objects\task_ctrl.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h
 .\objects\task_ctrl.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h
+.\objects\task_ctrl.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_usart.h
 .\objects\task_ctrl.o: ..\TASK\Can\Task_Can.h
 .\objects\task_ctrl.o: ..\FreeRTOS\include\queue.h
 .\objects\task_ctrl.o: ..\BSP\BSP_CAN\BSP_CAN.h

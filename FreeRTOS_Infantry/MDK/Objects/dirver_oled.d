@@ -31,8 +31,10 @@
 .\objects\dirver_oled.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c_ex.h
 .\objects\dirver_oled.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h
 .\objects\dirver_oled.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h
+.\objects\dirver_oled.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h
 .\objects\dirver_oled.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h
 .\objects\dirver_oled.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h
 .\objects\dirver_oled.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h
+.\objects\dirver_oled.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_usart.h
 .\objects\dirver_oled.o: ..\Driver\Dirver_OLED\codetab.h
 .\objects\dirver_oled.o: ..\BSP\BSP_I2C\BSP_I2C.h

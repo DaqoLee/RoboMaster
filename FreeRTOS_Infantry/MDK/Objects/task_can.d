@@ -43,9 +43,11 @@
 .\objects\task_can.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c_ex.h
 .\objects\task_can.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h
 .\objects\task_can.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h
+.\objects\task_can.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h
 .\objects\task_can.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h
 .\objects\task_can.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h
 .\objects\task_can.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h
+.\objects\task_can.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_usart.h
 .\objects\task_can.o: ..\Control\Ctrl_Rammer\Ctrl_Rammer.h
 .\objects\task_can.o: ..\USER\Inc\User_typedefs.h
 .\objects\task_can.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

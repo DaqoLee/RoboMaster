@@ -30,9 +30,11 @@
 .\objects\main.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c_ex.h
 .\objects\main.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h
 .\objects\main.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h
+.\objects\main.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h
 .\objects\main.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h
 .\objects\main.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h
 .\objects\main.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h
+.\objects\main.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_usart.h
 .\objects\main.o: ..\USER\Inc\SystemClock.h
 .\objects\main.o: ..\TASK\User\Task_user.h
 .\objects\main.o: ..\FreeRTOS\include\FreeRTOS.h
