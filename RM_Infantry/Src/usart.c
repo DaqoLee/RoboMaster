@@ -114,7 +114,6 @@ void MX_UART8_Init(void)
 
 void MX_USART1_UART_Init(void)
 {
-
   huart1.Instance = USART1;
   huart1.Init.BaudRate = 100000;
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
@@ -124,7 +123,6 @@ void MX_USART1_UART_Init(void)
   huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
   huart1.Init.OverSampling = UART_OVERSAMPLING_16;
   HAL_UART_Init(&huart1);
-
 }
 /* USART2 init function */
 

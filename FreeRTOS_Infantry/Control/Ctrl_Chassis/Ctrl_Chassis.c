@@ -1,5 +1,151 @@
 #include "Ctrl_Chassis.h"
+#include "Driver_DBUS.h"
+#include "Ctrl_Cloud.h"
 
+ChassisParam_Struct   ChassisParam;
+
+ /*
+  * @brief 底盘参数设置
+  * @param X与Y轴的最大速度
+  * @retval None
+  */
+void Chassis_Param_Set(uint16_t Max_X,uint16_t Max_Y)//底盘
+{
+	if(DBUS_ReceiveData.switch_right==3)//遥控模式
+	{
+		if(ABS(DBUS_ReceiveData.ch4)>20)//遥控中间时有误差，不一定为零
+		{
+			ChassisParam.TargetVY=10*DBUS_ReceiveData.ch4;
+			if(!CloudParam.Yaw.Offline)
+			{   //底盘跟随，Yaw轴编码器的实际值往中间值靠
+				Filters(pid_calc(&ChassisParam.Chassis_Gyro.Chassis_PID,CloudParam.Yaw.Real_Angle,MEDIAN_YAW),&ChassisParam.TargetOmega,0.2f);
+				if(ABS(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW])<100||CloudParam.Cloud_Gyro.Offline)
+					ChassisParam.TargetOmega=0;
+				//防止跑动时云台抖动影响车身，允许机械角度有200的抖动范围
+			}
+			else//如果Yaw轴电机离线直接控制底盘	
+				ChassisParam.TargetOmega=ABS(DBUS_ReceiveData.ch1)>20?10*DBUS_ReceiveData.ch1:0;
+		}
+		else
+			ChassisParam.TargetVY=0;
+		
+		if(ABS(DBUS_ReceiveData.ch3)>20)
+		{
+			ChassisParam.TargetVX=-10*DBUS_ReceiveData.ch3;
+			if(!CloudParam.Yaw.Offline)
+			{
+				Filters(pid_calc(&ChassisParam.Chassis_Gyro.Chassis_PID,CloudParam.Yaw.Real_Angle,MEDIAN_YAW),&ChassisParam.TargetOmega,0.2f);
+				if(ABS(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW])<100||CloudParam.Cloud_Gyro.Offline)
+					ChassisParam.TargetOmega=0;
+			}
+			else
+				ChassisParam.TargetOmega=ABS(DBUS_ReceiveData.ch1)>20?10*DBUS_ReceiveData.ch1:0;
+
+		}
+		else
+			ChassisParam.TargetVX=0;
+
+		if(ChassisParam.TargetVX==0&&ChassisParam.TargetVY==0)
+		{
+			if(!CloudParam.Yaw.Offline)
+			{   //静止时，90度范围内不跟随
+				Filters(pid_calc(&ChassisParam.Chassis_Gyro.Chassis_PID,CloudParam.Yaw.Real_Angle,MEDIAN_YAW),&ChassisParam.TargetOmega,0.06f);
+				if(ABS(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW])<1024||CloudParam.Cloud_Gyro.Offline)
+					ChassisParam.TargetOmega=0;
+			}
+			else
+				ChassisParam.TargetOmega=ABS(DBUS_ReceiveData.ch1)>20?10*DBUS_ReceiveData.ch1:0;		
+		}
+	}
+}
+ /*
+  * @brief 麦克纳姆伦运动模型
+  * @param Vx X轴方向的速度，Vy Y轴方向的速度，Omega 自旋速度，*Speed轮子转速
+  * @retval None
+  */
+void MecanumCalculate(float Vx, float Vy, float Omega, int16_t *Speed)
+{
+	static float Buffer[4];
+	static uint16_t MaxWheelSpeed=6600;
+    float  Param, MaxSpeed;
+    uint8_t index;
+    
+    Buffer[0] = -Vx - Vy + Omega;
+    Buffer[1] = -Vx + Vy + Omega;
+    Buffer[2] =  Vx + Vy + Omega;
+    Buffer[3] =  Vx - Vy + Omega;
+    
+    //限幅
+    for(index = 0, MaxSpeed = 0; index < 4; index++)
+    {
+        if((Buffer[index] > 0 ? Buffer[index] : -Buffer[index]) > MaxSpeed)
+        {
+            MaxSpeed = (Buffer[index] > 0 ? Buffer[index] : -Buffer[index]);//挑出最大的速度
+        }
+    }	
+	
+//	if((MEDIAN_ROLL-CloudParam.Cloud_Gyro.Roll)-((CloudParam.Pitch.Real_Angle-(MEDIAN_PITCH-Pitch_Min-200))/22.75f)>12)
+//		MaxWheelSpeed=2000;//云台陀螺仪角度变化大于Pitch轴编码器的转换值，被认为是爬坡，把速度降下来
+//	else
+//		MaxWheelSpeed=6600;
+	
+    if(MaxWheelSpeed < MaxSpeed)
+    {
+        Param = (float)MaxWheelSpeed / MaxSpeed;
+        Speed[0] = Buffer[0] * Param;
+        Speed[1] = Buffer[1] * Param;
+        Speed[2] = Buffer[2] * Param;
+        Speed[3] = Buffer[3] * Param; 
+    }
+    else
+    {
+        Speed[0] = Buffer[0];
+        Speed[1] = Buffer[1];
+        Speed[2] = Buffer[2];
+        Speed[3] = Buffer[3];
+    }
+}
+
+ /*
+  * @brief 底盘功率限制
+  * @param None
+  * @retval None
+  */
+void Power_Limit(float Cur_limit)
+{
+	static float Current;
+    //计算四个电机的总电流
+	Current=ABS(ChassisParam.LF.Target_Current)+ABS(ChassisParam.LB.Target_Current)\
+		   +ABS(ChassisParam.RB.Target_Current)+ABS(ChassisParam.RF.Target_Current);
+	
+	if(Current>Cur_limit)
+	{//根据目标值比例分配电流
+		ChassisParam.LF.Target_Current = ChassisParam.LF.Target_Current/Current*Cur_limit;
+		ChassisParam.LB.Target_Current = ChassisParam.LB.Target_Current/Current*Cur_limit;
+		ChassisParam.RB.Target_Current = ChassisParam.RB.Target_Current/Current*Cur_limit;
+		ChassisParam.RF.Target_Current = ChassisParam.RF.Target_Current/Current*Cur_limit;
+	}
+}
+
+ /*
+  * @brief 底盘电机PID计算
+  * @param None
+  * @retval None
+  */
+void M3508_PID_Set()
+{
+	//底盘左前轮
+	ChassisParam.LF.Target_Current=pid_calc(&ChassisParam.LF.PID,ChassisParam.LF.Real_Speed,ChassisParam.LF.Target_Speed);
+	
+	//底盘左后轮
+	ChassisParam.LB.Target_Current=pid_calc(&ChassisParam.LB.PID,ChassisParam.LB.Real_Speed,ChassisParam.LB.Target_Speed);
+	
+	//底盘右前轮
+	ChassisParam.RF.Target_Current=pid_calc(&ChassisParam.RF.PID,ChassisParam.RF.Real_Speed,ChassisParam.RF.Target_Speed);
+	
+	//底盘右后轮
+	ChassisParam.RB.Target_Current=pid_calc(&ChassisParam.RB.PID,ChassisParam.RB.Real_Speed,ChassisParam.RB.Target_Speed);
+}
 
 void Set_moto_current(CAN_HandleTypeDef* hcan,uint16_t ID,int16_t Current1, int16_t Current2, int16_t Current3, int16_t Current4)
 {

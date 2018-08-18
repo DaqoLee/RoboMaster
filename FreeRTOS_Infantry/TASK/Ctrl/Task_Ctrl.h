@@ -2,6 +2,7 @@
 #define _TASK_CTRL_H
 #include "FreeRTOS.h"
 #include "task.h"
+#include "User_Code.h"
+
 void Task_Control(void *Parameters);
-void PID_Config(void);
 #endif

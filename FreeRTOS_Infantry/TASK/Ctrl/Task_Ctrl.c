@@ -1,10 +1,8 @@
 #include "Task_Ctrl.h"
-#include "Ctrl_Chassis.h"
-#include "Ctrl_Rammer.h"
+
 void Task_Control(void *Parameters)
 {
 	portTickType CurrentControlTick = 0;
-	PID_Config();
 	
 	while(1)
 	{
@@ -14,10 +12,5 @@ void Task_Control(void *Parameters)
 	}
 }
 
-void PID_Config(void)
-{
-		M2006.Target_Angle=50000;
-		PID_struct_init(&M2006.PID.Out,POSITION_PID,6000,M2006.IntegralLimit,0.8f,0,2.8f);
-		PID_struct_init(&M2006.PID.In,DELTA_PID,6000,M2006.IntegralLimit,0.4f,0,0);
-}
+
 

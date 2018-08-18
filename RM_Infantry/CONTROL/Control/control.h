@@ -180,10 +180,10 @@ typedef struct
 		   float        Speed_KI;					
 		   float		Speed_KD;	
 
-	  PID_Struct		PID;
+	PID_Struct		PID;
 	  
 		uint32_t        FrameRate;
-         uint8_t        Offline;   
+     uint8_t        Offline;   
 	
 }Motor2006_Param;
 

@@ -2,6 +2,7 @@
 #define _TASK_USER_H
 #include "FreeRTOS.h"
 #include "task.h"
+#include "User_Code.h"
 
 extern TaskHandle_t StartTask_Handler;
 extern TaskHandle_t FLOATTask_Handler;

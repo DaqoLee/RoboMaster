@@ -32,6 +32,7 @@
 ".\objects\stm32f4xx_hal_msp.o"
 ".\objects\stm32f4xx_it.o"
 ".\objects\systemclock.o"
+".\objects\user_code.o"
 ".\objects\ctrl_chassis.o"
 ".\objects\ctrl_cloud.o"
 ".\objects\ctrl_frict.o"

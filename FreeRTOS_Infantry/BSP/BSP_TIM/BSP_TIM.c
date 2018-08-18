@@ -18,14 +18,14 @@ void TIM_Init(void)
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-		if(htim == &htim7)
-        {  
-		   // printf("7 \r\n");
-		}
-		else if(htim == &htim6)
-		{
-		   // printf("6\r\n");
-		}
+	if(htim == &htim7)
+	{  
+	   // printf("7 \r\n");
+	}
+	else if(htim == &htim6)
+	{
+	   // printf("6\r\n");
+	}
 }
 
 

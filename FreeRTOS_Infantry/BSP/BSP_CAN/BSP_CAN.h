@@ -3,6 +3,8 @@
 
 #include "stm32f4xx_hal.h"
 #include "Ctrl_Rammer.h"
+#include "Ctrl_Chassis.h"
+#include "Ctrl_Cloud.h"
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */

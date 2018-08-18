@@ -8,7 +8,7 @@ infantry\usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
 infantry\usart.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 infantry\usart.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f427xx.h
 infantry\usart.o: ../Drivers/CMSIS/Include/core_cm4.h
-infantry\usart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+infantry\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 infantry\usart.o: ../Drivers/CMSIS/Include/core_cmInstr.h
 infantry\usart.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
 infantry\usart.o: ../Drivers/CMSIS/Include/core_cmFunc.h
@@ -16,7 +16,7 @@ infantry\usart.o: ../Drivers/CMSIS/Include/core_cmSimd.h
 infantry\usart.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 infantry\usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 infantry\usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-infantry\usart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+infantry\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 infantry\usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 infantry\usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
 infantry\usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h

@@ -59,23 +59,6 @@ typedef struct
 		
 }Gyro_GY955_Struct;
 
-typedef struct
-{
-	   uint32_t         IntegralLimit;		
-	      pid_t			PID;
-	      float			KP;					
-		  float         KI;					
-	      float			KD;					   
-	
-          float         radian;
-		  float         angle;
-	
-		  float 		Target_angle; 
-		  float 		Target_radian;
-	   uint32_t         FrameRate;
-        uint8_t         Offline;	
-	
-}Gyro_Struct;
 
 typedef struct
 {
@@ -100,10 +83,7 @@ typedef struct
 		 int16_t 		Target_Current;	
 		 int16_t		Target_Speed;		
 		uint32_t        IntegralLimit;		
-	
-		   float		KP;					
-		   float        KI;					
-	       float		KD;					
+				
 	       pid_t		PID;
 		uint32_t        FrameRate;
          uint8_t        Offline;
@@ -118,11 +98,7 @@ typedef struct
 		 int16_t 		Target_Angle;	
 		 int16_t 		Target_Current;		
 		uint32_t        IntegralLimit;		
-  
-	       float		KP;					
-		   float        KI;					
-	       float		KD;					
-	
+
 	    uint32_t        FrameRate;
          uint8_t        Offline;
 	  PID_Struct		PID;
@@ -139,20 +115,12 @@ typedef struct
 		 int16_t   		Last_Angle;
 		 int16_t   		Now_Angle; 
 		 int16_t   		Error_Angle;
-     int32_t   		All_error_Angle;
+         int32_t   		All_error_Angle;
 	
 		uint32_t 		Target_Angle;	
 		 int16_t 		Target_Current;		
 		 int16_t		Target_Speed;			
 		uint32_t        IntegralLimit;		
-    
-		   float		Angle_KP;					
-		   float        Angle_KI;					
-		   float		Angle_KD;					
-		
-		   float		Speed_KP;					
-		   float        Speed_KI;					
-		   float		Speed_KD;	
 
 	  PID_Struct		PID;
 	  
@@ -169,6 +137,7 @@ typedef struct
     Motor3508_Param 	RF;
     Motor3508_Param	 	LB;
     Motor3508_Param		RB;
+	
 	Gyro_GY955_Struct	Chassis_Gyro;
     float 				TargetVX;
     float			    TargetVY;
@@ -183,8 +152,6 @@ typedef struct
     Motor6623_Param		Pitch;
 	Motor6623_Param		Yaw;
 	Gyro_GY955_Struct	Cloud_Gyro;
-	    Gyro_Struct     Gyro;
-
 }CloudParam_Struct;
 
 typedef struct
@@ -331,10 +298,6 @@ typedef struct{
 	uint8_t infoUpdateFlag;
 	
 }Judge_SendData_t;
-
-
-
-
 
 
 #endif
