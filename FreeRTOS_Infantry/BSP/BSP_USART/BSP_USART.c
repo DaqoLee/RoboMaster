@@ -50,8 +50,7 @@ DMA_HandleTypeDef hdma_usart6_tx;
 
 void UART_Init(void)
 {
-	
-	__HAL_RCC_DMA2_CLK_ENABLE();
+  __HAL_RCC_DMA2_CLK_ENABLE();
   __HAL_RCC_DMA1_CLK_ENABLE();
 	
   MX_UART7_Init();
@@ -73,7 +72,7 @@ void UART_Init(void)
 
 void MX_UART7_Init(void)
 {
-
+	
   huart7.Instance = UART7;
   huart7.Init.BaudRate = 115200;
   huart7.Init.WordLength = UART_WORDLENGTH_8B;

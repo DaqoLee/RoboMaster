@@ -9,7 +9,7 @@ infantry\dirver_oled.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
 infantry\dirver_oled.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 infantry\dirver_oled.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f427xx.h
 infantry\dirver_oled.o: ../Drivers/CMSIS/Include/core_cm4.h
-infantry\dirver_oled.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+infantry\dirver_oled.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 infantry\dirver_oled.o: ../Drivers/CMSIS/Include/core_cmInstr.h
 infantry\dirver_oled.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
 infantry\dirver_oled.o: ../Drivers/CMSIS/Include/core_cmFunc.h
@@ -17,7 +17,7 @@ infantry\dirver_oled.o: ../Drivers/CMSIS/Include/core_cmSimd.h
 infantry\dirver_oled.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 infantry\dirver_oled.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 infantry\dirver_oled.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-infantry\dirver_oled.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+infantry\dirver_oled.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 infantry\dirver_oled.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 infantry\dirver_oled.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
 infantry\dirver_oled.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h
@@ -37,7 +37,7 @@ infantry\dirver_oled.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 infantry\dirver_oled.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 infantry\dirver_oled.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 infantry\dirver_oled.o: ..\DRIVER\Driver_PID\Driver_PID.h
-infantry\dirver_oled.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+infantry\dirver_oled.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 infantry\dirver_oled.o: ..\DRIVER\Driver_Judge\Driver_Judge.h
 infantry\dirver_oled.o: ..\DRIVER\Driver_DBUS\Driver_DBUS.h
 infantry\dirver_oled.o: ../Inc/tim.h

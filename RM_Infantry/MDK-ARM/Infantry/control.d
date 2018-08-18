@@ -8,7 +8,7 @@ infantry\control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
 infantry\control.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 infantry\control.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f427xx.h
 infantry\control.o: ../Drivers/CMSIS/Include/core_cm4.h
-infantry\control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+infantry\control.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 infantry\control.o: ../Drivers/CMSIS/Include/core_cmInstr.h
 infantry\control.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
 infantry\control.o: ../Drivers/CMSIS/Include/core_cmFunc.h
@@ -16,7 +16,7 @@ infantry\control.o: ../Drivers/CMSIS/Include/core_cmSimd.h
 infantry\control.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 infantry\control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 infantry\control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-infantry\control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+infantry\control.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 infantry\control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 infantry\control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
 infantry\control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h
@@ -36,7 +36,7 @@ infantry\control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 infantry\control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 infantry\control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 infantry\control.o: ..\DRIVER\Driver_PID\Driver_PID.h
-infantry\control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+infantry\control.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 infantry\control.o: ..\DRIVER\Driver_Judge\Driver_Judge.h
 infantry\control.o: ..\DRIVER\Driver_DBUS\Driver_DBUS.h
 infantry\control.o: ../Inc/tim.h
@@ -49,7 +49,7 @@ infantry\control.o: ..\CONTROL\Ctrl_Rammer\Ctrl_Rammer.h
 infantry\control.o: ..\CONTROL\Ctrl_Frict\Ctrl_Frict.h
 infantry\control.o: ..\DRIVER\Driver_Display\Driver_Display.h
 infantry\control.o: ..\USER\User_Can\User_can.h
-infantry\control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+infantry\control.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 infantry\control.o: ..\DRIVER\Driver_Hierogram\Driver_Hierogram.h
 infantry\control.o: ..\DRIVER\Driver_SupCap\Driver_SupCap.h
 infantry\control.o: ..\USER\User\User.h

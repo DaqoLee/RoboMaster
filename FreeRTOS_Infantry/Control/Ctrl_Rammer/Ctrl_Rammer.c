@@ -1,8 +1,7 @@
 #include "Ctrl_Rammer.h"
 
-const 	  int32_t 	Rammer_Max_Angle=((8192*REDUCTION_RATIO)-RAMMER_ERROR);//拨盘转一圈编码器累计的最大值
-const     int32_t	St_Serve=(Rammer_Max_Angle/RAMMER_NUM+1);//转一格的线数
-
+const int32_t 	Rammer_Max_Angle=((8192*REDUCTION_RATIO)-RAMMER_ERROR);//拨盘转一圈编码器累计的最大值
+const int32_t	St_Serve=(Rammer_Max_Angle/RAMMER_NUM+1);//转一格的线数
 
 Motor2006_Param   M2006;
 

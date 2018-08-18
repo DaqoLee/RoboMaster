@@ -9,7 +9,7 @@ infantry\driver_gyro.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
 infantry\driver_gyro.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 infantry\driver_gyro.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f427xx.h
 infantry\driver_gyro.o: ../Drivers/CMSIS/Include/core_cm4.h
-infantry\driver_gyro.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+infantry\driver_gyro.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 infantry\driver_gyro.o: ../Drivers/CMSIS/Include/core_cmInstr.h
 infantry\driver_gyro.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
 infantry\driver_gyro.o: ../Drivers/CMSIS/Include/core_cmFunc.h
@@ -17,7 +17,7 @@ infantry\driver_gyro.o: ../Drivers/CMSIS/Include/core_cmSimd.h
 infantry\driver_gyro.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 infantry\driver_gyro.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 infantry\driver_gyro.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-infantry\driver_gyro.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+infantry\driver_gyro.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 infantry\driver_gyro.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 infantry\driver_gyro.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
 infantry\driver_gyro.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h
@@ -36,10 +36,10 @@ infantry\driver_gyro.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 infantry\driver_gyro.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 infantry\driver_gyro.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 infantry\driver_gyro.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
-infantry\driver_gyro.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+infantry\driver_gyro.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 infantry\driver_gyro.o: ..\CONTROL\Control\control.h
 infantry\driver_gyro.o: ..\DRIVER\Driver_PID\Driver_PID.h
-infantry\driver_gyro.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+infantry\driver_gyro.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 infantry\driver_gyro.o: ..\DRIVER\Driver_Judge\Driver_Judge.h
 infantry\driver_gyro.o: ..\DRIVER\Driver_DBUS\Driver_DBUS.h
 infantry\driver_gyro.o: ../Inc/tim.h
