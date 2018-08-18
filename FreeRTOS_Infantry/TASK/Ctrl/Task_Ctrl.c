@@ -20,3 +20,4 @@ void PID_Config(void)
 		PID_struct_init(&M2006.PID.Out,POSITION_PID,6000,M2006.IntegralLimit,0.8f,0,2.8f);
 		PID_struct_init(&M2006.PID.In,DELTA_PID,6000,M2006.IntegralLimit,0.4f,0,0);
 }
+

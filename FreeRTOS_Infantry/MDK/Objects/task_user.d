@@ -11,7 +11,6 @@
 .\objects\task_user.o: ..\FreeRTOS\include\mpu_wrappers.h
 .\objects\task_user.o: ..\FreeRTOS\include\task.h
 .\objects\task_user.o: ..\FreeRTOS\include\list.h
-.\objects\task_user.o: ..\BSP\BSP_GPIO\BSP_GPIO.h
 .\objects\task_user.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h
 .\objects\task_user.o: ..\USER\Inc\stm32f4xx_hal_conf.h
 .\objects\task_user.o: ..\USER\Inc\mxconstants.h
@@ -42,9 +41,12 @@
 .\objects\task_user.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c_ex.h
 .\objects\task_user.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h
 .\objects\task_user.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h
+.\objects\task_user.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h
 .\objects\task_user.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h
 .\objects\task_user.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h
 .\objects\task_user.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h
+.\objects\task_user.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_usart.h
+.\objects\task_user.o: ..\BSP\BSP_GPIO\BSP_GPIO.h
 .\objects\task_user.o: ..\BSP\BSP_TIM\BSP_TIM.h
 .\objects\task_user.o: ..\BSP\BSP_USART\BSP_USART.h
 .\objects\task_user.o: ..\BSP\BSP_CAN\BSP_CAN.h
@@ -57,3 +59,4 @@
 .\objects\task_user.o: ..\TASK\Can\Task_Can.h
 .\objects\task_user.o: ..\FreeRTOS\include\queue.h
 .\objects\task_user.o: ..\TASK\Ctrl\Task_Ctrl.h
+.\objects\task_user.o: ..\Driver\Driver_DBUS\Driver_DBUS.h

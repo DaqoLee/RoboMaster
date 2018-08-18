@@ -11,6 +11,5 @@ void Task_CanSend(void *Parameters)
 		HAL_CAN_Transmit(&Can, 100);
 	}
 
-
 }
 

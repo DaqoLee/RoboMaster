@@ -26,7 +26,6 @@
 ".\objects\stm32f4xx_hal_tim_ex.o"
 ".\objects\stm32f4xx_hal_spi.o"
 ".\objects\stm32f4xx_hal_uart.o"
-".\objects\stm32f4xx_hal_usart.o"
 ".\objects\stm32f4xx_hal_dma.o"
 ".\objects\stm32f4xx_hal_pwr_ex.o"
 ".\objects\main.o"

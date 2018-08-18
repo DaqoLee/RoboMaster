@@ -61,3 +61,4 @@ void Rammer_Angle(void)
 	
 	M2006.Last_Angle=M2006.Now_Angle;//现在的值赋给上一次的值
 }
+

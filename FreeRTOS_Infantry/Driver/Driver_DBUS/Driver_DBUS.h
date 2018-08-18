@@ -9,8 +9,7 @@
 //DBUS接收数据帧长度
 #define DBUSLength		18				//DBUS数据帧长
 #define DBUSBackLength	1				//增加一个字节保持稳定
-
-					
+			
 #define KEY_V		0x4000
 #define KEY_C		0x2000
 #define KEY_X		0x1000

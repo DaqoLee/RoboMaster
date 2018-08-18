@@ -31,9 +31,11 @@
 .\objects\ctrl_chassis.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c_ex.h
 .\objects\ctrl_chassis.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h
 .\objects\ctrl_chassis.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h
+.\objects\ctrl_chassis.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h
 .\objects\ctrl_chassis.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h
 .\objects\ctrl_chassis.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h
 .\objects\ctrl_chassis.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h
+.\objects\ctrl_chassis.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_usart.h
 .\objects\ctrl_chassis.o: ..\TASK\Can\Task_Can.h
 .\objects\ctrl_chassis.o: ..\FreeRTOS\include\FreeRTOS.h
 .\objects\ctrl_chassis.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h

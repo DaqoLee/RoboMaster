@@ -1,5 +1,4 @@
 #include "Task_User.h"
-#include "BSP_GPIO.h"
 #include "stm32f4xx_hal.h"
 #include "BSP_GPIO.h"
 #include "BSP_TIM.h"
@@ -8,6 +7,7 @@
 #include "BSP_NVIC.h"
 #include "Task_Can.h"
 #include "Task_Ctrl.h"
+#include "Driver_DBUS.h"
 TaskHandle_t StartTask_Handler;
 TaskHandle_t FLOATTask_Handler;
 TaskHandle_t LED_TaskHandler;
@@ -21,11 +21,11 @@ void start_task(void *pvParameters)
 	static uint8_t i=1;
 	
 	GPIO_Init();
+	NVIC_Init();
 	TIM_Init();
 	UART_Init();
-    CAN_Init(&hcan1);
-    CAN_Init(&hcan2);
-	NVIC_Init();
+  CAN_Init(&hcan1);
+  CAN_Init(&hcan2);
 	TIM12->CCR1=200;
 	for(;i<4;i++)
 	{
@@ -33,7 +33,6 @@ void start_task(void *pvParameters)
 		vTaskDelay(150);
 	}
 	TIM12->ARR=0;
-	
 	Queue_CanSend=xQueueCreate(128, sizeof(CAN_HandleTypeDef));
 	
     taskENTER_CRITICAL();            
@@ -60,7 +59,7 @@ void start_task(void *pvParameters)
                 "Task_CanSend",   
                 300, 
                 NULL,
-				4,
+								4,
                 &Task_CanSendHandler);  	
 	xTaskCreate(Task_Control,     
                 "Task_Control",   

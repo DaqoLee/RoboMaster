@@ -6,6 +6,7 @@
 #define ClearShackTick      50      //Ïû¶¶Ê±³¤
     
 uint8_t Key_Test;
+
 void User_DMAInit(UART_HandleTypeDef* user_usartX)
 {
 
