@@ -67,3 +67,4 @@
 .\objects\main.o: ..\BSP\BSP_TIM\BSP_TIM.h
 .\objects\main.o: ..\BSP\BSP_USART\BSP_USART.h
 .\objects\main.o: ..\BSP\BSP_NVIC\BSP_NVIC.h
+.\objects\main.o: ..\Driver\Driver_SupCap\Driver_SupCap.h

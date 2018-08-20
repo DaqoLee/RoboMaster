@@ -1,9 +1,6 @@
 .\objects\ctrl_cloud.o: ..\Control\Ctrl_Cloud\Ctrl_Cloud.c
 .\objects\ctrl_cloud.o: ..\Control\Ctrl_Cloud\Ctrl_Cloud.h
 .\objects\ctrl_cloud.o: ..\USER\User_Code\User_Code.h
-.\objects\ctrl_cloud.o: ..\USER\Inc\User_typedefs.h
-.\objects\ctrl_cloud.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\ctrl_cloud.o: ..\Driver\Driver_PID\Driver_PID.h
 .\objects\ctrl_cloud.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h
 .\objects\ctrl_cloud.o: ..\USER\Inc\stm32f4xx_hal_conf.h
 .\objects\ctrl_cloud.o: ..\USER\Inc\mxconstants.h
@@ -40,6 +37,9 @@
 .\objects\ctrl_cloud.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h
 .\objects\ctrl_cloud.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h
 .\objects\ctrl_cloud.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_usart.h
+.\objects\ctrl_cloud.o: ..\USER\Inc\User_typedefs.h
+.\objects\ctrl_cloud.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\ctrl_cloud.o: ..\Driver\Driver_PID\Driver_PID.h
 .\objects\ctrl_cloud.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\ctrl_cloud.o: ..\Control\Ctrl_Chassis\Ctrl_Chassis.h
 .\objects\ctrl_cloud.o: ..\TASK\Can\Task_Can.h
@@ -66,3 +66,4 @@
 .\objects\ctrl_cloud.o: ..\BSP\BSP_TIM\BSP_TIM.h
 .\objects\ctrl_cloud.o: ..\BSP\BSP_USART\BSP_USART.h
 .\objects\ctrl_cloud.o: ..\BSP\BSP_NVIC\BSP_NVIC.h
+.\objects\ctrl_cloud.o: ..\Driver\Driver_SupCap\Driver_SupCap.h

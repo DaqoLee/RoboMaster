@@ -41,7 +41,7 @@ extern Judge_GameResult_t Judge_GameResult;
 extern Judge_GetBuff_t Judge_GetBuff;
 extern Judge_RobotPos_t Judge_RobotPos;
 extern Judge_SendData_t Judge_SendData;
-
+extern uint8_t JudgeSystem_rxBuff[JUDGESYSTEM_PACKSIZE]; 
 void JudgeSystem_Init(void);
 void Judge_getInfo(uint16_t dataLength);
 void Judge_sendInfo(void);

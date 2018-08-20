@@ -67,3 +67,4 @@
 .\objects\ctrl_chassis.o: ..\BSP\BSP_USART\BSP_USART.h
 .\objects\ctrl_chassis.o: ..\BSP\BSP_CAN\BSP_CAN.h
 .\objects\ctrl_chassis.o: ..\BSP\BSP_NVIC\BSP_NVIC.h
+.\objects\ctrl_chassis.o: ..\Driver\Driver_SupCap\Driver_SupCap.h

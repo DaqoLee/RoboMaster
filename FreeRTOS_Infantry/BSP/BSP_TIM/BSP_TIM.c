@@ -8,12 +8,17 @@ TIM_HandleTypeDef htim12;
 /* TIM1 init function */
 void TIM_Init(void)
 {
+	MX_TIM1_Init();
 	MX_TIM6_Init();
 	MX_TIM7_Init();
 	MX_TIM12_Init();
 	HAL_TIM_Base_Start_IT(&htim6);
 	HAL_TIM_Base_Start_IT(&htim7);
 	HAL_TIM_PWM_Start(&htim12,TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1);//TIM1 通道1使能（摩擦轮）
+	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2);//TIM1 通道2使能（摩擦轮）
+	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_3);//TIM1 通道1使能（摩擦轮）
+	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_4);//TIM1 通道2使能（摩擦轮）
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)

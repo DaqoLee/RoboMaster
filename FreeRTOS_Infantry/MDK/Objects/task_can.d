@@ -56,8 +56,8 @@
 .\objects\task_can.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\task_can.o: ..\Control\Ctrl_Chassis\Ctrl_Chassis.h
 .\objects\task_can.o: ..\TASK\Can\Task_Can.h
-.\objects\task_can.o: ..\Control\Ctrl_Cloud\Ctrl_Cloud.h
 .\objects\task_can.o: ..\USER\User_Code\User_Code.h
+.\objects\task_can.o: ..\Control\Ctrl_Cloud\Ctrl_Cloud.h
 .\objects\task_can.o: ..\Control\Ctrl_Frict\Ctrl_Frict.h
 .\objects\task_can.o: ..\Control\Ctrl_Rammer\Ctrl_Rammer.h
 .\objects\task_can.o: ..\Driver\Driver_Judge\Driver_Judge.h
@@ -67,3 +67,4 @@
 .\objects\task_can.o: ..\BSP\BSP_USART\BSP_USART.h
 .\objects\task_can.o: ..\BSP\BSP_CAN\BSP_CAN.h
 .\objects\task_can.o: ..\BSP\BSP_NVIC\BSP_NVIC.h
+.\objects\task_can.o: ..\Driver\Driver_SupCap\Driver_SupCap.h

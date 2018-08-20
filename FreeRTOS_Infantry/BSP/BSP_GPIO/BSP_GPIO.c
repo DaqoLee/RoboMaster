@@ -111,7 +111,7 @@ void MX_GPIO_Init(void)
     GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
     HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 		
-		/**USART3 GPIO Configuration    
+	/**USART3 GPIO Configuration    
     PD9     ------> USART3_RX
     PD8     ------> USART3_TX 
     */
@@ -122,7 +122,7 @@ void MX_GPIO_Init(void)
     GPIO_InitStruct.Alternate = GPIO_AF7_USART3;
     HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 		
-		/**USART6 GPIO Configuration    
+	/**USART6 GPIO Configuration    
     PG14     ------> USART6_TX
     PG9     ------> USART6_RX 
     */
@@ -144,7 +144,7 @@ void MX_GPIO_Init(void)
     GPIO_InitStruct.Alternate = GPIO_AF8_UART7;
     HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 		
-		 /**UART8 GPIO Configuration    
+	/**UART8 GPIO Configuration    
     PE1     ------> UART8_TX
     PE0     ------> UART8_RX 
     */
@@ -155,7 +155,7 @@ void MX_GPIO_Init(void)
     GPIO_InitStruct.Alternate = GPIO_AF8_UART8;
     HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 		
-		/**CAN1 GPIO Configuration    
+	/**CAN1 GPIO Configuration    
     PD0     ------> CAN1_RX
     PD1     ------> CAN1_TX 
     */
@@ -166,7 +166,7 @@ void MX_GPIO_Init(void)
     GPIO_InitStruct.Alternate = GPIO_AF9_CAN1;
     HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 		
-		/**CAN2 GPIO Configuration    
+	/**CAN2 GPIO Configuration    
     PB12     ------> CAN2_RX
     PB13     ------> CAN2_TX 
     */
@@ -177,7 +177,7 @@ void MX_GPIO_Init(void)
     GPIO_InitStruct.Alternate = GPIO_AF9_CAN2;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 		
-		    /**TIM1 GPIO Configuration    
+	/**TIM1 GPIO Configuration    
     PA9      ------> TIM1_CH2
     PA8      ------> TIM1_CH1
     PE13     ------> TIM1_CH3
@@ -197,7 +197,7 @@ void MX_GPIO_Init(void)
     GPIO_InitStruct.Alternate = GPIO_AF1_TIM1;
     HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 		
-	  /**TIM12 GPIO Configuration    
+	/**TIM12 GPIO Configuration    
     PH6     ------> TIM12_CH1 
     */
     GPIO_InitStruct.Pin = GPIO_PIN_6;
@@ -207,7 +207,7 @@ void MX_GPIO_Init(void)
     GPIO_InitStruct.Alternate = GPIO_AF9_TIM12;
     HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
 		
-		/**I2C2 GPIO Configuration    
+	/**I2C2 GPIO Configuration    
     PF0     ------> I2C2_SDA
     PF1     ------> I2C2_SCL 
     */

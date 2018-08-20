@@ -1,9 +1,6 @@
 .\objects\ctrl_rammer.o: ..\Control\Ctrl_Rammer\Ctrl_Rammer.c
 .\objects\ctrl_rammer.o: ..\Control\Ctrl_Rammer\Ctrl_Rammer.h
 .\objects\ctrl_rammer.o: ..\USER\User_Code\User_Code.h
-.\objects\ctrl_rammer.o: ..\USER\Inc\User_typedefs.h
-.\objects\ctrl_rammer.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\ctrl_rammer.o: ..\Driver\Driver_PID\Driver_PID.h
 .\objects\ctrl_rammer.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h
 .\objects\ctrl_rammer.o: ..\USER\Inc\stm32f4xx_hal_conf.h
 .\objects\ctrl_rammer.o: ..\USER\Inc\mxconstants.h
@@ -40,6 +37,9 @@
 .\objects\ctrl_rammer.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h
 .\objects\ctrl_rammer.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h
 .\objects\ctrl_rammer.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_usart.h
+.\objects\ctrl_rammer.o: ..\USER\Inc\User_typedefs.h
+.\objects\ctrl_rammer.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\ctrl_rammer.o: ..\Driver\Driver_PID\Driver_PID.h
 .\objects\ctrl_rammer.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\ctrl_rammer.o: ..\Control\Ctrl_Chassis\Ctrl_Chassis.h
 .\objects\ctrl_rammer.o: ..\TASK\Can\Task_Can.h
@@ -66,3 +66,4 @@
 .\objects\ctrl_rammer.o: ..\BSP\BSP_TIM\BSP_TIM.h
 .\objects\ctrl_rammer.o: ..\BSP\BSP_USART\BSP_USART.h
 .\objects\ctrl_rammer.o: ..\BSP\BSP_NVIC\BSP_NVIC.h
+.\objects\ctrl_rammer.o: ..\Driver\Driver_SupCap\Driver_SupCap.h

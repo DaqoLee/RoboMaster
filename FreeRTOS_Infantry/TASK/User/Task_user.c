@@ -3,7 +3,6 @@
 #include "Task_Can.h"
 #include "Task_Ctrl.h"
 TaskHandle_t StartTask_Handler;
-TaskHandle_t FLOATTask_Handler;
 TaskHandle_t LED_TaskHandler;
 TaskHandle_t KEY_TaskHandler;
 TaskHandle_t Buzzer_TaskHandler;
@@ -33,34 +32,28 @@ void start_task(void *pvParameters)
 	Queue_CanSend=xQueueCreate(128, sizeof(CAN_HandleTypeDef));
 	
     taskENTER_CRITICAL();            
-   
-    xTaskCreate(Buzzer_Task,     
-                "Buzzer_Task",   
-                128, 
-                NULL,
-                2,
-                &Buzzer_TaskHandler);
+
     xTaskCreate(LED_Task,     
                 "LED_Task",   
                 128, 
                 NULL,
                 3,
                 &LED_TaskHandler);  
-	xTaskCreate(KEY_Task,     
-                "KEY_Task",   
-                128, 
-                NULL,
-                2,
-                &KEY_TaskHandler);  	
+//	xTaskCreate(KEY_Task,     
+//                "KEY_Task",   
+//                128, 
+//                NULL,
+//                2,
+//                &KEY_TaskHandler);  	
 	xTaskCreate(Task_CanSend,     
                 "Task_CanSend",   
-                300, 
+                256, 
                 NULL,
-								4,
+				5,
                 &Task_CanSendHandler);  	
 	xTaskCreate(Task_Control,     
                 "Task_Control",   
-                128, 
+                256, 
                 NULL,
                 4,
                 &Task_ControlHandler); 				
@@ -74,16 +67,12 @@ void LED_Task(void *pvParameters)
 	static uint8_t i=1;
 	 while(1)
     {
-		for(i=1;i<17;i++)
+		for(i=1;i<10;i++)
 		{
-		   if(i>8)
-				GPIOG->BSRR=1<<(i+8);
-		   else
-				GPIOG->BSRR=1<<i;
 		   HAL_GPIO_TogglePin(LED_G_GPIO_Port, LED_G_Pin);
-           vTaskDelay(40);
+           vTaskDelay(50);
 		}
-		HAL_GPIO_TogglePin(LED_R_GPIO_Port, LED_R_Pin);
+		//HAL_GPIO_TogglePin(LED_R_GPIO_Port, LED_R_Pin);
 		i=1;
     }
 }
@@ -131,14 +120,4 @@ void KEY_Task(void *pvParameters)
     }
 }
 
-void float_task(void *pvParameters)
-{
-	static float float_num=0.00;
-	while(1)
-	{
-		float_num+=0.01f;
-		printf("%f\r\n",float_num);
-        vTaskDelay(1000);
-	}
-}
 

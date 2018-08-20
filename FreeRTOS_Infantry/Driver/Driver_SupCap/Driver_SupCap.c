@@ -29,50 +29,38 @@ void Read_Cap_State(void)
 */
 void Cap_Mode(void)
 {
-	static uint8_t Flag1=0;
-	if((DBUS_CheckPush(KEY_R)&&DBUS_CheckPush(KEY_SHIFT)))
-	{
-		if(Flag1)
-		{
-			CAP_OFF=!CAP_OFF;
-			Flag1=0;
-		}
-	}
-    else 
-	{	
-		Flag1=1;
-	}
-if(CAP_OFF)
-{
-	  CAP_CHARGING(unenable);
-  	HAL_GPIO_WritePin(LED_8_GPIO_Port,LED_8_Pin,GPIO_PIN_SET);
-}
-else
-{
-		CAP_CHARGING(enable);
-	  HAL_GPIO_WritePin(LED_8_GPIO_Port,LED_8_Pin,GPIO_PIN_RESET);
-}
 
-		if(Sup_Cap&0x01)
+	if(CAP_OFF)
+	{
+		CAP_CHARGING(unenable);
+		HAL_GPIO_WritePin(LED_8_GPIO_Port,LED_8_Pin,GPIO_PIN_SET);
+	}
+	else
+	{
+		CAP_CHARGING(enable);
+		HAL_GPIO_WritePin(LED_8_GPIO_Port,LED_8_Pin,GPIO_PIN_RESET);
+	}
+
+	if(Sup_Cap&0x01)
+	{
+		if(Sup_Cap&0x02&&Sup_Cap&0x10)//低压底盘电源切回电池供电
 		{
-				if(Sup_Cap&0x02&&Sup_Cap&0x10)//低压底盘电源切回电池供电
-				{
-					  HAL_GPIO_WritePin(LED_7_GPIO_Port,LED_7_Pin,GPIO_PIN_SET);
-						CAP_POWER_SWITCH(battery_supply);
-						CAP_SET_CURRENT(_05A_current);
-				}
-			  if(Sup_Cap&0x04&&(Sup_Cap&0x10)==0x00)
-				{
-					  HAL_GPIO_WritePin(LED_7_GPIO_Port,LED_7_Pin,GPIO_PIN_RESET);
-						CAP_POWER_SWITCH(cap_supply);
-						CAP_SET_CURRENT(_2A_current);
-				}
+			HAL_GPIO_WritePin(LED_7_GPIO_Port,LED_7_Pin,GPIO_PIN_SET);
+			CAP_POWER_SWITCH(battery_supply);
+			CAP_SET_CURRENT(_05A_current);
 		}
-		else//失效充电管理时地盘电源切回电池来供电
+		if(Sup_Cap&0x04&&(Sup_Cap&0x10)==0x00)
 		{
-				CAP_POWER_SWITCH(battery_supply);
-				CAP_SET_CURRENT(_05A_current);
+			HAL_GPIO_WritePin(LED_7_GPIO_Port,LED_7_Pin,GPIO_PIN_RESET);
+			CAP_POWER_SWITCH(cap_supply);
+			CAP_SET_CURRENT(_2A_current);
 		}
+	}
+	else//失效充电管理时地盘电源切回电池来供电
+	{
+		CAP_POWER_SWITCH(battery_supply);
+		CAP_SET_CURRENT(_05A_current);
+	}
 }
 /*
 	正常模式启动超级电容充电管理，并以0.5A充电

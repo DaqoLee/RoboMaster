@@ -35,9 +35,7 @@
 #include "stm32f4xx.h"
 #include "stm32f4xx_it.h"
 #include "Driver_DBUS.h"
-/* USER CODE BEGIN 0 */
-uint8_t UARTtemp;
-/* USER CODE END 0 */
+#include "User_Code.h"
 
 /* External variables --------------------------------------------------------*/
 extern TIM_HandleTypeDef htim6;
@@ -185,8 +183,8 @@ void DebugMon_Handler(void)
 void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
-	UARTtemp=huart1.Instance->SR;//清楚标志位时序
-	UARTtemp=huart1.Instance->DR;//清楚标志位时序
+	(void)huart1.Instance->SR;//清楚标志位时序
+	(void)huart1.Instance->DR;//清楚标志位时序
 	HAL_UART_DMAStop(&huart1);//暂停DMA
 	
 	if(huart1.hdmarx->Instance->NDTR==DBUSBackLength)//接收18字节正确
@@ -202,6 +200,97 @@ void USART1_IRQHandler(void)
 
   /* USER CODE END USART1_IRQn 1 */
 }
+
+/**
+* @brief This function handles USART2 global interrupt.
+*/
+void USART2_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART2_IRQn 0 */
+	(void)huart2.Instance->SR;//清楚标志位时序
+	(void)huart2.Instance->DR;//清楚标志位时序
+	HAL_UART_DMAStop(&huart2);//暂停DMA
+	DMA1->LIFCR=(1<<21)|(1<<20);//清楚完成标志位
+  /* USER CODE END USART2_IRQn 0 */
+	HAL_UART_IRQHandler(&huart2);
+
+}
+
+/**
+* @brief This function handles USART3 global interrupt.
+*/
+void USART3_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART3_IRQn 0 */
+	(void)huart3.Instance->SR;//清楚标志位时序
+	(void)huart3.Instance->DR;//清楚标志位时序
+	HAL_UART_DMAStop(&huart3);//暂停DMA
+	
+	Judge_getInfo(JUDGESYSTEM_PACKSIZE-huart3.hdmarx->Instance->NDTR);
+	DMA1->LIFCR=(1<<21)|(1<<20);//清楚完成标志位
+	HAL_UART_Receive_DMA(&huart3,JudgeSystem_rxBuff,JUDGESYSTEM_PACKSIZE);//设置接收地址和数据长度
+  /* USER CODE END USART3_IRQn 0 */
+	HAL_UART_IRQHandler(&huart3);
+
+}
+
+/**
+* @brief This function handles USART6 global interrupt.
+*/
+//void USART6_IRQHandler(void)
+//{
+//  /* USER CODE BEGIN USART6_IRQn 0 */
+//	UARTtemp=huart6.Instance->SR;//清楚标志位时序
+//	UARTtemp=huart6.Instance->DR;//清楚标志位时序
+//	HAL_UART_DMAStop(&huart6);//暂停DMA
+//	PC_Data_Analysis();
+//	HAL_UART_Receive_DMA(&huart6,Hierogram,20);//设置接收地址和数据长度
+//	
+//	DMA2->LIFCR=(1<<21)|(1<<20);//清楚完成标志位
+//  /* USER CODE END USART6_IRQn 0 */
+//  HAL_UART_IRQHandler(&huart6);
+//  /* USER CODE BEGIN USART6_IRQn 1 */
+
+//  /* USER CODE END USART6_IRQn 1 */
+//}
+
+///**
+//* @brief This function handles UART7 global interrupt.
+//*/
+//void UART7_IRQHandler(void)
+//{
+//  /* USER CODE BEGIN UART7_IRQn 0 */
+//	UARTtemp=huart7.Instance->SR;//清楚标志位时序
+//	UARTtemp=huart7.Instance->DR;//清楚标志位时序
+//	HAL_UART_DMAStop(&huart7);//暂停DMA
+//	Analysis_Chassis_Gyro();
+//	DMA1->LIFCR=(1<<21)|(1<<20);//清楚完成标志位
+//	HAL_UART_Receive_DMA(&huart7,Chassis_Gyro_Data,20);//设置接收地址和数据长度
+//  /* USER CODE END UART7_IRQn 0 */
+//  HAL_UART_IRQHandler(&huart7);
+//  /* USER CODE BEGIN UART7_IRQn 1 */
+
+//  /* USER CODE END UART7_IRQn 1 */
+//}
+
+///**
+//* @brief This function handles UART8 global interrupt.
+//*/
+//void UART8_IRQHandler(void)
+//{
+//  /* USER CODE BEGIN UART8_IRQn 0 */
+//	UARTtemp=huart8.Instance->SR;//清楚标志位时序
+//	UARTtemp=huart8.Instance->DR;//清楚标志位时序
+//	HAL_UART_DMAStop(&huart8);//暂停DMA
+//	Analysis_Cloud_Gyro();
+//	DMA1->LIFCR=(1<<21)|(1<<20);//清楚完成标志位
+//	HAL_UART_Receive_DMA(&huart8,Cloud_Gyro_Data,20);//设置接收地址和数据长度
+//  /* USER CODE END UART8_IRQn 0 */
+//  HAL_UART_IRQHandler(&huart8);
+//  /* USER CODE BEGIN UART8_IRQn 1 */
+
+//  /* USER CODE END UART8_IRQn 1 */
+//}
 
 /**
 * @brief This function handles DMA1 stream1 global interrupt.
