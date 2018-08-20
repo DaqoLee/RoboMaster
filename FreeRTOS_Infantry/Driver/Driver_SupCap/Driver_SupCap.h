@@ -1,7 +1,6 @@
 #ifndef __DRIVER_SUPCAP_H
 #define __DRIVER_SUPCAP_H
-#include "control.h"
-
+#include "User_Code.h"
 typedef enum
 {
 		enable					=0x01,//表示是否是使能充电

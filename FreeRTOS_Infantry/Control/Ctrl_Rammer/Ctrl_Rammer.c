@@ -4,7 +4,95 @@ const int32_t 	Rammer_Max_Angle=((8192*REDUCTION_RATIO)-RAMMER_ERROR);//拨盘转一
 const int32_t	St_Serve=(Rammer_Max_Angle/RAMMER_NUM+1);//转一格的线数
 
 Motor2006_Param   M2006;
+Shoot_Struct 	  Shoot;
+ /*
+  * @brief 拨弹电机参数设定，单击单发，长按连发。
+  * @param None
+  * @retval None
+  */
+void Rammer_Param_Set()//拨弹
+{
+	if(M2006.Real_Current>4000)//电流大于4000反转一格
+	{
+		M2006.Target_Angle=M2006.Target_Angle<=St_Serve?(Rammer_Max_Angle-2*St_Serve):M2006.Target_Angle-2*St_Serve;
+	}
+	else if(DBUS_ReceiveData.mouse.press_left||DBUS_ReceiveData.switch_left==2)
+	{
+		if(DBUS_ReceiveData.mouse.press_right)//低速高频模式
+		{
+				switch(Judge_RobotStatus.data.robotLevel)//机器人当前等级
+			{
+				case 0:
+				case 1://一级上限 90，每秒冷却18
+					FRICT_SPEED=650;//射速
+					Shoot.Freq=8;//射频；
+					Shoot.Num=(120-Judge_PowerHeatData.data.shooter17mm_Heat)/14;
+					break;
+				case 2://二级上限180，每秒冷却36
+					FRICT_SPEED=750;//射速
+					Shoot.Freq=10;//射频；
+					Shoot.Num=(240-Judge_PowerHeatData.data.shooter17mm_Heat)/18;
+					break;
+				case 3://三级上限360，每秒冷却72
+					FRICT_SPEED=800;//射速
+					Shoot.Freq=10;//射频；
+					Shoot.Num=(480-Judge_PowerHeatData.data.shooter17mm_Heat)/20;
+					break;
+			}
+		}
+		else
+		{
+			switch(Judge_RobotStatus.data.robotLevel)//机器人当前等级
+			{
+				case 0:
+				case 1://一级上限 90，每秒冷却18
+					FRICT_SPEED=1000;//射速
+					if(Judge_RFIDCard.data.cardType&0x0100)//冷却值加成
+						Shoot.Freq=8;
+					else
+						Shoot.Freq=5;//射频；
+					Shoot.Num=(120-Judge_PowerHeatData.data.shooter17mm_Heat)/22;
+					break;
+				case 2://二级上限180，每秒冷却36
+					FRICT_SPEED=1000;//射速
+					if(Judge_RFIDCard.data.cardType&0x0100)
+						Shoot.Freq=10;
+					else
+						Shoot.Freq=6;//射频；
+					Shoot.Num=(240-Judge_PowerHeatData.data.shooter17mm_Heat)/22;
+					break;
+				case 3://三级上限360，每秒冷却72
+					FRICT_SPEED=1000;
+					if(Judge_RFIDCard.data.cardType&0x0100)
+						Shoot.Freq=10;
+					else
+						Shoot.Freq=8;//射频；
+					  Shoot.Num=(480-Judge_PowerHeatData.data.shooter17mm_Heat)/22;
+					break;
+			}
+		} 
+		if(Shoot.Num>2&&Shoot.Flag==1&&Game_Mode!=SUPPLY)
+		{
+			Shoot.Flag=0;
+			M2006.Target_Angle=M2006.Target_Angle>Rammer_Max_Angle?0:M2006.Target_Angle+St_Serve;
+		}
+		
+	}
+	else
+	{
+		Shoot.Time=0;
+		Shoot.Flag=1;
+	}
+	
+	M2006.Target_Angle=M2006.Target_Angle>Rammer_Max_Angle?0:M2006.Target_Angle;
+	M2006_PID_Set();
 
+}
+ /*
+  * @brief 拨弹电机PID计算
+  * @param None
+  * @retval None
+  */
 void M2006_PID_Set(void)
 {
 	float Current1=0,Current2=0;

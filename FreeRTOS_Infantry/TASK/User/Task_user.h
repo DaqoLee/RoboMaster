@@ -5,7 +5,6 @@
 #include "User_Code.h"
 
 extern TaskHandle_t StartTask_Handler;
-extern TaskHandle_t FLOATTask_Handler;
 extern TaskHandle_t LED_TaskHandler;
 extern TaskHandle_t KEY_TaskHandler;
 extern TaskHandle_t Buzzer_TaskHandler;

@@ -8,11 +8,27 @@
 #pragma anon_unions
 
 
-enum{
+typedef enum
+{
 	COMMON	= 1,//一般模式
     SUPPLY 	= 2,//补给模式
  HIEROGRAM 	= 3,//神符模式
-};
+}Game_Mode_State;
+
+typedef enum
+{
+	Remote_1	= 1,//遥控模式(跟随云台)
+    Remote_2 	= 2,//遥控模式(不跟随云台)
+    Keyboard 	= 3,//键鼠模式
+	Ctrl_OFF	= 4,//失能控制
+}Ctrl_Mode_State;
+
+typedef enum
+{
+	UP		    = 1,//加速
+    Down 	    = 2,//减速
+    Normal   	= 3,//正常
+}Speed_Mode_State;
 
 typedef struct 
 {

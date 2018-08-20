@@ -1,63 +1,252 @@
 #include "Ctrl_Chassis.h"
-#include "Driver_DBUS.h"
-#include "Ctrl_Cloud.h"
 
 ChassisParam_Struct   ChassisParam;
-
  /*
   * @brief 底盘参数设置
   * @param X与Y轴的最大速度
   * @retval None
   */
-void Chassis_Param_Set(uint16_t Max_X,uint16_t Max_Y)//底盘
+void Chassis_Param_Set(void)//底盘
 {
-	if(DBUS_ReceiveData.switch_right==3)//遥控模式
+	int16_t WheelSpeed[4]; 
+	static int16_t Target_VX=0,Target_VY=0;
+	static int16_t Speed_X=0,Speed_Y=0;
+	static int8_t Spin_Flag=1;
+	switch(Control_Mode)//右键在中间为遥控模式，默认是模式1，底盘跟随
 	{
-		if(ABS(DBUS_ReceiveData.ch4)>20)//遥控中间时有误差，不一定为零
-		{
-			ChassisParam.TargetVY=10*DBUS_ReceiveData.ch4;
-			if(!CloudParam.Yaw.Offline)
-			{   //底盘跟随，Yaw轴编码器的实际值往中间值靠
-				Filters(pid_calc(&ChassisParam.Chassis_Gyro.Chassis_PID,CloudParam.Yaw.Real_Angle,MEDIAN_YAW),&ChassisParam.TargetOmega,0.2f);
-				if(ABS(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW])<100||CloudParam.Cloud_Gyro.Offline)
-					ChassisParam.TargetOmega=0;
-				//防止跑动时云台抖动影响车身，允许机械角度有200的抖动范围
-			}
-			else//如果Yaw轴电机离线直接控制底盘	
-				ChassisParam.TargetOmega=ABS(DBUS_ReceiveData.ch1)>20?10*DBUS_ReceiveData.ch1:0;
-		}
-		else
-			ChassisParam.TargetVY=0;
+/************************************************************************************************************************/
+		case    Remote_1://遥控模式(跟随云台)
+			
+				if(ABS(DBUS_ReceiveData.ch4)>20)//遥控中间时有误差，不一定为零
+				{
+					ChassisParam.TargetVY=10*DBUS_ReceiveData.ch4;
+					if(!CloudParam.Yaw.Offline)
+					{   //底盘跟随，Yaw轴编码器的实际值往中间值靠
+						Filters(pid_calc(&ChassisParam.Chassis_Gyro.Chassis_PID,CloudParam.Yaw.Real_Angle,MEDIAN_YAW),&ChassisParam.TargetOmega,0.2f);
+						if(ABS(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW])<100||CloudParam.Cloud_Gyro.Offline)
+							ChassisParam.TargetOmega=0;
+						//防止跑动时云台抖动影响车身，允许机械角度有200的抖动范围
+					}
+					else//如果Yaw轴电机离线直接控制底盘	
+						ChassisParam.TargetOmega=ABS(DBUS_ReceiveData.ch1)>20?10*DBUS_ReceiveData.ch1:0;
+				}
+				else
+					ChassisParam.TargetVY=0;
+				
+				if(ABS(DBUS_ReceiveData.ch3)>20)
+				{
+					ChassisParam.TargetVX=-10*DBUS_ReceiveData.ch3;
+					if(!CloudParam.Yaw.Offline)
+					{
+						Filters(pid_calc(&ChassisParam.Chassis_Gyro.Chassis_PID,CloudParam.Yaw.Real_Angle,MEDIAN_YAW),&ChassisParam.TargetOmega,0.2f);
+						if(ABS(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW])<100||CloudParam.Cloud_Gyro.Offline)
+							ChassisParam.TargetOmega=0;
+					}
+					else
+						ChassisParam.TargetOmega=ABS(DBUS_ReceiveData.ch1)>20?10*DBUS_ReceiveData.ch1:0;
+
+				}
+				else
+					ChassisParam.TargetVX=0;
+
+				if(ChassisParam.TargetVX==0&&ChassisParam.TargetVY==0)
+				{
+					if(!CloudParam.Yaw.Offline)
+					{   //静止时，90度范围内不跟随
+						Filters(pid_calc(&ChassisParam.Chassis_Gyro.Chassis_PID,CloudParam.Yaw.Real_Angle,MEDIAN_YAW),&ChassisParam.TargetOmega,0.06f);
+						if(ABS(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW])<1024||CloudParam.Cloud_Gyro.Offline)
+							ChassisParam.TargetOmega=0;
+					}
+					else
+						ChassisParam.TargetOmega=ABS(DBUS_ReceiveData.ch1)>20?10*DBUS_ReceiveData.ch1:0;		
+				}
+				break ;
+				
+/************************************************************************************************************************/				
+		case    Remote_2://遥控模式(不跟随云台)
+			
+				ChassisParam.TargetVY=ABS(DBUS_ReceiveData.ch4)>20?10*DBUS_ReceiveData.ch4:0;
+				ChassisParam.TargetVX=ABS(DBUS_ReceiveData.ch3)>20?-10*DBUS_ReceiveData.ch3:0;
+				ChassisParam.TargetOmega=ABS(DBUS_ReceiveData.ch1)>20?10*DBUS_ReceiveData.ch1:0;	
 		
-		if(ABS(DBUS_ReceiveData.ch3)>20)
-		{
-			ChassisParam.TargetVX=-10*DBUS_ReceiveData.ch3;
-			if(!CloudParam.Yaw.Offline)
-			{
-				Filters(pid_calc(&ChassisParam.Chassis_Gyro.Chassis_PID,CloudParam.Yaw.Real_Angle,MEDIAN_YAW),&ChassisParam.TargetOmega,0.2f);
-				if(ABS(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW])<100||CloudParam.Cloud_Gyro.Offline)
-					ChassisParam.TargetOmega=0;
-			}
-			else
-				ChassisParam.TargetOmega=ABS(DBUS_ReceiveData.ch1)>20?10*DBUS_ReceiveData.ch1:0;
-
-		}
-		else
-			ChassisParam.TargetVX=0;
-
-		if(ChassisParam.TargetVX==0&&ChassisParam.TargetVY==0)
-		{
-			if(!CloudParam.Yaw.Offline)
-			{   //静止时，90度范围内不跟随
-				Filters(pid_calc(&ChassisParam.Chassis_Gyro.Chassis_PID,CloudParam.Yaw.Real_Angle,MEDIAN_YAW),&ChassisParam.TargetOmega,0.06f);
-				if(ABS(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW])<1024||CloudParam.Cloud_Gyro.Offline)
-					ChassisParam.TargetOmega=0;
-			}
-			else
-				ChassisParam.TargetOmega=ABS(DBUS_ReceiveData.ch1)>20?10*DBUS_ReceiveData.ch1:0;		
-		}
+			break ;
+/************************************************************************************************************************/
+		case    Keyboard://键鼠模式
+			
+				Key_Combination();
+				PID_REST(Game_Mode);
+				switch(Game_Mode)
+				{
+/************************************************************************************************************************/
+					case    COMMON://一般
+								switch(Speed_Mode)
+								{
+									case    UP://加速
+											Target_VX=SPEED_UP;
+											Target_VY=SPEED_UP;
+											break ;
+									case    Down://减速
+											Target_VX=SPEED_DOWN;
+											Target_VY=SPEED_DOWN;
+											break ;
+									case    Normal://正常
+											Target_VX=SPEED_NORMAL;
+											Target_VY=SPEED_NORMAL;
+											break ;
+									default:
+											Target_VX=SPEED_NORMAL;
+											Target_VY=SPEED_NORMAL;
+											break;
+								}
+								if(DBUS_CheckPush(KEY_W))
+								{
+									Speed_Y=Speed_Y<0?Speed_Y+2*SPEED_BUFFER:Speed_Y;
+									Speed_Y=Speed_Y>=Target_VY?Target_VY:Speed_Y+SPEED_BUFFER;
+									
+									if(!CloudParam.Cloud_Gyro.Offline)
+										{
+											if(DBUS_CheckPush(KEY_F))//蛇皮走位
+											{		
+												pid_calc(&ChassisParam.Chassis_Gyro.Chassis_PID,CloudParam.Yaw.Real_Angle,MEDIAN_YAW);
+												
+												if(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW]>400)						
+													Spin_Flag=1;
+												else if(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW]<-400)
+													Spin_Flag=-1;
+												Filters(Spin_Flag*2000,&ChassisParam.TargetOmega,0.04f);
+											}
+											else//普通跟随
+											{
+												ChassisParam.TargetOmega=pid_calc(&ChassisParam.Chassis_Gyro.Chassis_PID,CloudParam.Yaw.Real_Angle,MEDIAN_YAW);
+												if(ABS(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW])<100)
+												ChassisParam.TargetOmega=0;
+											}
+										}
+										else
+											ChassisParam.TargetOmega=0;	
+								}
+								else if(DBUS_CheckPush(KEY_S))
+								{
+									Speed_Y=Speed_Y>0?Speed_Y-2*SPEED_BUFFER:Speed_Y;
+									Speed_Y=Speed_Y<=-Target_VY?-Target_VY:Speed_Y-SPEED_BUFFER;
+									if(!CloudParam.Cloud_Gyro.Offline)
+									{
+										ChassisParam.TargetOmega=pid_calc(&ChassisParam.Chassis_Gyro.Chassis_PID,CloudParam.Yaw.Real_Angle,MEDIAN_YAW);
+										if(ABS(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW])<100)
+											ChassisParam.TargetOmega=0;	
+									}
+									else
+										ChassisParam.TargetOmega=0;	
+								}
+								else
+								{
+									Speed_Y=Speed_Y<0?Speed_Y+2*SPEED_BUFFER:Speed_Y-2*SPEED_BUFFER;//缓慢减速
+									if(ABS(Speed_Y)<200)
+									{
+										Speed_Y=0;
+									}
+								}
+/************************************************************************************************************************/								
+								if(DBUS_CheckPush(KEY_D))
+								{
+									Speed_X=Speed_X>0?Speed_X-2*SPEED_BUFFER:Speed_X;
+									Speed_X=Speed_X<=-Target_VX?-Target_VX:Speed_X-SPEED_BUFFER;
+									
+									if(!CloudParam.Cloud_Gyro.Offline)
+									{
+										ChassisParam.TargetOmega=pid_calc(&ChassisParam.Chassis_Gyro.Chassis_PID,CloudParam.Yaw.Real_Angle,MEDIAN_YAW);
+										if(ABS(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW])<100)
+											ChassisParam.TargetOmega=0;
+									}
+								}
+								else if(DBUS_CheckPush(KEY_A))
+								{
+									Speed_X=Speed_X<0?Speed_X+2*SPEED_BUFFER:Speed_X;
+									Speed_X=Speed_X>=Target_VX?Target_VX:Speed_X+SPEED_BUFFER;
+									
+									if(!CloudParam.Cloud_Gyro.Offline)
+									{
+										ChassisParam.TargetOmega=pid_calc(&ChassisParam.Chassis_Gyro.Chassis_PID,CloudParam.Yaw.Real_Angle,MEDIAN_YAW);
+										if(ABS(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW])<100)
+											ChassisParam.TargetOmega=0;
+									}
+								}
+								else
+								{
+									Speed_X=Speed_X<0?Speed_X+2*SPEED_BUFFER:Speed_X-2*SPEED_BUFFER;
+									if(ABS(Speed_X)<200)
+									{
+										Speed_X=0;
+									}
+								}
+								
+								break ;
+/************************************************************************************************************************/
+					case    SUPPLY://补给
+						
+								if(DBUS_CheckPush(KEY_W))
+									Speed_Y=SPEED_SUPPLY;	
+								
+								else if(DBUS_CheckPush(KEY_S))
+									Speed_Y=-SPEED_SUPPLY;
+								
+								else
+									Speed_Y=0;
+								
+								if(DBUS_CheckPush(KEY_A))
+									Speed_X=SPEED_SUPPLY;	
+								
+								else if(DBUS_CheckPush(KEY_D))
+									Speed_X=-SPEED_SUPPLY;
+								
+								else
+									Speed_X=0;
+								
+								if(DBUS_CheckPush(KEY_Q))
+									 ChassisParam.TargetOmega=-SPEED_SUPPLY;
+								
+								else if(DBUS_CheckPush(KEY_E))
+								
+									ChassisParam.TargetOmega=SPEED_SUPPLY;
+								
+								else
+									ChassisParam.TargetOmega=0;
+					
+								break ;
+					case HIEROGRAM://打符
+						
+								ChassisParam.TargetVY=0;
+								ChassisParam.TargetVX=0;
+								ChassisParam.TargetOmega=0;	
+								break ;
+					default:
+								break;
+				}
+				Filters(Speed_X,&ChassisParam.TargetVX,0.1f);//缓冲平滑处理
+				Filters(Speed_Y,&ChassisParam.TargetVY,0.1f);	
+			break ;
+/************************************************************************************************************************/
+		case    Ctrl_OFF://失能控制
+			
+				ChassisParam.TargetVY=0;
+				ChassisParam.TargetVX=0;
+				ChassisParam.TargetOmega=0;	
+		
+			break ;
+/************************************************************************************************************************/
 	}
+	
+	MecanumCalculate(ChassisParam.TargetVX,ChassisParam.TargetVY,ChassisParam.TargetOmega,WheelSpeed);
+	//麦轮解算
+	ChassisParam.LF.Target_Speed = WheelSpeed[0];
+    ChassisParam.LB.Target_Speed = WheelSpeed[1];
+    ChassisParam.RB.Target_Speed = WheelSpeed[2];
+    ChassisParam.RF.Target_Speed = WheelSpeed[3];
+	M3508_PID_Set();
+	Chassis_Current_Set(&hcan1);
 }
+
+
  /*
   * @brief 麦克纳姆伦运动模型
   * @param Vx X轴方向的速度，Vy Y轴方向的速度，Omega 自旋速度，*Speed轮子转速
@@ -84,10 +273,10 @@ void MecanumCalculate(float Vx, float Vy, float Omega, int16_t *Speed)
         }
     }	
 	
-//	if((MEDIAN_ROLL-CloudParam.Cloud_Gyro.Roll)-((CloudParam.Pitch.Real_Angle-(MEDIAN_PITCH-Pitch_Min-200))/22.75f)>12)
-//		MaxWheelSpeed=2000;//云台陀螺仪角度变化大于Pitch轴编码器的转换值，被认为是爬坡，把速度降下来
-//	else
-//		MaxWheelSpeed=6600;
+	if((MEDIAN_ROLL-CloudParam.Cloud_Gyro.Roll)-((CloudParam.Pitch.Real_Angle-(MEDIAN_PITCH-Pitch_Min-200))/22.75f)>12)
+		MaxWheelSpeed=2000;//云台陀螺仪角度变化大于Pitch轴编码器的转换值，被认为是爬坡，把速度降下来
+	else
+		MaxWheelSpeed=6600;
 	
     if(MaxWheelSpeed < MaxSpeed)
     {
@@ -132,7 +321,7 @@ void Power_Limit(float Cur_limit)
   * @param None
   * @retval None
   */
-void M3508_PID_Set()
+void M3508_PID_Set(void)
 {
 	//底盘左前轮
 	ChassisParam.LF.Target_Current=pid_calc(&ChassisParam.LF.PID,ChassisParam.LF.Real_Speed,ChassisParam.LF.Target_Speed);
@@ -147,24 +336,26 @@ void M3508_PID_Set()
 	ChassisParam.RB.Target_Current=pid_calc(&ChassisParam.RB.PID,ChassisParam.RB.Real_Speed,ChassisParam.RB.Target_Speed);
 }
 
-void Set_moto_current(CAN_HandleTypeDef* hcan,uint16_t ID,int16_t Current1, int16_t Current2, int16_t Current3, int16_t Current4)
-{
 
-	hcan->pTxMsg->StdId = ID;
+ /*
+* @brief 底盘电机电流发送 ID(0x201~0x204)
+  * @param CAN
+  * @retval None
+  */
+void Chassis_Current_Set(CAN_HandleTypeDef* hcan)
+{
+	hcan->pTxMsg->StdId = 0x200;
 	hcan->pTxMsg->IDE = CAN_ID_STD;
 	hcan->pTxMsg->RTR = CAN_RTR_DATA;
 	hcan->pTxMsg->DLC = 0x08;
-	hcan->pTxMsg->Data[0] = Current1 >> 8;
-	hcan->pTxMsg->Data[1] = Current1;
-	hcan->pTxMsg->Data[2] = Current2 >> 8;
-	hcan->pTxMsg->Data[3] = Current2;
-	hcan->pTxMsg->Data[4] = Current3 >> 8;
-	hcan->pTxMsg->Data[5] = Current3 ;
-	hcan->pTxMsg->Data[6] = Current4 >> 8;
-	hcan->pTxMsg->Data[7] = Current4;
-	
+	hcan->pTxMsg->Data[0] = ChassisParam.LB.Target_Current >> 8;
+	hcan->pTxMsg->Data[1] = ChassisParam.LB.Target_Current;
+	hcan->pTxMsg->Data[2] = ChassisParam.RB.Target_Current >> 8;
+	hcan->pTxMsg->Data[3] = ChassisParam.RB.Target_Current;
+	hcan->pTxMsg->Data[4] = ChassisParam.RF.Target_Current >> 8;
+	hcan->pTxMsg->Data[5] = ChassisParam.RF.Target_Current ;
+	hcan->pTxMsg->Data[6] = ChassisParam.LF.Target_Current >> 8;
+	hcan->pTxMsg->Data[7] = ChassisParam.LF.Target_Current;
 	
 	xQueueSend(Queue_CanSend, hcan, 20);
-	
 }
-

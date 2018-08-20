@@ -56,8 +56,8 @@
 .\objects\bsp_can.o: ..\FreeRTOS\include\list.h
 .\objects\bsp_can.o: ..\FreeRTOS\include\queue.h
 .\objects\bsp_can.o: ..\BSP\BSP_CAN\BSP_CAN.h
-.\objects\bsp_can.o: ..\Control\Ctrl_Cloud\Ctrl_Cloud.h
 .\objects\bsp_can.o: ..\USER\User_Code\User_Code.h
+.\objects\bsp_can.o: ..\Control\Ctrl_Cloud\Ctrl_Cloud.h
 .\objects\bsp_can.o: ..\Control\Ctrl_Frict\Ctrl_Frict.h
 .\objects\bsp_can.o: ..\Control\Ctrl_Rammer\Ctrl_Rammer.h
 .\objects\bsp_can.o: ..\Driver\Driver_Judge\Driver_Judge.h
@@ -66,3 +66,4 @@
 .\objects\bsp_can.o: ..\BSP\BSP_TIM\BSP_TIM.h
 .\objects\bsp_can.o: ..\BSP\BSP_USART\BSP_USART.h
 .\objects\bsp_can.o: ..\BSP\BSP_NVIC\BSP_NVIC.h
+.\objects\bsp_can.o: ..\Driver\Driver_SupCap\Driver_SupCap.h

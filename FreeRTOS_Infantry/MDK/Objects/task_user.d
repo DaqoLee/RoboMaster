@@ -12,9 +12,6 @@
 .\objects\task_user.o: ..\FreeRTOS\include\task.h
 .\objects\task_user.o: ..\FreeRTOS\include\list.h
 .\objects\task_user.o: ..\USER\User_Code\User_Code.h
-.\objects\task_user.o: ..\USER\Inc\User_typedefs.h
-.\objects\task_user.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\task_user.o: ..\Driver\Driver_PID\Driver_PID.h
 .\objects\task_user.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h
 .\objects\task_user.o: ..\USER\Inc\stm32f4xx_hal_conf.h
 .\objects\task_user.o: ..\USER\Inc\mxconstants.h
@@ -50,6 +47,9 @@
 .\objects\task_user.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h
 .\objects\task_user.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h
 .\objects\task_user.o: ..\Library\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_usart.h
+.\objects\task_user.o: ..\USER\Inc\User_typedefs.h
+.\objects\task_user.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\task_user.o: ..\Driver\Driver_PID\Driver_PID.h
 .\objects\task_user.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\task_user.o: ..\Control\Ctrl_Chassis\Ctrl_Chassis.h
 .\objects\task_user.o: ..\TASK\Can\Task_Can.h
@@ -66,4 +66,5 @@
 .\objects\task_user.o: ..\BSP\BSP_TIM\BSP_TIM.h
 .\objects\task_user.o: ..\BSP\BSP_USART\BSP_USART.h
 .\objects\task_user.o: ..\BSP\BSP_NVIC\BSP_NVIC.h
+.\objects\task_user.o: ..\Driver\Driver_SupCap\Driver_SupCap.h
 .\objects\task_user.o: ..\TASK\Ctrl\Task_Ctrl.h
