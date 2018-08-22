@@ -16,7 +16,7 @@
 #include "BSP_NVIC.h"
 #include "Driver_SupCap.h"
 
-#define INFANTRY           4    //1号和4号参数有差异
+#define INFANTRY           1    //1号和4号参数有差异
 
 #if  INFANTRY==4
 #define MEDIAN_PITCH       2400 //Pith轴中间机械角度
@@ -37,7 +37,7 @@
 
 #define M2006_Xianfu  	   8000
 #define M3508_Xianfu       8000
-#define M6623_Xianfu       6000
+#define M6623_Xianfu       1000
 
 #define SPEED_UP		   6500
 #define SPEED_DOWN		   2500
@@ -55,6 +55,7 @@ void PID_REST(Game_Mode_State mode);
 void Game_Mode_Set(void);
 void Control_Mode_Set(void);
 void Key_Combination(void);
-void Moto_Current_Set(CAN_HandleTypeDef* hcan,uint16_t ID,int16_t Current1, int16_t Current2, int16_t Current3, int16_t Current4);
+void Frame_Rate_Statistics(void);
+void Moto_Current_Set(CAN_X_State CAN_X,uint16_t ID,int16_t Current1, int16_t Current2, int16_t Current3, int16_t Current4);
 #endif
 

@@ -158,7 +158,7 @@
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>hcan1,0x0A</ItemText>
+          <ItemText>hcan1,0x10</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
@@ -168,7 +168,7 @@
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>DBUS_ReceiveData,0x10</ItemText>
+          <ItemText>DBUS_ReceiveData,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
@@ -199,6 +199,11 @@
           <count>9</count>
           <WinNumber>1</WinNumber>
           <ItemText>((TIM_TypeDef *) ((((uint32_t)0x40000000U) + 0x00010000U) + 0x0000U)),0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>10</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>CloudParam,0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
@@ -378,7 +383,7 @@
 
   <Group>
     <GroupName>Library</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

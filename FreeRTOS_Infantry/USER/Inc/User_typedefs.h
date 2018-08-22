@@ -30,6 +30,13 @@ typedef enum
     Normal   	= 3,//正常
 }Speed_Mode_State;
 
+typedef enum
+{
+	CAN_1		= 1,//加速
+    CAN_2 	    = 2,//减速
+ 
+}CAN_X_State;
+
 typedef struct 
 {
 	 pid_t	     Out;
@@ -41,6 +48,11 @@ typedef struct
 	 uint32_t        FrameRate;
       uint8_t        Offline;
 }FrameRate_Struct;
+typedef struct
+{
+    uint8_t     CANx;               //CAN编号     1 CAN1      2 CAN2
+    CanTxMsgTypeDef    SendCanTxMsg;       //发送数据
+}CanSend_Type;
 
 typedef struct 
 {

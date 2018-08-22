@@ -3,8 +3,8 @@
 #include "Task_Can.h"
 #include "Task_Ctrl.h"
 TaskHandle_t StartTask_Handler;
-TaskHandle_t LED_TaskHandler;
-TaskHandle_t KEY_TaskHandler;
+TaskHandle_t Control_Mode_TaskHandler;
+TaskHandle_t Frame_Rate_TaskHandler;
 TaskHandle_t Buzzer_TaskHandler;
 TaskHandle_t Task_CanSendHandler;
 TaskHandle_t Task_ControlHandler;
@@ -29,27 +29,29 @@ void start_task(void *pvParameters)
 	}
 	TIM12->ARR=0;
 	
-	Queue_CanSend=xQueueCreate(128, sizeof(CAN_HandleTypeDef));
+	Queue_CanSend=xQueueCreate(64, sizeof(CanSend_Type));
 	
     taskENTER_CRITICAL();            
 
-    xTaskCreate(LED_Task,     
-                "LED_Task",   
+	xTaskCreate(Frame_Rate_Task,     
+                "Frame_Rate_Task",   
+                128, 
+                NULL,
+                2,
+                &Frame_Rate_TaskHandler);  
+	
+    xTaskCreate(Control_Mode_Task,     
+                "Control_Mode_Task",   
                 128, 
                 NULL,
                 3,
-                &LED_TaskHandler);  
-//	xTaskCreate(KEY_Task,     
-//                "KEY_Task",   
-//                128, 
-//                NULL,
-//                2,
-//                &KEY_TaskHandler);  	
+                &Control_Mode_TaskHandler);  
+ 	
 	xTaskCreate(Task_CanSend,     
                 "Task_CanSend",   
                 256, 
                 NULL,
-				5,
+				4,
                 &Task_CanSendHandler);  	
 	xTaskCreate(Task_Control,     
                 "Task_Control",   
@@ -62,18 +64,13 @@ void start_task(void *pvParameters)
     taskEXIT_CRITICAL();            
 }
 
-void LED_Task(void *pvParameters)
+void Control_Mode_Task(void *pvParameters)
 {
-	static uint8_t i=1;
 	 while(1)
     {
-		for(i=1;i<10;i++)
-		{
-		   HAL_GPIO_TogglePin(LED_G_GPIO_Port, LED_G_Pin);
-           vTaskDelay(50);
-		}
-		//HAL_GPIO_TogglePin(LED_R_GPIO_Port, LED_R_Pin);
-		i=1;
+		Control_Mode_Set();
+        vTaskDelay(50);
+
     }
 }
 
@@ -93,30 +90,12 @@ void Buzzer_Task(void *pvParameters)
     }
 }
 
-void KEY_Task(void *pvParameters)
+void Frame_Rate_Task(void *pvParameters)
 {
-	static uint8_t Flag1=1,Flag2=0;
 	 while(1)
     {
-		if(HAL_GPIO_ReadPin(KEY_GPIO_Port,KEY_Pin))
-		{
-			vTaskDelay(20);
-			if(HAL_GPIO_ReadPin(KEY_GPIO_Port,KEY_Pin)&&Flag1)
-			{
-				Flag1=0;
-				Flag2=!Flag2;
-			}
-		}
-		else
-			Flag1=1;
-		if(Flag2)
-		{
-			vTaskSuspend(LED_TaskHandler);
-		}
-		else
-		{
-			vTaskResume(LED_TaskHandler);
-		}
+		Frame_Rate_Statistics();
+		vTaskDelay(100);
     }
 }
 
