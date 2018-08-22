@@ -9,6 +9,6 @@ void MecanumCalculate(float Vx, float Vy, float Omega, int16_t *Speed);
 void M3508_PID_Set(void);
 void Chassis_Param_Set(void);
 void Power_Limit(float Cur_limit);
-void Chassis_Current_Set(CAN_HandleTypeDef* hcan);
+void Chassis_Current_Set(CAN_X_State CAN_X);
 #endif
 

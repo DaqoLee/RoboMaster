@@ -13,7 +13,7 @@ const float	Gyro_Yaw_Min=YAW_GYRO_RANGE/2,Gyro_Yaw_Max=360-Gyro_Yaw_Min;
   * @retval None
   */
 
-void Cloud_Param_Set()//云台
+void Cloud_Param_Set(void)//云台
 {	
 
 /**************************************把目标值限制在0~8191**************************************/	
@@ -76,7 +76,45 @@ void Cloud_Param_Set()//云台
 		CloudParam.Pitch.Target_Angle=(CloudParam.Pitch.Target_Angle<(MEDIAN_PITCH-4096))&&\
 		(CloudParam.Pitch.Target_Angle>(MEDIAN_PITCH-Pitch_Max))?MEDIAN_PITCH-Pitch_Max:CloudParam.Pitch.Target_Angle;
 	}
+	
 
+
+	
+	
+		switch(Control_Mode)//右键在中间为遥控模式，默认是模式1，底盘跟随
+		{
+/************************************************************************************************************************/
+		case    Remote_1://遥控模式(跟随云台)
+					CloudParam.Pitch.Target_Angle=ABS(DBUS_ReceiveData.ch2)>20?CloudParam.Pitch.Target_Angle-DBUS_ReceiveData.ch2*0.02f:CloudParam.Pitch.Target_Angle;
+					CloudParam.Yaw.Target_Angle=ABS(DBUS_ReceiveData.ch1)>20?CloudParam.Yaw.Target_Angle-DBUS_ReceiveData.ch1*0.02f:CloudParam.Yaw.Target_Angle;
+					
+					M6623_PID_Set(&CloudParam.Yaw.PID.Out,CloudParam.Yaw.Real_Angle ,CloudParam.Yaw.Target_Angle,\
+					&CloudParam.Pitch.PID.Out,CloudParam.Pitch.Real_Angle,CloudParam.Pitch.Target_Angle);
+					
+					CloudParam.Cloud_Gyro.Target_Yaw=CloudParam.Cloud_Gyro.Yaw;
+					CloudParam.Cloud_Gyro.Target_Roll=CloudParam.Cloud_Gyro.Roll;
+
+				break ;
+				
+/************************************************************************************************************************/				
+		case    Remote_2://遥控模式(不跟随云台)
+			
+
+		
+				break ;
+/************************************************************************************************************************/
+		case    Keyboard://键鼠模式
+	
+				break ;
+/************************************************************************************************************************/
+		case    Ctrl_OFF://失能控制
+					CloudParam.Pitch.Target_Current=0;
+					CloudParam.Yaw.Target_Current=0;
+		
+				break ;
+/************************************************************************************************************************/
+		}
+		Cloud_Current_Set(CAN_1);
 }
 
 
@@ -93,7 +131,8 @@ void M6623_PID_Set(pid_t* PID_Yaw, float Yaw_Real,float Yaw_Target,pid_t* PID_Pi
 	if(PID_Pitch==&CloudParam.Pitch.PID.Out)//判断外环类型
 	{
 		Current1=pid_calc(&CloudParam.Pitch.PID.In,CloudParam.Cloud_Gyro.Gyr_Y,Current);//内环PID计算
-		CloudParam.Pitch.Target_Current=-Current1;
+		//CloudParam.Pitch.Target_Current=-Current1;
+		CloudParam.Pitch.Target_Current=-Current;
 	}
 	else if(PID_Pitch==&CloudParam.Cloud_Gyro.Pitch_PID.Out)
 	{
@@ -110,7 +149,8 @@ void M6623_PID_Set(pid_t* PID_Yaw, float Yaw_Real,float Yaw_Target,pid_t* PID_Pi
 	if(PID_Yaw==&CloudParam.Yaw.PID.Out)
 	{
 		Current1=pid_calc(&CloudParam.Yaw.PID.In,CloudParam.Cloud_Gyro.Gyr_Z,Current);
-		CloudParam.Yaw.Target_Current=-Current1;
+		//CloudParam.Yaw.Target_Current=-Current1;
+		CloudParam.Yaw.Target_Current=-Current;
 		
 	}   
 		else if(PID_Yaw==&CloudParam.Cloud_Gyro.Yaw_PID.Out)
@@ -125,21 +165,25 @@ void M6623_PID_Set(pid_t* PID_Yaw, float Yaw_Real,float Yaw_Target,pid_t* PID_Pi
 
 }
 
-void Cloud_Current_Set(CAN_HandleTypeDef* hcan)
+void Cloud_Current_Set(CAN_X_State CAN_X)
 {
-	hcan->pTxMsg->StdId = 0x1FF;
-	hcan->pTxMsg->IDE = CAN_ID_STD;
-	hcan->pTxMsg->RTR = CAN_RTR_DATA;
-	hcan->pTxMsg->DLC = 0x08;
-	hcan->pTxMsg->Data[0] = CloudParam.Yaw.Target_Current >> 8;
-	hcan->pTxMsg->Data[1] = CloudParam.Yaw.Target_Current;
-	hcan->pTxMsg->Data[2] = CloudParam.Pitch.Target_Current >> 8;
-	hcan->pTxMsg->Data[3] = CloudParam.Pitch.Target_Current;
-	hcan->pTxMsg->Data[4] = M2006.Target_Current >> 8;
-	hcan->pTxMsg->Data[5] = M2006.Target_Current;
-	hcan->pTxMsg->Data[6] = 0;
-	hcan->pTxMsg->Data[7] = 0;
+	static  CanSend_Type   SendData;
+
 	
-	xQueueSend(Queue_CanSend, hcan, 20);
+	SendData.CANx=CAN_X;
+	SendData.SendCanTxMsg.StdId = 0x1FF;
+	SendData.SendCanTxMsg.IDE = CAN_ID_STD;
+	SendData.SendCanTxMsg.RTR = CAN_RTR_DATA;
+	SendData.SendCanTxMsg.DLC = 0x08;
+	SendData.SendCanTxMsg.Data[0] = CloudParam.Yaw.Target_Current >> 8;
+	SendData.SendCanTxMsg.Data[1] = CloudParam.Yaw.Target_Current;
+	SendData.SendCanTxMsg.Data[2] = CloudParam.Pitch.Target_Current >> 8;
+	SendData.SendCanTxMsg.Data[3] = CloudParam.Pitch.Target_Current;
+	SendData.SendCanTxMsg.Data[4] = M2006.Target_Current >> 8;
+	SendData.SendCanTxMsg.Data[5] = M2006.Target_Current;
+	SendData.SendCanTxMsg.Data[6] = 0;
+	SendData.SendCanTxMsg.Data[7] = 0;
+	
+	xQueueSend(Queue_CanSend, &SendData, 20);
 }
 

@@ -60,6 +60,14 @@ void Chassis_Param_Set(void)//底盘
 					else
 						ChassisParam.TargetOmega=ABS(DBUS_ReceiveData.ch1)>20?10*DBUS_ReceiveData.ch1:0;		
 				}
+				
+				MecanumCalculate(ChassisParam.TargetVX,ChassisParam.TargetVY,ChassisParam.TargetOmega,WheelSpeed);
+				//麦轮解算
+				ChassisParam.LF.Target_Speed = WheelSpeed[0];
+				ChassisParam.LB.Target_Speed = WheelSpeed[1];
+				ChassisParam.RB.Target_Speed = WheelSpeed[2];
+				ChassisParam.RF.Target_Speed = WheelSpeed[3];
+				M3508_PID_Set();
 				break ;
 				
 /************************************************************************************************************************/				
@@ -69,11 +77,19 @@ void Chassis_Param_Set(void)//底盘
 				ChassisParam.TargetVX=ABS(DBUS_ReceiveData.ch3)>20?-10*DBUS_ReceiveData.ch3:0;
 				ChassisParam.TargetOmega=ABS(DBUS_ReceiveData.ch1)>20?10*DBUS_ReceiveData.ch1:0;	
 		
+				MecanumCalculate(ChassisParam.TargetVX,ChassisParam.TargetVY,ChassisParam.TargetOmega,WheelSpeed);
+				//麦轮解算
+				ChassisParam.LF.Target_Speed = WheelSpeed[0];
+				ChassisParam.LB.Target_Speed = WheelSpeed[1];
+				ChassisParam.RB.Target_Speed = WheelSpeed[2];
+				ChassisParam.RF.Target_Speed = WheelSpeed[3];
+				M3508_PID_Set();
+		
 			break ;
 /************************************************************************************************************************/
 		case    Keyboard://键鼠模式
 			
-				Key_Combination();
+				Key_Combination();//组合按键
 				PID_REST(Game_Mode);
 				switch(Game_Mode)
 				{
@@ -214,7 +230,7 @@ void Chassis_Param_Set(void)//底盘
 					
 								break ;
 					case HIEROGRAM://打符
-						
+							
 								ChassisParam.TargetVY=0;
 								ChassisParam.TargetVX=0;
 								ChassisParam.TargetOmega=0;	
@@ -223,27 +239,29 @@ void Chassis_Param_Set(void)//底盘
 								break;
 				}
 				Filters(Speed_X,&ChassisParam.TargetVX,0.1f);//缓冲平滑处理
-				Filters(Speed_Y,&ChassisParam.TargetVY,0.1f);	
+				Filters(Speed_Y,&ChassisParam.TargetVY,0.1f);
+
+				MecanumCalculate(ChassisParam.TargetVX,ChassisParam.TargetVY,ChassisParam.TargetOmega,WheelSpeed);
+				//麦轮解算
+				ChassisParam.LF.Target_Speed = WheelSpeed[0];
+				ChassisParam.LB.Target_Speed = WheelSpeed[1];
+				ChassisParam.RB.Target_Speed = WheelSpeed[2];
+				ChassisParam.RF.Target_Speed = WheelSpeed[3];
+				M3508_PID_Set();				
 			break ;
 /************************************************************************************************************************/
 		case    Ctrl_OFF://失能控制
 			
-				ChassisParam.TargetVY=0;
-				ChassisParam.TargetVX=0;
-				ChassisParam.TargetOmega=0;	
+				ChassisParam.LB.Target_Current=0;
+				ChassisParam.LF.Target_Current=0;
+				ChassisParam.RB.Target_Current=0;
+				ChassisParam.RF.Target_Current=0;
 		
 			break ;
 /************************************************************************************************************************/
 	}
 	
-	MecanumCalculate(ChassisParam.TargetVX,ChassisParam.TargetVY,ChassisParam.TargetOmega,WheelSpeed);
-	//麦轮解算
-	ChassisParam.LF.Target_Speed = WheelSpeed[0];
-    ChassisParam.LB.Target_Speed = WheelSpeed[1];
-    ChassisParam.RB.Target_Speed = WheelSpeed[2];
-    ChassisParam.RF.Target_Speed = WheelSpeed[3];
-	M3508_PID_Set();
-	Chassis_Current_Set(&hcan1);
+	Chassis_Current_Set(CAN_1);
 }
 
 
@@ -273,10 +291,10 @@ void MecanumCalculate(float Vx, float Vy, float Omega, int16_t *Speed)
         }
     }	
 	
-	if((MEDIAN_ROLL-CloudParam.Cloud_Gyro.Roll)-((CloudParam.Pitch.Real_Angle-(MEDIAN_PITCH-Pitch_Min-200))/22.75f)>12)
-		MaxWheelSpeed=2000;//云台陀螺仪角度变化大于Pitch轴编码器的转换值，被认为是爬坡，把速度降下来
-	else
-		MaxWheelSpeed=6600;
+//	if((MEDIAN_ROLL-CloudParam.Cloud_Gyro.Roll)-((CloudParam.Pitch.Real_Angle-(MEDIAN_PITCH-Pitch_Min-200))/22.75f)>12)
+//		MaxWheelSpeed=2000;//云台陀螺仪角度变化大于Pitch轴编码器的转换值，被认为是爬坡，把速度降下来
+//	else
+//		MaxWheelSpeed=6600;
 	
     if(MaxWheelSpeed < MaxSpeed)
     {
@@ -342,20 +360,24 @@ void M3508_PID_Set(void)
   * @param CAN
   * @retval None
   */
-void Chassis_Current_Set(CAN_HandleTypeDef* hcan)
+void Chassis_Current_Set(CAN_X_State CAN_X)
 {
-	hcan->pTxMsg->StdId = 0x200;
-	hcan->pTxMsg->IDE = CAN_ID_STD;
-	hcan->pTxMsg->RTR = CAN_RTR_DATA;
-	hcan->pTxMsg->DLC = 0x08;
-	hcan->pTxMsg->Data[0] = ChassisParam.LB.Target_Current >> 8;
-	hcan->pTxMsg->Data[1] = ChassisParam.LB.Target_Current;
-	hcan->pTxMsg->Data[2] = ChassisParam.RB.Target_Current >> 8;
-	hcan->pTxMsg->Data[3] = ChassisParam.RB.Target_Current;
-	hcan->pTxMsg->Data[4] = ChassisParam.RF.Target_Current >> 8;
-	hcan->pTxMsg->Data[5] = ChassisParam.RF.Target_Current ;
-	hcan->pTxMsg->Data[6] = ChassisParam.LF.Target_Current >> 8;
-	hcan->pTxMsg->Data[7] = ChassisParam.LF.Target_Current;
+	static  CanSend_Type   SendData;
+
+	SendData.CANx=CAN_X;
+	SendData.SendCanTxMsg.StdId = 0x200;
+	SendData.SendCanTxMsg.IDE = CAN_ID_STD;
+	SendData.SendCanTxMsg.RTR = CAN_RTR_DATA;
+	SendData.SendCanTxMsg.DLC = 0x08;
+	SendData.SendCanTxMsg.Data[0] = ChassisParam.LB.Target_Current >> 8;
+	SendData.SendCanTxMsg.Data[1] = ChassisParam.LB.Target_Current;
+	SendData.SendCanTxMsg.Data[2] = ChassisParam.RB.Target_Current >> 8;
+	SendData.SendCanTxMsg.Data[3] = ChassisParam.RB.Target_Current;
+	SendData.SendCanTxMsg.Data[4] = ChassisParam.RF.Target_Current >> 8;
+	SendData.SendCanTxMsg.Data[5] = ChassisParam.RF.Target_Current ;
+	SendData.SendCanTxMsg.Data[6] = ChassisParam.LF.Target_Current >> 8;
+	SendData.SendCanTxMsg.Data[7] = ChassisParam.LF.Target_Current;
 	
-	xQueueSend(Queue_CanSend, hcan, 20);
+	
+	xQueueSend(Queue_CanSend, &SendData, 20);
 }

@@ -304,7 +304,7 @@ void Chassis_Param_Set(uint16_t Max_X,uint16_t Max_Y)//底盘
 				}
 		if(Mode==SUPPLY)//补给模式不跟随，Q，E自旋
 		{
-			  if(DBUS_CheckPush(KEY_Q))
+				if(DBUS_CheckPush(KEY_Q))
 					 ChassisParam.TargetOmega=-500;//补给时低速
 				
 				else if(DBUS_CheckPush(KEY_E))

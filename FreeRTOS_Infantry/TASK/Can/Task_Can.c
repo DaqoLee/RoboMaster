@@ -4,11 +4,20 @@ xQueueHandle    Queue_CanSend;
 
 void Task_CanSend(void *Parameters)
 {
-	CAN_HandleTypeDef Can;
+	CanSend_Type   SendData;
 	while(1)
 	{
-		xQueueReceive(Queue_CanSend, &Can, portMAX_DELAY);
-		HAL_CAN_Transmit(&Can, 100);
+		xQueueReceive(Queue_CanSend, &SendData, portMAX_DELAY);
+		if(SendData.CANx==CAN_1)
+		{
+			hcan1.pTxMsg=&SendData.SendCanTxMsg;
+			HAL_CAN_Transmit(&hcan1, 1000);
+		}
+		else if(SendData.CANx==CAN_2)
+		{
+			hcan2.pTxMsg=&SendData.SendCanTxMsg;
+			HAL_CAN_Transmit(&hcan2, 1000);
+		}
 	}
 
 }
