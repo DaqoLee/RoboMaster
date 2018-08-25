@@ -62,9 +62,10 @@
 .\objects\ctrl_chassis.o: ..\Control\Ctrl_Rammer\Ctrl_Rammer.h
 .\objects\ctrl_chassis.o: ..\Driver\Driver_Judge\Driver_Judge.h
 .\objects\ctrl_chassis.o: ..\Driver\Driver_DBUS\Driver_DBUS.h
+.\objects\ctrl_chassis.o: ..\Driver\Driver_SupCap\Driver_SupCap.h
+.\objects\ctrl_chassis.o: ..\Driver\Driver_Gyro\Driver_Gyro.h
 .\objects\ctrl_chassis.o: ..\BSP\BSP_GPIO\BSP_GPIO.h
 .\objects\ctrl_chassis.o: ..\BSP\BSP_TIM\BSP_TIM.h
 .\objects\ctrl_chassis.o: ..\BSP\BSP_USART\BSP_USART.h
 .\objects\ctrl_chassis.o: ..\BSP\BSP_CAN\BSP_CAN.h
 .\objects\ctrl_chassis.o: ..\BSP\BSP_NVIC\BSP_NVIC.h
-.\objects\ctrl_chassis.o: ..\Driver\Driver_SupCap\Driver_SupCap.h

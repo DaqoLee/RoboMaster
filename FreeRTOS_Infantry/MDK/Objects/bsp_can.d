@@ -62,8 +62,9 @@
 .\objects\bsp_can.o: ..\Control\Ctrl_Rammer\Ctrl_Rammer.h
 .\objects\bsp_can.o: ..\Driver\Driver_Judge\Driver_Judge.h
 .\objects\bsp_can.o: ..\Driver\Driver_DBUS\Driver_DBUS.h
+.\objects\bsp_can.o: ..\Driver\Driver_SupCap\Driver_SupCap.h
+.\objects\bsp_can.o: ..\Driver\Driver_Gyro\Driver_Gyro.h
 .\objects\bsp_can.o: ..\BSP\BSP_GPIO\BSP_GPIO.h
 .\objects\bsp_can.o: ..\BSP\BSP_TIM\BSP_TIM.h
 .\objects\bsp_can.o: ..\BSP\BSP_USART\BSP_USART.h
 .\objects\bsp_can.o: ..\BSP\BSP_NVIC\BSP_NVIC.h
-.\objects\bsp_can.o: ..\Driver\Driver_SupCap\Driver_SupCap.h

@@ -15,10 +15,10 @@ void PID_Init(void)
 	PID_struct_init(&M2006.PID.In,DELTA_PID,	 M2006_Xianfu,	500,	0.4f,	0,	   0);
 	
 /********************底盘电机*************************输出限幅****积分限幅** P ***** I **** D **/	
-    PID_struct_init(&ChassisParam.LF.PID,DELTA_PID,	M3508_Xianfu,	1000,	2.5f,	0.5f,	0);
-	PID_struct_init(&ChassisParam.LB.PID,DELTA_PID,	M3508_Xianfu,	1000,	2.5f,	0.5f,	0);
-	PID_struct_init(&ChassisParam.RF.PID,DELTA_PID,	M3508_Xianfu,	1000,	2.5f,	0.5f,	0);
-	PID_struct_init(&ChassisParam.RB.PID,DELTA_PID,	M3508_Xianfu,	1000,	2.5f,	0.5f,	0);
+    PID_struct_init(&ChassisParam.LF.PID,DELTA_PID,	M3508_Xianfu,	1000,	2.5f,	1.0f,	0);
+	PID_struct_init(&ChassisParam.LB.PID,DELTA_PID,	M3508_Xianfu,	1000,	2.5f,	1.0f,	0);
+	PID_struct_init(&ChassisParam.RF.PID,DELTA_PID,	M3508_Xianfu,	1000,	2.5f,	1.0f,	0);
+	PID_struct_init(&ChassisParam.RB.PID,DELTA_PID,	M3508_Xianfu,	1000,	2.5f,	1.0f,	0);
 	
 /********************云台电机*********************************输出限幅****积分限幅** P **** I *** D */
 	PID_struct_init(&CloudParam.Pitch.PID.Out,POSITION_PID,	M6623_Xianfu,	2000,	1.5f,	0,	0.0f);
@@ -155,6 +155,7 @@ void Control_Mode_Set(void)
 				}
 				break ;
 		default:
+				Control_Mode=Ctrl_OFF;
 				break;
 	}
 }

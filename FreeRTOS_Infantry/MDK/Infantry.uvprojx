@@ -338,7 +338,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F427xx</Define>
               <Undefine></Undefine>
-              <IncludePath>..\USER\Inc;..\Library\STM32F4xx_HAL_Driver\Inc;..\Library\STM32F4xx_HAL_Driver\Inc\Legacy;..\Library\CMSIS\Include;..\Library\CMSIS\Device\ST\STM32F4xx\Include;..\FreeRTOS\portable\MemMang;..\FreeRTOS\portable\RVDS\ARM_CM4F;..\FreeRTOS\include;..\TASK\User;..\BSP\BSP_GPIO;..\BSP\BSP_TIM;..\BSP\BSP_CAN;..\BSP\BSP_USART;..\Control\Ctrl_Chassis;..\Control\Ctrl_Cloud;..\Control\Ctrl_Frict;..\Control\Ctrl_Rammer;..\Driver\Dirver_OLED;..\Driver\Driver_DBUS;..\Driver\Driver_Judge;..\Driver\Driver_PID;..\Driver\Driver_Niming;..\BSP\BSP_I2C;..\TASK\Ctrl;..\BSP\BSP_NVIC;..\TASK\Can;..\USER\User_Code;..\Driver\Driver_SupCap</IncludePath>
+              <IncludePath>..\USER\Inc;..\Library\STM32F4xx_HAL_Driver\Inc;..\Library\STM32F4xx_HAL_Driver\Inc\Legacy;..\Library\CMSIS\Include;..\Library\CMSIS\Device\ST\STM32F4xx\Include;..\FreeRTOS\portable\MemMang;..\FreeRTOS\portable\RVDS\ARM_CM4F;..\FreeRTOS\include;..\TASK\User;..\BSP\BSP_GPIO;..\BSP\BSP_TIM;..\BSP\BSP_CAN;..\BSP\BSP_USART;..\Control\Ctrl_Chassis;..\Control\Ctrl_Cloud;..\Control\Ctrl_Frict;..\Control\Ctrl_Rammer;..\Driver\Dirver_OLED;..\Driver\Driver_DBUS;..\Driver\Driver_Judge;..\Driver\Driver_PID;..\Driver\Driver_Niming;..\BSP\BSP_I2C;..\TASK\Ctrl;..\BSP\BSP_NVIC;..\TASK\Can;..\USER\User_Code;..\Driver\Driver_SupCap;..\Driver\Driver_Gyro</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -631,6 +631,11 @@
               <FileName>Driver_SupCap.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Driver\Driver_SupCap\Driver_SupCap.c</FilePath>
+            </File>
+            <File>
+              <FileName>Driver_Gyro.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\Driver_Gyro\Driver_Gyro.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -9,12 +9,13 @@
 #include "Driver_Judge.h"
 #include "Driver_DBUS.h"
 #include "Driver_PID.h"
+#include "Driver_SupCap.h"
+#include "Driver_Gyro.h"
 #include "BSP_GPIO.h"
 #include "BSP_TIM.h"
 #include "BSP_USART.h"
 #include "BSP_CAN.h"
 #include "BSP_NVIC.h"
-#include "Driver_SupCap.h"
 
 #define INFANTRY           1    //1号和4号参数有差异
 

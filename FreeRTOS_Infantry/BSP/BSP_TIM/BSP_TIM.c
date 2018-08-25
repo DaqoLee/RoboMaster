@@ -1,5 +1,5 @@
 #include "BSP_TIM.h"
-
+#include "User_Code.h"
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim6;
 TIM_HandleTypeDef htim7;
@@ -29,7 +29,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	}
 	else if(htim == &htim6)
 	{
-	   // printf("6\r\n");
+	   	if(++Shoot.Time>=1000/Shoot.Freq)//Á¬·¢ÆµÂÊ
+		{
+			Shoot.Time=0;
+			Shoot.Flag=1;
+		}
 	}
 }
 
@@ -85,9 +89,9 @@ void MX_TIM6_Init(void)
   TIM_MasterConfigTypeDef sMasterConfig;
 
   htim6.Instance = TIM6;
-  htim6.Init.Prescaler = 8999;
+  htim6.Init.Prescaler = 899;
   htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim6.Init.Period = 9999;
+  htim6.Init.Period = 99;
   HAL_TIM_Base_Init(&htim6);
 
   sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
