@@ -62,8 +62,9 @@
 .\objects\ctrl_frict.o: ..\Control\Ctrl_Frict\Ctrl_Frict.h
 .\objects\ctrl_frict.o: ..\Driver\Driver_Judge\Driver_Judge.h
 .\objects\ctrl_frict.o: ..\Driver\Driver_DBUS\Driver_DBUS.h
+.\objects\ctrl_frict.o: ..\Driver\Driver_SupCap\Driver_SupCap.h
+.\objects\ctrl_frict.o: ..\Driver\Driver_Gyro\Driver_Gyro.h
 .\objects\ctrl_frict.o: ..\BSP\BSP_GPIO\BSP_GPIO.h
 .\objects\ctrl_frict.o: ..\BSP\BSP_TIM\BSP_TIM.h
 .\objects\ctrl_frict.o: ..\BSP\BSP_USART\BSP_USART.h
 .\objects\ctrl_frict.o: ..\BSP\BSP_NVIC\BSP_NVIC.h
-.\objects\ctrl_frict.o: ..\Driver\Driver_SupCap\Driver_SupCap.h

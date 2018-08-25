@@ -43,6 +43,7 @@
 ".\objects\dirver_oled.o"
 ".\objects\driver_niming.o"
 ".\objects\driver_supcap.o"
+".\objects\driver_gyro.o"
 ".\objects\task_user.o"
 ".\objects\task_ctrl.o"
 ".\objects\task_can.o"

@@ -63,8 +63,9 @@
 .\objects\stm32f4xx_it.o: ..\Control\Ctrl_Frict\Ctrl_Frict.h
 .\objects\stm32f4xx_it.o: ..\Driver\Driver_Judge\Driver_Judge.h
 .\objects\stm32f4xx_it.o: ..\Driver\Driver_DBUS\Driver_DBUS.h
+.\objects\stm32f4xx_it.o: ..\Driver\Driver_SupCap\Driver_SupCap.h
+.\objects\stm32f4xx_it.o: ..\Driver\Driver_Gyro\Driver_Gyro.h
 .\objects\stm32f4xx_it.o: ..\BSP\BSP_GPIO\BSP_GPIO.h
 .\objects\stm32f4xx_it.o: ..\BSP\BSP_TIM\BSP_TIM.h
 .\objects\stm32f4xx_it.o: ..\BSP\BSP_USART\BSP_USART.h
 .\objects\stm32f4xx_it.o: ..\BSP\BSP_NVIC\BSP_NVIC.h
-.\objects\stm32f4xx_it.o: ..\Driver\Driver_SupCap\Driver_SupCap.h

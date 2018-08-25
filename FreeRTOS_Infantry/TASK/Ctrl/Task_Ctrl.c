@@ -6,16 +6,24 @@ void Task_Control(void *Parameters)
 	
 	while(1)
 	{
-//		Frict_Param_Set();
-		Chassis_Param_Set();
-		Cloud_Param_Set();
-//		Moto_Current_Set(&hcan1,0x200, ChassisParam.LB.Target_Current, ChassisParam.RB.Target_Current, \
-//		ChassisParam.RF.Target_Current, ChassisParam.LF.Target_Current);
-//		Moto_Current_Set(&hcan1,0x1FF, CloudParam.Yaw.Target_Current, CloudParam.Pitch.Target_Current, \
-//		M2006.Target_Current, 0);
-		vTaskDelayUntil(&CurrentControlTick, 5 / portTICK_RATE_MS);
+		Frict_Param_Set();//Ä¦²ÁÂÖ
+		Rammer_Param_Set();//²¦µ¯
+		Chassis_Param_Set();//µ×ÅÌ
+		Cloud_Param_Set();//ÔÆÌ¨
+		
+		vTaskDelayUntil(&CurrentControlTick, 5 / portTICK_RATE_MS);//5msÑÓÊ±
 	}
 }
 
 
+
+void Control_Mode_Task(void *pvParameters)
+{
+	 while(1)
+    {
+		Control_Mode_Set();//Ò£¿ØÄ£Ê½1¡¢2£¬¼üÅÌÄ£Ê½£¬Ê§ÄÜ¿ØÖÆÇĞ»»¡£
+        vTaskDelay(50);
+
+    }
+}
 

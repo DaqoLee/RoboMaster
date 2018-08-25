@@ -11,12 +11,12 @@ void Task_CanSend(void *Parameters)
 		if(SendData.CANx==CAN_1)
 		{
 			hcan1.pTxMsg=&SendData.SendCanTxMsg;
-			HAL_CAN_Transmit(&hcan1, 1000);
+			HAL_CAN_Transmit(&hcan1, 100);
 		}
 		else if(SendData.CANx==CAN_2)
 		{
 			hcan2.pTxMsg=&SendData.SendCanTxMsg;
-			HAL_CAN_Transmit(&hcan2, 1000);
+			HAL_CAN_Transmit(&hcan2, 100);
 		}
 	}
 

@@ -64,15 +64,7 @@ void start_task(void *pvParameters)
     taskEXIT_CRITICAL();            
 }
 
-void Control_Mode_Task(void *pvParameters)
-{
-	 while(1)
-    {
-		Control_Mode_Set();
-        vTaskDelay(50);
 
-    }
-}
 
 void Buzzer_Task(void *pvParameters)
 {

@@ -12,7 +12,6 @@ extern TaskHandle_t Buzzer_TaskHandler;
 void start_task(void *pvParameters);
 void led0_task(void *pvParameters);
 void float_task(void *pvParameters);
-void Control_Mode_Task(void *pvParameters);
 void Frame_Rate_Task(void *pvParameters);
 void Buzzer_Task(void *pvParameters);
 #endif

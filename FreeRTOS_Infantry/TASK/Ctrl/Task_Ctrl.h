@@ -5,4 +5,5 @@
 #include "User_Code.h"
 
 void Task_Control(void *Parameters);
+void Control_Mode_Task(void *pvParameters);
 #endif

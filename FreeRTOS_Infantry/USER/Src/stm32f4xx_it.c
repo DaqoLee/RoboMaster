@@ -276,21 +276,19 @@ void USART3_IRQHandler(void)
 ///**
 //* @brief This function handles UART8 global interrupt.
 //*/
-//void UART8_IRQHandler(void)
-//{
-//  /* USER CODE BEGIN UART8_IRQn 0 */
-//	UARTtemp=huart8.Instance->SR;//清楚标志位时序
-//	UARTtemp=huart8.Instance->DR;//清楚标志位时序
-//	HAL_UART_DMAStop(&huart8);//暂停DMA
-//	Analysis_Cloud_Gyro();
-//	DMA1->LIFCR=(1<<21)|(1<<20);//清楚完成标志位
-//	HAL_UART_Receive_DMA(&huart8,Cloud_Gyro_Data,20);//设置接收地址和数据长度
-//  /* USER CODE END UART8_IRQn 0 */
-//  HAL_UART_IRQHandler(&huart8);
-//  /* USER CODE BEGIN UART8_IRQn 1 */
+void UART8_IRQHandler(void)
+{
+	(void)huart8.Instance->SR;//清楚标志位时序
+	(void)huart8.Instance->DR;//清楚标志位时序
+	
+	HAL_UART_DMAStop(&huart8);//暂停DMA
+	Analysis_Cloud_Gyro();
+	DMA1->LIFCR=(1<<21)|(1<<20);//清楚完成标志位
+	HAL_UART_Receive_DMA(&huart8,Cloud_Gyro_Data,20);//设置接收地址和数据长度
+  /* USER CODE END UART8_IRQn 0 */
+	HAL_UART_IRQHandler(&huart8);
 
-//  /* USER CODE END UART8_IRQn 1 */
-//}
+}
 
 /**
 * @brief This function handles DMA1 stream1 global interrupt.

@@ -1,5 +1,5 @@
 #include "Driver_PID.h"
-
+#include "User_Code.h"
 void abs_limit(float *a, float ABS_MAX){
     if(*a > ABS_MAX)
         *a = ABS_MAX;
@@ -58,27 +58,27 @@ float pid_calc(pid_t* pid, float get, float set)
     if(pid->pid_mode == POSITION_PID) //位置式p
     {
 /************************************过零点时比较权重挑最近的路到目标值***********************************/
-//		if(pid==&CloudParam.Pitch.PID.Out||pid==&CloudParam.Yaw.PID.Out||pid==&ChassisParam.Chassis_Gyro.Chassis_PID)
-//		{
-//			if(pid->err[NOW]<0)
-//				pid->err[NOW]=ABS(pid->err[NOW])>ABS(8191-ABS(pid->err[NOW]))?8191-ABS(pid->err[NOW]):pid->err[NOW];
-//			else if(pid->err[NOW]>0)
-//				pid->err[NOW]=ABS(pid->err[NOW])>ABS(8191-ABS(pid->err[NOW]))?ABS(pid->err[NOW])-8191:pid->err[NOW];
-//	    }
-//		else if(pid==&M2006.PID.Out)
-//		{
-//			if(pid->err[NOW]<0)
-//				pid->err[NOW]=ABS(pid->err[NOW])>ABS(Rammer_Max_Angle-ABS(pid->err[NOW]))?Rammer_Max_Angle-ABS(pid->err[NOW]):pid->err[NOW];
-//			else if(pid->err[NOW]>0)
-//				pid->err[NOW]=ABS(pid->err[NOW])>ABS(Rammer_Max_Angle-ABS(pid->err[NOW]))?ABS(pid->err[NOW])-Rammer_Max_Angle:pid->err[NOW];
-//		}
-//		else if(pid==&CloudParam.Cloud_Gyro.Yaw_PID.Out)
-//		{
-//			if(pid->err[NOW]<0)
-//				pid->err[NOW]=ABS(pid->err[NOW])>ABS(360-ABS(pid->err[NOW]))?360-ABS(pid->err[NOW]):pid->err[NOW];
-//			else if(pid->err[NOW]>0)
-//				pid->err[NOW]=ABS(pid->err[NOW])>ABS(360-ABS(pid->err[NOW]))?ABS(pid->err[NOW])-360:pid->err[NOW];
-//		}
+		if(pid==&CloudParam.Pitch.PID.Out||pid==&CloudParam.Yaw.PID.Out||pid==&ChassisParam.Chassis_Gyro.Chassis_PID)
+		{
+			if(pid->err[NOW]<0)
+				pid->err[NOW]=ABS(pid->err[NOW])>ABS(8191-ABS(pid->err[NOW]))?8191-ABS(pid->err[NOW]):pid->err[NOW];
+			else if(pid->err[NOW]>0)
+				pid->err[NOW]=ABS(pid->err[NOW])>ABS(8191-ABS(pid->err[NOW]))?ABS(pid->err[NOW])-8191:pid->err[NOW];
+	    }
+		else if(pid==&M2006.PID.Out)
+		{
+			if(pid->err[NOW]<0)
+				pid->err[NOW]=ABS(pid->err[NOW])>ABS(Rammer_Max_Angle-ABS(pid->err[NOW]))?Rammer_Max_Angle-ABS(pid->err[NOW]):pid->err[NOW];
+			else if(pid->err[NOW]>0)
+				pid->err[NOW]=ABS(pid->err[NOW])>ABS(Rammer_Max_Angle-ABS(pid->err[NOW]))?ABS(pid->err[NOW])-Rammer_Max_Angle:pid->err[NOW];
+		}
+		else if(pid==&CloudParam.Cloud_Gyro.Yaw_PID.Out)
+		{
+			if(pid->err[NOW]<0)
+				pid->err[NOW]=ABS(pid->err[NOW])>ABS(360-ABS(pid->err[NOW]))?360-ABS(pid->err[NOW]):pid->err[NOW];
+			else if(pid->err[NOW]>0)
+				pid->err[NOW]=ABS(pid->err[NOW])>ABS(360-ABS(pid->err[NOW]))?ABS(pid->err[NOW])-360:pid->err[NOW];
+		}
 /*********************************************************************************************************/		
         pid->pout = pid->p * pid->err[NOW];
         pid->iout += pid->i * pid->err[NOW];

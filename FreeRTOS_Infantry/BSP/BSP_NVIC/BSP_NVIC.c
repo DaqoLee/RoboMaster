@@ -19,7 +19,7 @@ void NVIC_Init(void)
 	
 	
 	//USART1
-	  HAL_NVIC_SetPriority(USART1_IRQn,  2, 0);
+	  HAL_NVIC_SetPriority(USART1_IRQn,  1, 0);
     HAL_NVIC_EnableIRQ(USART1_IRQn);
 	
 	//USART2
@@ -39,7 +39,7 @@ void NVIC_Init(void)
     HAL_NVIC_EnableIRQ(UART7_IRQn);
 	
 	//UART8
-    HAL_NVIC_SetPriority(UART8_IRQn,   9, 0);
+    HAL_NVIC_SetPriority(UART8_IRQn,   3, 0);
     HAL_NVIC_EnableIRQ(UART8_IRQn);
 		
 		

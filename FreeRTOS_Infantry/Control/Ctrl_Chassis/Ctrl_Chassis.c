@@ -58,7 +58,7 @@ void Chassis_Param_Set(void)//╣вел
 							ChassisParam.TargetOmega=0;
 					}
 					else
-						ChassisParam.TargetOmega=ABS(DBUS_ReceiveData.ch1)>20?10*DBUS_ReceiveData.ch1:0;		
+ 						ChassisParam.TargetOmega=ABS(DBUS_ReceiveData.ch1)>20?10*DBUS_ReceiveData.ch1:0;		
 				}
 				
 				MecanumCalculate(ChassisParam.TargetVX,ChassisParam.TargetVY,ChassisParam.TargetOmega,WheelSpeed);
