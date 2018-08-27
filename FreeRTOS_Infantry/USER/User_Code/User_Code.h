@@ -57,6 +57,7 @@ void Game_Mode_Set(void);
 void Control_Mode_Set(void);
 void Key_Combination(void);
 void Frame_Rate_Statistics(void);
+void Get_Target_Angle(void);
 void Moto_Current_Set(CAN_X_State CAN_X,uint16_t ID,int16_t Current1, int16_t Current2, int16_t Current3, int16_t Current4);
 #endif
 
