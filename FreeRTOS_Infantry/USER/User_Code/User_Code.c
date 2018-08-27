@@ -27,10 +27,7 @@ void PID_Init(void)
 	
 	PID_struct_init(&CloudParam.Yaw.PID.Out,POSITION_PID,	M6623_Xianfu,	2000,	4.6f,	0,	0.0f);
 	PID_struct_init(&CloudParam.Yaw.PID.In,POSITION_PID,	M6623_Xianfu,	2000,	0.8f,	0,	1.0f);
-
 	
-	CloudParam.Yaw.Target_Angle=MEDIAN_YAW;
-	CloudParam.Pitch.Target_Angle=MEDIAN_PITCH;
 /*******************云台陀螺仪********************************************输出限幅****积分限幅** P ****** I ***** D **/
 	PID_struct_init(&CloudParam.Cloud_Gyro.Pitch_PID.Out,POSITION_PID,	M6623_Xianfu,	500,  100.0f,	   0,  1000.0f);
 	PID_struct_init(&CloudParam.Cloud_Gyro.Pitch_PID.In,POSITION_PID,	M6623_Xianfu,	1000,	1.2f,   0.1f,	  2.0f);
@@ -79,20 +76,19 @@ void PID_REST(Game_Mode_State mode)
 	}
 }
  /*
-  * @brief 正常，打符，补给模式设置
+  * @brief 获取初始角度
   * @param None
   * @retval None
   */
-void Game_Mode_Set(void)
+void Get_Target_Angle(void)
 {
-    if(DBUS_CheckPush(KEY_CTRL)&&DBUS_CheckPush(KEY_C))
-		Game_Mode=COMMON;
-	
-	else if(DBUS_CheckPush(KEY_SHIFT)&&DBUS_CheckPush(KEY_X))
-		Game_Mode=HIEROGRAM;
-	
-	else if(DBUS_CheckPush(KEY_CTRL)&&DBUS_CheckPush(KEY_X))
-		Game_Mode=SUPPLY;
+	ChassisParam.TargetABSAngle=ChassisParam.Chassis_Gyro.Yaw;
+	ChassisParam.Chassis_Gyro.Target_Yaw=ChassisParam.Chassis_Gyro.Yaw;
+	CloudParam.Cloud_Gyro.Target_Yaw=CloudParam.Cloud_Gyro.Yaw;
+	CloudParam.Cloud_Gyro.Target_Roll=CloudParam.Cloud_Gyro.Roll;
+	ERror=ChassisParam.Chassis_Gyro.Yaw-CloudParam.Cloud_Gyro.Yaw;
+	CloudParam.Yaw.Target_Angle=CloudParam.Yaw.Real_Angle;
+	CloudParam.Pitch.Target_Angle=CloudParam.Pitch.Real_Angle;
 }
 
  /*

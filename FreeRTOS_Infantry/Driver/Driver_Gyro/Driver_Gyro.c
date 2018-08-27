@@ -56,16 +56,3 @@ void Analysis_Chassis_Gyro()
 		}
 }
 
-void Get_Target_Angle()
-{
-	ChassisParam.TargetABSAngle=ChassisParam.Chassis_Gyro.Yaw;
-	ChassisParam.Chassis_Gyro.Target_Yaw=ChassisParam.Chassis_Gyro.Yaw;
-	CloudParam.Cloud_Gyro.Target_Yaw=CloudParam.Cloud_Gyro.Yaw;
-	CloudParam.Cloud_Gyro.Target_Roll=CloudParam.Cloud_Gyro.Roll;
-	ERror=ChassisParam.Chassis_Gyro.Yaw-CloudParam.Cloud_Gyro.Yaw;
-	
-//	Target_Auto_Yaw=CloudParam.Yaw.Real_Angle;
-//	Target_Auto_Pitch=CloudParam.Pitch.Real_Angle;
-//	Read_M6623_First_Angle();	
-}
-
