@@ -161,6 +161,38 @@ void Chassis_Param_Set(void)//底盘
 										Speed_Y=0;
 									}
 								}
+								
+								if(!DBUS_CheckPush(KEY_F))//没有按下F，正常跟随
+								{
+									if(!(DBUS_CheckPush(KEY_D)||DBUS_CheckPush(KEY_A)||DBUS_CheckPush(KEY_S)||DBUS_CheckPush(KEY_W)))
+									{
+										if(!CloudParam.Cloud_Gyro.Offline)
+										{
+											pid_calc(&ChassisParam.Chassis_Gyro.Chassis_PID,CloudParam.Yaw.Real_Angle,MEDIAN_YAW);
+											if(ABS(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW])<1024)
+												ChassisParam.TargetOmega=0;	
+											else
+												Filters(pid_calc(&ChassisParam.Chassis_Gyro.Chassis_PID,CloudParam.Yaw.Real_Angle,MEDIAN_YAW),&ChassisParam.TargetOmega,0.05f);
+										}
+										else
+											ChassisParam.TargetOmega=0;	
+									}
+								}
+								else if(!DBUS_CheckPush(KEY_W))//按下F，且不前进时扭腰
+								{		
+									pid_calc(&ChassisParam.Chassis_Gyro.Chassis_PID,CloudParam.Yaw.Real_Angle,MEDIAN_YAW);
+									
+									if(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW]>600)				
+										Spin_Flag=1;
+									else if(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW]<-600)
+										Spin_Flag=-1;
+									
+									if(Spin_Flag==1)
+										ChassisParam.TargetOmega=ChassisParam.TargetOmega>3000?3000:ChassisParam.TargetOmega+200;
+									else 
+										ChassisParam.TargetOmega=ChassisParam.TargetOmega<-3000?-3000:ChassisParam.TargetOmega-200;
+								}
+								
 /************************************************************************************************************************/								
 								if(DBUS_CheckPush(KEY_D))
 								{

@@ -38,7 +38,7 @@
 
 #define M2006_Xianfu  	   8000
 #define M3508_Xianfu       8000
-#define M6623_Xianfu       1000
+#define M6623_Xianfu       6000
 
 #define SPEED_UP		   6500
 #define SPEED_DOWN		   2500

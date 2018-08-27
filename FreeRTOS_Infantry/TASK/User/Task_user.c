@@ -44,27 +44,25 @@ void start_task(void *pvParameters)
                 "Control_Mode_Task",   
                 128, 
                 NULL,
-                3,
+                4,
                 &Control_Mode_TaskHandler);  
- 	
+	xTaskCreate(Task_Control,     
+                "Task_Control",   
+                256, 
+                NULL,
+                4,
+                &Task_ControlHandler); 
+				
 	xTaskCreate(Task_CanSend,     
                 "Task_CanSend",   
                 256, 
                 NULL,
 				4,
                 &Task_CanSendHandler);  	
-	xTaskCreate(Task_Control,     
-                "Task_Control",   
-                256, 
-                NULL,
-                4,
-                &Task_ControlHandler); 				
-				
+								
     vTaskDelete(StartTask_Handler); 
     taskEXIT_CRITICAL();            
 }
-
-
 
 void Buzzer_Task(void *pvParameters)
 {
