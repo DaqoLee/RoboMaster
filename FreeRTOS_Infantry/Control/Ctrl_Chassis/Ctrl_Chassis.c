@@ -90,7 +90,6 @@ void Chassis_Param_Set(void)//底盘
 		case    Keyboard://键鼠模式
 			
 				Key_Combination();//组合按键
-				PID_REST(Game_Mode);
 				switch(Game_Mode)
 				{
 /************************************************************************************************************************/
