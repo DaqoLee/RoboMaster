@@ -77,10 +77,6 @@ void Cloud_Param_Set(void)//云台
 		(CloudParam.Pitch.Target_Angle>(MEDIAN_PITCH-Pitch_Max))?MEDIAN_PITCH-Pitch_Max:CloudParam.Pitch.Target_Angle;
 	}
 	
-
-
-	
-	
 		switch(Control_Mode)//右键在中间为遥控模式，默认是模式1，底盘跟随
 		{
 /************************************************************************************************************************/

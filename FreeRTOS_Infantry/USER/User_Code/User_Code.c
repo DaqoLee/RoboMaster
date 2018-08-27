@@ -20,16 +20,17 @@ void PID_Init(void)
 	PID_struct_init(&ChassisParam.RF.PID,DELTA_PID,	M3508_Xianfu,	1000,	2.5f,	1.0f,	0);
 	PID_struct_init(&ChassisParam.RB.PID,DELTA_PID,	M3508_Xianfu,	1000,	2.5f,	1.0f,	0);
 	
+	PID_struct_init(&ChassisParam.Chassis_Gyro.Chassis_PID,POSITION_PID,4000,1000,3.5f,0,0);
 /********************云台电机*********************************输出限幅****积分限幅** P **** I *** D */
-	PID_struct_init(&CloudParam.Pitch.PID.Out,POSITION_PID,	M6623_Xianfu,	2000,	1.5f,	0,	0.0f);
+	PID_struct_init(&CloudParam.Pitch.PID.Out,POSITION_PID,	M6623_Xianfu,	2000,	4.5f,	0,	0.0f);
 	PID_struct_init(&CloudParam.Pitch.PID.In,POSITION_PID,	M6623_Xianfu,	2000,	0.8f,	0,	1.0f);
 	
-	PID_struct_init(&CloudParam.Yaw.PID.Out,POSITION_PID,	M6623_Xianfu,	2000,	1.6f,	0,	0.0f);
+	PID_struct_init(&CloudParam.Yaw.PID.Out,POSITION_PID,	M6623_Xianfu,	2000,	4.6f,	0,	0.0f);
 	PID_struct_init(&CloudParam.Yaw.PID.In,POSITION_PID,	M6623_Xianfu,	2000,	0.8f,	0,	1.0f);
 
 	
-	CloudParam.Yaw.Target_Angle=4266;
-	CloudParam.Pitch.Target_Angle=3700;
+	CloudParam.Yaw.Target_Angle=MEDIAN_YAW;
+	CloudParam.Pitch.Target_Angle=MEDIAN_PITCH;
 /*******************云台陀螺仪********************************************输出限幅****积分限幅** P ****** I ***** D **/
 	PID_struct_init(&CloudParam.Cloud_Gyro.Pitch_PID.Out,POSITION_PID,	M6623_Xianfu,	500,  100.0f,	   0,  1000.0f);
 	PID_struct_init(&CloudParam.Cloud_Gyro.Pitch_PID.In,POSITION_PID,	M6623_Xianfu,	1000,	1.2f,   0.1f,	  2.0f);
@@ -52,8 +53,8 @@ void PID_REST(Game_Mode_State mode)
 		case    COMMON://一般
 				if(Mode_flag!=mode)//                                                 P     I   D
 				{
-					CloudParam.Yaw.PID.Out.f_pid_reset(&CloudParam.Yaw.PID.Out,		2.2f,	0,  0);
-					CloudParam.Pitch.PID.Out.f_pid_reset(&CloudParam.Pitch.PID.Out,	2.5f,	0,	0);
+					CloudParam.Yaw.PID.Out.f_pid_reset(&CloudParam.Yaw.PID.Out,		4.2f,	0,  0);
+					CloudParam.Pitch.PID.Out.f_pid_reset(&CloudParam.Pitch.PID.Out,	4.5f,	0,	0);
 					Mode_flag=mode;
 				}
 				break ;
@@ -194,11 +195,17 @@ void Key_Combination(void)
 						Flag=0;
 					}
 					break ;
-		case	KEY_CTRL|KEY_W:
+		case	KEY_SHIFT|KEY_W:
+		case	KEY_SHIFT|KEY_S:
+		case	KEY_SHIFT|KEY_A:
+		case	KEY_SHIFT|KEY_D:
 			
 						Speed_Mode=UP;
 					break ;
-		case	KEY_SHIFT|KEY_V:
+		case	KEY_CTRL|KEY_W:
+		case	KEY_CTRL|KEY_S:
+		case	KEY_CTRL|KEY_A:
+		case	KEY_CTRL|KEY_D:
 			
 						Speed_Mode=Down;
 					break ;
