@@ -22,7 +22,7 @@ typedef struct __pid_t
     float set[3];				//目标值,包含NOW， LAST， LLAST上上次
     float get[3];				//测量值
     float err[3];				//误差
-	
+	float erc[3];
     
     float pout;							//p输出
     float iout;							//i输出
@@ -62,8 +62,10 @@ void PID_struct_init(
     float 	kd);
     
 float pid_calc(pid_t* pid, float fdb, float ref);
-    
-
+	
+void Fuzzy_KD(pid_t* pid);    
+void Fuzzy_KP(pid_t* pid);
+float fuzzy_pid_calc(pid_t* pid, float get, float set);
 
 #endif
 

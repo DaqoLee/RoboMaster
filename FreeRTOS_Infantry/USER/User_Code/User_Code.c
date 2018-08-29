@@ -50,8 +50,8 @@ void PID_REST(Game_Mode_State mode)
 		case    COMMON://Ò»°ã
 				if(Mode_flag!=mode)//                                                 P     I   D
 				{
-					CloudParam.Yaw.PID.Out.f_pid_reset(&CloudParam.Yaw.PID.Out,		4.2f,	0,  0);
-					CloudParam.Pitch.PID.Out.f_pid_reset(&CloudParam.Pitch.PID.Out,	4.5f,	0,	0);
+					CloudParam.Yaw.PID.Out.f_pid_reset(&CloudParam.Yaw.PID.Out,		2.2f,	0,  0);
+					CloudParam.Pitch.PID.Out.f_pid_reset(&CloudParam.Pitch.PID.Out,	6.5f,	0,	0);
 					Mode_flag=mode;
 				}
 				break ;
