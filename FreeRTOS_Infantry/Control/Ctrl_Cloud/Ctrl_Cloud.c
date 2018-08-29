@@ -111,7 +111,7 @@ void Cloud_Param_Set(void)//云台
 					}
 					else
 					{
-						CloudParam.Pitch.Target_Angle=ABS(DBUS_ReceiveData.ch2)>20?CloudParam.Pitch.Target_Angle-DBUS_ReceiveData.ch2*0.02f:CloudParam.Pitch.Target_Angle;
+						CloudParam.Pitch.Target_Angle=ABS(DBUS_ReceiveData.ch2)>20?CloudParam.Pitch.Target_Angle+DBUS_ReceiveData.ch2*0.02f:CloudParam.Pitch.Target_Angle;
 						CloudParam.Yaw.Target_Angle=ABS(DBUS_ReceiveData.ch1)>20?CloudParam.Yaw.Target_Angle-DBUS_ReceiveData.ch1*0.02f:CloudParam.Yaw.Target_Angle;
 						
 						M6623_PID_Set(&CloudParam.Yaw.PID.Out,CloudParam.Yaw.Real_Angle ,CloudParam.Yaw.Target_Angle,\
@@ -127,7 +127,7 @@ void Cloud_Param_Set(void)//云台
 /************************************************************************************************************************/				
 		case    Remote_2://遥控模式(不跟随云台)
 			
-						CloudParam.Pitch.Target_Angle=ABS(DBUS_ReceiveData.ch2)>20?CloudParam.Pitch.Target_Angle-DBUS_ReceiveData.ch2*0.02f:CloudParam.Pitch.Target_Angle;
+						CloudParam.Pitch.Target_Angle=ABS(DBUS_ReceiveData.ch2)>20?CloudParam.Pitch.Target_Angle+DBUS_ReceiveData.ch2*0.02f:CloudParam.Pitch.Target_Angle;
 						
 						M6623_PID_Set(&CloudParam.Yaw.PID.Out,CloudParam.Yaw.Real_Angle ,MEDIAN_YAW,\
 						&CloudParam.Pitch.PID.Out,CloudParam.Pitch.Real_Angle,CloudParam.Pitch.Target_Angle);
@@ -228,8 +228,8 @@ void M6623_PID_Set(pid_t* PID_Yaw, float Yaw_Real,float Yaw_Target,pid_t* PID_Pi
 {
 	float Current=0,Current1=0;
 	//云台Pitch轴
-	Current=pid_calc(PID_Pitch,Pitch_Real,Pitch_Target);//外环PID计算
-	
+//	Current=pid_calc(PID_Pitch,Pitch_Real,Pitch_Target);//外环PID计算
+	Current=fuzzy_pid_calc(PID_Pitch,Pitch_Real,Pitch_Target);//外环PID计算
 	if(PID_Pitch==&CloudParam.Pitch.PID.Out)//判断外环类型
 	{
 		Current1=pid_calc(&CloudParam.Pitch.PID.In,CloudParam.Cloud_Gyro.Gyr_Y,Current);//内环PID计算
@@ -246,7 +246,7 @@ void M6623_PID_Set(pid_t* PID_Yaw, float Yaw_Real,float Yaw_Target,pid_t* PID_Pi
 
 	
 	//云台Yaw轴
-	Current=pid_calc(PID_Yaw,Yaw_Real,Yaw_Target);
+	Current=fuzzy_pid_calc(PID_Yaw,Yaw_Real,Yaw_Target);
 	if(PID_Yaw==&CloudParam.Yaw.PID.Out)
 	{
 		Current1=pid_calc(&CloudParam.Yaw.PID.In,CloudParam.Cloud_Gyro.Gyr_Z,Current);
