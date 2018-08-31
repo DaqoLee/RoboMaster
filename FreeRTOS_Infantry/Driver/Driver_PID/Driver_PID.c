@@ -10,9 +10,10 @@
 #define PB 6
 
 float E_Rule[7]={-60,-40,-20,0,20,40,60};
-float EC_Rule[7]={-15,-10,-5,0,5,10,15};
+float EC_Rule[7]={-30,-20,-10,0,10,20,30};
 float KP_Rule[7]={10,15,25,30,0,0,0};
-float KD_Rule[7]={5,10,15,20,0,0,0};
+//float KP_Rule[7]={10,12,14,16,0,0,0};
+float KD_Rule[7]={10,20,30,40,0,0,0};
 uint8_t KP[7][7]=
 //{
 //	{PB,PB,PB,PB,PM,ZO,ZO},
@@ -183,8 +184,18 @@ float fuzzy_pid_calc(pid_t* pid, float get, float set)
     pid->set[NOW] = set;
     pid->err[NOW] = set - get;	//set - measure
 	pid->erc[NOW] = pid->err[NOW]-pid->err[LAST];
-	
-	
+	if(Cloud_Flag==0)
+	{
+		if(ABS(CloudParam.Pitch.PID.Out.err[NOW])>100)
+		{
+			CloudParam.Pitch.PID.Out.MaxOutput=1000;
+		}
+		else
+		{
+			CloudParam.Pitch.PID.Out.MaxOutput=M6623_Xianfu;
+			Cloud_Flag=1;
+		}
+	}
     if(pid->pid_mode == POSITION_PID) //位置式p
     {
 /************************************过零点时比较权重挑最近的路到目标值***********************************/
@@ -357,9 +368,6 @@ void Fuzzy_KP(pid_t* pid)
 	N=KP[Flag_E+1][Flag_EC+1];
 	KP_Fuzzy[N]+=E_Fuzzy[1]*EC_Fuzzy[1];
 
-
-	
-	
 	pid->p=(KP_Fuzzy[0]*KP_Rule[0]+KP_Fuzzy[1]*KP_Rule[1]+KP_Fuzzy[2]*KP_Rule[2]+KP_Fuzzy[3]*KP_Rule[3]+KP_Fuzzy[4]*KP_Rule[4]+KP_Fuzzy[5]*KP_Rule[5]+KP_Fuzzy[6]*KP_Rule[6]);
 	
 }

@@ -6,7 +6,7 @@ const float	Pitch_Min=((8192.0f*(PITCH_RANGE/360.0f))/2+0.5f),Pitch_Max=(8192.0f
 const float Yaw_Min=((8192.0f*(YAW_RANGE/360.0f))/2+0.5f),Yaw_Max=(8192.0f-Yaw_Min+0.5f);
 const float	Gyro_Yaw_Min=YAW_GYRO_RANGE/2,Gyro_Yaw_Max=360-Gyro_Yaw_Min;
 
-
+uint8_t Cloud_Flag=0;
  /*
   * @brief 云台电机和陀螺仪相关参数的处理，云台电机的绝对是编码器（0~8191），陀螺仪安装位置影响，Pitch轴真实参数用Roll替换
   * @param None
@@ -76,7 +76,6 @@ void Cloud_Param_Set(void)//云台
 		CloudParam.Pitch.Target_Angle=(CloudParam.Pitch.Target_Angle<(MEDIAN_PITCH-4096))&&\
 		(CloudParam.Pitch.Target_Angle>(MEDIAN_PITCH-Pitch_Max))?MEDIAN_PITCH-Pitch_Max:CloudParam.Pitch.Target_Angle;
 	}
-	
 		switch(Control_Mode)//右键在中间为遥控模式，默认是模式1，底盘跟随
 		{
 /************************************************************************************************************************/
@@ -84,8 +83,8 @@ void Cloud_Param_Set(void)//云台
 			
 					if(!CloudParam.Cloud_Gyro.Offline)
 					{
-						CloudParam.Cloud_Gyro.Target_Yaw=ABS(DBUS_ReceiveData.ch1)>20?CloudParam.Cloud_Gyro.Target_Yaw+DBUS_ReceiveData.ch1*0.005:CloudParam.Cloud_Gyro.Target_Yaw;
-						CloudParam.Cloud_Gyro.Target_Roll=ABS(DBUS_ReceiveData.ch2)>20?CloudParam.Cloud_Gyro.Target_Roll-DBUS_ReceiveData.ch2*0.005:CloudParam.Cloud_Gyro.Target_Roll;
+						CloudParam.Cloud_Gyro.Target_Yaw=ABS(DBUS_ReceiveData.ch1)>20?CloudParam.Cloud_Gyro.Target_Yaw+DBUS_ReceiveData.ch1*0.0025:CloudParam.Cloud_Gyro.Target_Yaw;
+						CloudParam.Cloud_Gyro.Target_Roll=ABS(DBUS_ReceiveData.ch2)>20?CloudParam.Cloud_Gyro.Target_Roll-DBUS_ReceiveData.ch2*0.0025:CloudParam.Cloud_Gyro.Target_Roll;
 						CloudParam.Pitch.Target_Angle=ABS(DBUS_ReceiveData.ch2)>20?CloudParam.Pitch.Target_Angle+DBUS_ReceiveData.ch2*0.05f:CloudParam.Pitch.Target_Angle;
 
 						if((CloudParam.Yaw.Real_Angle<MEDIAN_YAW-Yaw_Min&&CloudParam.Cloud_Gyro.Yaw_PID.Out.err[NOW]>0)\
@@ -211,6 +210,7 @@ void Cloud_Param_Set(void)//云台
 		case    Ctrl_OFF://失能控制
 					CloudParam.Pitch.Target_Current=0;
 					CloudParam.Yaw.Target_Current=0;
+					Cloud_Flag=0;
 		
 				break ;
 /************************************************************************************************************************/
@@ -246,9 +246,10 @@ void M6623_PID_Set(pid_t* PID_Yaw, float Yaw_Real,float Yaw_Target,pid_t* PID_Pi
 
 	
 	//云台Yaw轴
+//	Current=pid_calc(PID_Yaw,Yaw_Real,Yaw_Target);
 	Current=fuzzy_pid_calc(PID_Yaw,Yaw_Real,Yaw_Target);
 	if(PID_Yaw==&CloudParam.Yaw.PID.Out)
-	{
+	{  
 		Current1=pid_calc(&CloudParam.Yaw.PID.In,CloudParam.Cloud_Gyro.Gyr_Z,Current);
 		if(!CloudParam.Cloud_Gyro.Offline)
 			CloudParam.Yaw.Target_Current=-Current1;

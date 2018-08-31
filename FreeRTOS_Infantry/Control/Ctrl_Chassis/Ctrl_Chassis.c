@@ -252,8 +252,7 @@ void Chassis_Param_Set(void)//╣вел
 								if(DBUS_CheckPush(KEY_Q))
 									 ChassisParam.TargetOmega=-SPEED_SUPPLY;
 								
-								else if(DBUS_CheckPush(KEY_E))
-								
+								else if(DBUS_CheckPush(KEY_E))		
 									ChassisParam.TargetOmega=SPEED_SUPPLY;
 								
 								else
@@ -408,7 +407,6 @@ void Chassis_Current_Set(CAN_X_State CAN_X)
 	SendData.SendCanTxMsg.Data[5] = ChassisParam.RF.Target_Current ;
 	SendData.SendCanTxMsg.Data[6] = ChassisParam.LF.Target_Current >> 8;
 	SendData.SendCanTxMsg.Data[7] = ChassisParam.LF.Target_Current;
-	
 	
 	xQueueSend(Queue_CanSend, &SendData, 20);
 }

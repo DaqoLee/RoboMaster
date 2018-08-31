@@ -28,7 +28,8 @@ void start_task(void *pvParameters)
 		vTaskDelay(150);
 	}
 	TIM12->ARR=0;
-	vTaskDelay(500);
+	
+	vTaskDelay(500);//等待陀螺仪数据稳定
 	Get_Target_Angle();
 	
 	Queue_CanSend=xQueueCreate(64, sizeof(CanSend_Type));
