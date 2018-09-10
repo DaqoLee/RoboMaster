@@ -22,9 +22,9 @@ void Analysis_Cloud_Gyro()
 			CloudParam.Cloud_Gyro.Gyr_Y=((Cloud_Gyro_Data[6]<<8)|Cloud_Gyro_Data[7]);
 			CloudParam.Cloud_Gyro.Gyr_Z=((Cloud_Gyro_Data[8]<<8)|Cloud_Gyro_Data[9]);
 	
-			CloudParam.Cloud_Gyro.Yaw=(uint16_t)((Cloud_Gyro_Data[10]<<8)|Cloud_Gyro_Data[11])/100.0f;
-			CloudParam.Cloud_Gyro.Roll=(int16_t)((Cloud_Gyro_Data[12]<<8)|Cloud_Gyro_Data[13])/100.0f;
-			CloudParam.Cloud_Gyro.Pitch=(int16_t)((Cloud_Gyro_Data[14]<<8)|Cloud_Gyro_Data[15])/100.0f;
+			CloudParam.Cloud_Gyro.Yaw=(uint16_t)((Cloud_Gyro_Data[10]<<8)|Cloud_Gyro_Data[11])/10.0f;
+			CloudParam.Cloud_Gyro.Roll=(int16_t)((Cloud_Gyro_Data[12]<<8)|Cloud_Gyro_Data[13])/10.0f;
+			CloudParam.Cloud_Gyro.Pitch=(int16_t)((Cloud_Gyro_Data[14]<<8)|Cloud_Gyro_Data[15])/10.0f;
 			
 			CloudParam.Cloud_Gyro.FrameRate++;
 		}

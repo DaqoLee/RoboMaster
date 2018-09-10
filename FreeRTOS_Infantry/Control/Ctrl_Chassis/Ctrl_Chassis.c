@@ -39,7 +39,7 @@ void Chassis_Param_Set(void)//µ×ÅÌ
 					if(!CloudParam.Yaw.Offline)
 					{
 						Filters(pid_calc(&ChassisParam.Chassis_Gyro.Chassis_PID,CloudParam.Yaw.Real_Angle,MEDIAN_YAW),&ChassisParam.TargetOmega,0.2f);
-						if(ABS(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW])<100||CloudParam.Cloud_Gyro.Offline)
+						if(ABS(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW])<150||CloudParam.Cloud_Gyro.Offline)
 							ChassisParam.TargetOmega=0;
 					}
 					else
@@ -54,7 +54,7 @@ void Chassis_Param_Set(void)//µ×ÅÌ
 					if(!CloudParam.Yaw.Offline)
 					{   //¾²Ö¹Ê±£¬90¶È·¶Î§ÄÚ²»¸úËæ
 						Filters(pid_calc(&ChassisParam.Chassis_Gyro.Chassis_PID,CloudParam.Yaw.Real_Angle,MEDIAN_YAW),&ChassisParam.TargetOmega,0.06f);
-						if(ABS(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW])<1024||CloudParam.Cloud_Gyro.Offline)
+						if(ABS(ChassisParam.Chassis_Gyro.Chassis_PID.err[NOW])<600||CloudParam.Cloud_Gyro.Offline)
 							ChassisParam.TargetOmega=0;
 					}
 					else

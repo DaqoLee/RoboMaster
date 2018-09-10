@@ -23,11 +23,11 @@ void Cloud_Param_Set(void)//云台
 	CloudParam.Yaw.Target_Angle=CloudParam.Yaw.Target_Angle>8191?CloudParam.Yaw.Target_Angle-8191:CloudParam.Yaw.Target_Angle;
 	CloudParam.Yaw.Target_Angle=CloudParam.Yaw.Target_Angle<0?CloudParam.Yaw.Target_Angle+8191:CloudParam.Yaw.Target_Angle;
 	
-	CloudParam.Cloud_Gyro.Target_Yaw=CloudParam.Cloud_Gyro.Target_Yaw>360?CloudParam.Cloud_Gyro.Target_Yaw-360:CloudParam.Cloud_Gyro.Target_Yaw;
-	CloudParam.Cloud_Gyro.Target_Yaw=CloudParam.Cloud_Gyro.Target_Yaw<0?CloudParam.Cloud_Gyro.Target_Yaw+360:CloudParam.Cloud_Gyro.Target_Yaw;
+	CloudParam.Cloud_Gyro.Target_Yaw=CloudParam.Cloud_Gyro.Target_Yaw>3600?CloudParam.Cloud_Gyro.Target_Yaw-3600:CloudParam.Cloud_Gyro.Target_Yaw;
+	CloudParam.Cloud_Gyro.Target_Yaw=CloudParam.Cloud_Gyro.Target_Yaw<0?CloudParam.Cloud_Gyro.Target_Yaw+3600:CloudParam.Cloud_Gyro.Target_Yaw;
 	
-	CloudParam.Cloud_Gyro.Target_Roll=CloudParam.Cloud_Gyro.Target_Roll>10?10:CloudParam.Cloud_Gyro.Target_Roll;
-	CloudParam.Cloud_Gyro.Target_Roll=CloudParam.Cloud_Gyro.Target_Roll<-15?-15:CloudParam.Cloud_Gyro.Target_Roll;
+	CloudParam.Cloud_Gyro.Target_Roll=CloudParam.Cloud_Gyro.Target_Roll>100?100:CloudParam.Cloud_Gyro.Target_Roll;
+	CloudParam.Cloud_Gyro.Target_Roll=CloudParam.Cloud_Gyro.Target_Roll<-150?-150:CloudParam.Cloud_Gyro.Target_Roll;
 /***********************************Yaw轴限制在180°和过零处理************************************/	
 	if(MEDIAN_YAW>Yaw_Min&&MEDIAN_YAW<Yaw_Max)//中间值在最大值和最小值之间，不会经过零点
 	{
@@ -83,8 +83,8 @@ void Cloud_Param_Set(void)//云台
 			
 					if(!CloudParam.Cloud_Gyro.Offline)
 					{
-						CloudParam.Cloud_Gyro.Target_Yaw=ABS(DBUS_ReceiveData.ch1)>20?CloudParam.Cloud_Gyro.Target_Yaw+DBUS_ReceiveData.ch1*0.0025:CloudParam.Cloud_Gyro.Target_Yaw;
-						CloudParam.Cloud_Gyro.Target_Roll=ABS(DBUS_ReceiveData.ch2)>20?CloudParam.Cloud_Gyro.Target_Roll-DBUS_ReceiveData.ch2*0.0025:CloudParam.Cloud_Gyro.Target_Roll;
+						CloudParam.Cloud_Gyro.Target_Yaw=ABS(DBUS_ReceiveData.ch1)>20?CloudParam.Cloud_Gyro.Target_Yaw+DBUS_ReceiveData.ch1*0.025:CloudParam.Cloud_Gyro.Target_Yaw;
+						CloudParam.Cloud_Gyro.Target_Roll=ABS(DBUS_ReceiveData.ch2)>20?CloudParam.Cloud_Gyro.Target_Roll-DBUS_ReceiveData.ch2*0.025:CloudParam.Cloud_Gyro.Target_Roll;
 						CloudParam.Pitch.Target_Angle=ABS(DBUS_ReceiveData.ch2)>20?CloudParam.Pitch.Target_Angle+DBUS_ReceiveData.ch2*0.05f:CloudParam.Pitch.Target_Angle;
 
 						if((CloudParam.Yaw.Real_Angle<MEDIAN_YAW-Yaw_Min&&CloudParam.Cloud_Gyro.Yaw_PID.Out.err[NOW]>0)\
@@ -100,8 +100,8 @@ void Cloud_Param_Set(void)//云台
 						CloudParam.Cloud_Gyro.Target_Yaw=CloudParam.Cloud_Gyro.Yaw;
 					}
 
-						CloudParam.Cloud_Gyro.Target_Yaw=CloudParam.Cloud_Gyro.Target_Yaw>360?CloudParam.Cloud_Gyro.Target_Yaw-360:CloudParam.Cloud_Gyro.Target_Yaw;
-						CloudParam.Cloud_Gyro.Target_Yaw=CloudParam.Cloud_Gyro.Target_Yaw<0?CloudParam.Cloud_Gyro.Target_Yaw+360:CloudParam.Cloud_Gyro.Target_Yaw;
+						CloudParam.Cloud_Gyro.Target_Yaw=CloudParam.Cloud_Gyro.Target_Yaw>3600?CloudParam.Cloud_Gyro.Target_Yaw-3600:CloudParam.Cloud_Gyro.Target_Yaw;
+						CloudParam.Cloud_Gyro.Target_Yaw=CloudParam.Cloud_Gyro.Target_Yaw<0?CloudParam.Cloud_Gyro.Target_Yaw+3600:CloudParam.Cloud_Gyro.Target_Yaw;
 
 						M6623_PID_Set(&CloudParam.Cloud_Gyro.Yaw_PID.Out,CloudParam.Cloud_Gyro.Yaw ,CloudParam.Cloud_Gyro.Target_Yaw,\
 						&CloudParam.Pitch.PID.Out,CloudParam.Pitch.Real_Angle,CloudParam.Pitch.Target_Angle);
@@ -147,8 +147,8 @@ void Cloud_Param_Set(void)//云台
 								{
 									if(DBUS_CheckPush(KEY_CTRL))
 									{
-										CloudParam.Cloud_Gyro.Target_Yaw+=0.01f*DBUS_ReceiveData.mouse.x;
-										CloudParam.Cloud_Gyro.Target_Roll+=0.01f*DBUS_ReceiveData.mouse.y;
+										CloudParam.Cloud_Gyro.Target_Yaw+=0.1f*DBUS_ReceiveData.mouse.x;
+										CloudParam.Cloud_Gyro.Target_Roll+=0.1f*DBUS_ReceiveData.mouse.y;
 										CloudParam.Pitch.Target_Angle-=0.2f*DBUS_ReceiveData.mouse.y;
 									}
 									else 
@@ -160,8 +160,8 @@ void Cloud_Param_Set(void)//云台
 										DBUS_ReceiveData.mouse.y=DBUS_ReceiveData.mouse.y>200?200:DBUS_ReceiveData.mouse.y;
 										DBUS_ReceiveData.mouse.y=DBUS_ReceiveData.mouse.y<-200?-200:DBUS_ReceiveData.mouse.y;
 										
-										CloudParam.Cloud_Gyro.Target_Yaw+=0.04f*DBUS_ReceiveData.mouse.x;
-										CloudParam.Cloud_Gyro.Target_Roll+=0.02f*DBUS_ReceiveData.mouse.y;
+										CloudParam.Cloud_Gyro.Target_Yaw+=0.4f*DBUS_ReceiveData.mouse.x;
+										CloudParam.Cloud_Gyro.Target_Roll+=0.2f*DBUS_ReceiveData.mouse.y;
 										CloudParam.Pitch.Target_Angle-=0.8f*DBUS_ReceiveData.mouse.y;
 										
 									}
@@ -173,8 +173,8 @@ void Cloud_Param_Set(void)//云台
 									}
 
 									
-									CloudParam.Cloud_Gyro.Target_Yaw=CloudParam.Cloud_Gyro.Target_Yaw>360?CloudParam.Cloud_Gyro.Target_Yaw-360:CloudParam.Cloud_Gyro.Target_Yaw;
-									CloudParam.Cloud_Gyro.Target_Yaw=CloudParam.Cloud_Gyro.Target_Yaw<0?CloudParam.Cloud_Gyro.Target_Yaw+360:CloudParam.Cloud_Gyro.Target_Yaw;
+									CloudParam.Cloud_Gyro.Target_Yaw=CloudParam.Cloud_Gyro.Target_Yaw>3600?CloudParam.Cloud_Gyro.Target_Yaw-3600:CloudParam.Cloud_Gyro.Target_Yaw;
+									CloudParam.Cloud_Gyro.Target_Yaw=CloudParam.Cloud_Gyro.Target_Yaw<0?CloudParam.Cloud_Gyro.Target_Yaw+3600:CloudParam.Cloud_Gyro.Target_Yaw;
 									
 									M6623_PID_Set(&CloudParam.Cloud_Gyro.Yaw_PID.Out,CloudParam.Cloud_Gyro.Yaw ,CloudParam.Cloud_Gyro.Target_Yaw,\
 									&CloudParam.Pitch.PID.Out,CloudParam.Pitch.Real_Angle,CloudParam.Pitch.Target_Angle);
@@ -228,8 +228,8 @@ void M6623_PID_Set(pid_t* PID_Yaw, float Yaw_Real,float Yaw_Target,pid_t* PID_Pi
 {
 	float Current=0,Current1=0;
 	//云台Pitch轴
-//	Current=pid_calc(PID_Pitch,Pitch_Real,Pitch_Target);//外环PID计算
-	Current=fuzzy_pid_calc(PID_Pitch,Pitch_Real,Pitch_Target);//外环PID计算
+	Current=pid_calc(PID_Pitch,Pitch_Real,Pitch_Target);//外环PID计算
+//	Current=fuzzy_pid_calc(PID_Pitch,Pitch_Real,Pitch_Target);//外环PID计算
 	if(PID_Pitch==&CloudParam.Pitch.PID.Out)//判断外环类型
 	{
 		Current1=pid_calc(&CloudParam.Pitch.PID.In,CloudParam.Cloud_Gyro.Gyr_Y,Current);//内环PID计算
@@ -245,9 +245,12 @@ void M6623_PID_Set(pid_t* PID_Yaw, float Yaw_Real,float Yaw_Target,pid_t* PID_Pi
 	}
 
 	
-	//云台Yaw轴
-//	Current=pid_calc(PID_Yaw,Yaw_Real,Yaw_Target);
-	Current=fuzzy_pid_calc(PID_Yaw,Yaw_Real,Yaw_Target);
+//	//云台Yaw轴
+//	if(Control_Mode==Remote_2)
+//		Current=fuzzy_pid_calc(PID_Yaw,Yaw_Real,Yaw_Target);
+//	else
+	    Current=pid_calc(PID_Yaw,Yaw_Real,Yaw_Target);
+//	Current=fuzzy_pid_calc(PID_Yaw,Yaw_Real,Yaw_Target);
 	if(PID_Yaw==&CloudParam.Yaw.PID.Out)
 	{  
 		Current1=pid_calc(&CloudParam.Yaw.PID.In,CloudParam.Cloud_Gyro.Gyr_Z,Current);

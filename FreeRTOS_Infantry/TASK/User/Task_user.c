@@ -36,27 +36,27 @@ void start_task(void *pvParameters)
 	
     taskENTER_CRITICAL();            
 
-	xTaskCreate(Frame_Rate_Task,     
+	xTaskCreate(Frame_Rate_Task,  //创建帧率统计任务   
                 "Frame_Rate_Task",   
                 128, 
                 NULL,
                 2,
                 &Frame_Rate_TaskHandler);  
 	
-    xTaskCreate(Control_Mode_Task,     
+    xTaskCreate(Control_Mode_Task,  //创建控制模式任务   
                 "Control_Mode_Task",   
                 128, 
                 NULL,
                 4,
                 &Control_Mode_TaskHandler);  
-	xTaskCreate(Task_Control,     
+	xTaskCreate(Task_Control,     //创建控制任务
                 "Task_Control",   
                 256, 
                 NULL,
                 4,
                 &Task_ControlHandler); 
 				
-	xTaskCreate(Task_CanSend,     
+	xTaskCreate(Task_CanSend, //创建CAN发送任务
                 "Task_CanSend",   
                 256, 
                 NULL,

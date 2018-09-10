@@ -71,7 +71,7 @@ void Rammer_Param_Set()//²¦µ¯
 					break;
 			}
 		} 
-		if(Shoot.Num>2&&Shoot.Flag==1&&Game_Mode!=SUPPLY)
+		if(Shoot.Num>2&&Shoot.Flag==1&&Game_Mode!=SUPPLY&&Control_Mode!=Ctrl_OFF)
 		{
 			Shoot.Flag=0;
 			M2006.Target_Angle=M2006.Target_Angle>Rammer_Max_Angle?0:M2006.Target_Angle+St_Serve;
