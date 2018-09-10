@@ -24,8 +24,8 @@
 #define MEDIAN_YAW         4000 //Yaw轴中间机械角度
 #define MEDIAN_ROLL		   10
 #elif INFANTRY==1
-#define MEDIAN_PITCH       4000 //Pith轴中间机械角度
-#define MEDIAN_YAW         4400 //Yaw轴中间机械角度
+#define MEDIAN_PITCH       2400 //Pith轴中间机械角度
+#define MEDIAN_YAW         4000 //Yaw轴中间机械角度
 #define MEDIAN_ROLL		   10
 #endif
 #define PITCH_RANGE		   28  		//Pitch角度范围

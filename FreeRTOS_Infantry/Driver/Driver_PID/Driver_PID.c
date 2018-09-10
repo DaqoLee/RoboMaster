@@ -9,11 +9,15 @@
 #define PM 5
 #define PB 6
 
+//float E_Rule[7]={-60,-40,-20,0,20,40,60};
+//float EC_Rule[7]={-30,-20,-10,0,10,20,30};
+//float KP_Rule[7]={10,15,25,30,0,0,0};
+//float KD_Rule[7]={10,20,30,40,0,0,0};
+
 float E_Rule[7]={-60,-40,-20,0,20,40,60};
-float EC_Rule[7]={-30,-20,-10,0,10,20,30};
+float EC_Rule[7]={-15,-10,-5,0,5,10,15};
 float KP_Rule[7]={10,15,25,30,0,0,0};
-//float KP_Rule[7]={10,12,14,16,0,0,0};
-float KD_Rule[7]={10,20,30,40,0,0,0};
+float KD_Rule[7]={5,10,15,20,0,0,0};
 uint8_t KP[7][7]=
 //{
 //	{PB,PB,PB,PB,PM,ZO,ZO},
@@ -129,15 +133,15 @@ float pid_calc(pid_t* pid, float get, float set)
 		else if(pid==&CloudParam.Cloud_Gyro.Yaw_PID.Out)
 		{
 			if(pid->err[NOW]<0)
-				pid->err[NOW]=ABS(pid->err[NOW])>ABS(360-ABS(pid->err[NOW]))?360-ABS(pid->err[NOW]):pid->err[NOW];
+				pid->err[NOW]=ABS(pid->err[NOW])>ABS(3600-ABS(pid->err[NOW]))?3600-ABS(pid->err[NOW]):pid->err[NOW];
 			else if(pid->err[NOW]>0)
-				pid->err[NOW]=ABS(pid->err[NOW])>ABS(360-ABS(pid->err[NOW]))?ABS(pid->err[NOW])-360:pid->err[NOW];
+				pid->err[NOW]=ABS(pid->err[NOW])>ABS(3600-ABS(pid->err[NOW]))?ABS(pid->err[NOW])-3600:pid->err[NOW];
 		}
 /*********************************************************************************************************/		
         pid->pout = pid->p * pid->err[NOW];
         pid->iout += pid->i * pid->err[NOW];
         pid->dout = pid->d * (pid->err[NOW] - pid->err[LAST] );
-		
+		 
         abs_limit(&(pid->iout), pid->IntegralLimit);
 
 		pid->pos_out = pid->pout + pid->iout + pid->dout;
@@ -216,9 +220,9 @@ float fuzzy_pid_calc(pid_t* pid, float get, float set)
 		else if(pid==&CloudParam.Cloud_Gyro.Yaw_PID.Out)
 		{
 			if(pid->err[NOW]<0)
-				pid->err[NOW]=ABS(pid->err[NOW])>ABS(360-ABS(pid->err[NOW]))?360-ABS(pid->err[NOW]):pid->err[NOW];
+				pid->err[NOW]=ABS(pid->err[NOW])>ABS(3600-ABS(pid->err[NOW]))?3600-ABS(pid->err[NOW]):pid->err[NOW];
 			else if(pid->err[NOW]>0)
-				pid->err[NOW]=ABS(pid->err[NOW])>ABS(360-ABS(pid->err[NOW]))?ABS(pid->err[NOW])-360:pid->err[NOW];
+				pid->err[NOW]=ABS(pid->err[NOW])>ABS(3600-ABS(pid->err[NOW]))?ABS(pid->err[NOW])-3600:pid->err[NOW];
 		}
 /*********************************************************************************************************/		
 		Fuzzy_KP(pid);
